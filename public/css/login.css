@@ -1,3 +1,164 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --azul-marino: #0b1a40;
+  --azul-medio: #1c3b70;
+  --azul-brillante: #2d5aa8;
+}
 body {
-    background-color: rgb(209, 234, 234);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+}
+.navbar {
+  background: #4ba5ff;
+  border-bottom: 2px solid rgba(0, 145, 255, 0.1);
+  height: 70px; 
+}
+.logo-box {
+  width: 270px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+.logo-box:hover {
+  transform: scale(1.05);
+}
+.login-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../img/imagen1.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+.login-container {
+  position: relative;
+  min-height: 230px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+}
+.sat-logo {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  box-shadow: 0 0 15px rgba(13, 30, 80, 0.6);
+  padding: 5px;
+}
+.sat-inner {
+  background: #fff;
+  border-radius: 50%;
+  width: 110px;
+  height: 110px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sat-inner img {
+  width: 80px;
+  height: 80px;
+}
+
+.login-title {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.6rem;
+}
+.login-subtitle {
+  color: #ffffff;
+  font-size: 1rem;
+}
+.login-card {
+  background: rgba(41, 40, 40, 0.459);
+  backdrop-filter: blur(18px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 253, 253, 0.25);
+  box-shadow: 0 10px 26px rgba(252, 249, 249, 0.3);
+  padding: 5px 30px;
+  max-width: 475px; 
+  width: 100%;
+  transition: 0.3s;
+}
+.login-card:hover {
+  transform: scale(1.02);
+}
+.floating-label {
+  position: relative;
+}
+.floating-label input {
+  width: 100%;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  color: #fff;
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.floating-label input:focus {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.02);
+}
+
+.floating-label label {
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  color: #fff; /* ← blanco */
+  font-size: 1rem;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+.floating-label input:focus + label,
+.floating-label input:not(:placeholder-shown) + label {
+  top: -8px;
+  left: 12px;
+  font-size: 0.8rem;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 0 6px;
+  border-radius: 6px;
+  color: #cfe3ff;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--azul-marino), var(--azul-brillante), var(--azul-medio));
+  border: none;
+  font-weight: 600;
+  border-radius: 12px;
+  transition: all 0.4s ease;
+}
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--azul-brillante), var(--azul-marino));
+  transform: translateY(-2px) scale(1.02);
+}
+.login-link {
+  color: #e8effcc2;
+  text-decoration: none;
+  transition: 0.3s;
+}
+.login-link:hover {
+  color: #fff;
+}
+.footer-text {
+  color: #ffffff;
+  font-size: 0.9rem;
+  margin-top: 15px;
 }
