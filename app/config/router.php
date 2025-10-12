@@ -9,6 +9,10 @@
             require_once './views/login.php';
             break;
         }
+        case "inicio":{
+            require_once './views/home.php';
+            break;
+        }
         default:{
             require_once './views/error404.php';
         }

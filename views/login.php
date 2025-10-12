@@ -1,3 +1,9 @@
+<?php
+if (isset($_SESSION['usuario'])) {
+    header("location:inicio");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -37,7 +43,7 @@
 
       <form id="formulario_login">
         <div class="floating-label mb-4">
-          <input type="text" class="form-control" id="usuario" name="usuario" placeholder=" " required>
+          <input type="text" class="form-control" id="usuario" name="usuario" placeholder="" required>
           <label for="usuario"><i class="bi bi-person-circle me-2"></i>Usuario autorizado</label>
         </div>
         <div class="floating-label mb-4">

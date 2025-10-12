@@ -6,22 +6,24 @@ class Login extends Conexion {
 
     public function logear_usuario() {
         if(isset($_POST['usuario']) && !empty($_POST['usuario']) && isset($_POST['pass']) && !empty($_POST['pass'])) {
-    
+            
             $usuario = $_POST['usuario'];
             $pass = $_POST['pass'];
-    
-            $consulta = $this->obtener_conexion()->prepare("SELECT * FROM t_usuarios WHERE usuario_usuario = :usuario");
+            
+            $consulta = $this->obtener_conexion()->prepare("SELECT * FROM empleados WHERE usuario = :usuario");
             $consulta->bindParam(':usuario',$usuario);
             $consulta->execute();
             $datos = $consulta->fetch(PDO::FETCH_ASSOC);
             $this->cerrar_conexion();
             if ($datos) {
-                if (password_verify($pass,$datos['usuario_pass'])) {
-                    $_SESSION['usuario'] = $datos;
-                    echo json_encode([1,"Datos de acceso correctos"]);
-                } else {
-                        echo json_encode([0,"Error en credenciales de acceso"]);
-                    }
+                // if (password_verify($pass,$datos['usuario_pass'])) {
+                //     $_SESSION['usuario'] = $datos;
+                //     echo json_encode([1,"Datos de acceso correctos"]);
+                // } else {
+                //     echo json_encode([0,"Error en credenciales de acceso"]);
+                // }
+                $_SESSION['usuario'] = $datos;
+                echo json_encode([1,'Datos de acceso correctos']);
             } else {
                 echo json_encode([0,"Informacion no localizada"]);
             }
