@@ -69,7 +69,7 @@ if (!isset($_SESSION['usuario'])) {
                     </i></button>
                 </div>
                 <div>
-                    <button class="botones">
+                    <button class="botones" id="cerrar_sesion">
                         <i class="bi bi-power"></i>
                     </button>
                 </div>
