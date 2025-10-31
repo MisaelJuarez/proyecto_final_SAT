@@ -1,6 +1,7 @@
 const contenedorNav = document.getElementById('contenedorNav');
 const mostrar_ocultar_nav = document.getElementById('mostrar-ocultar-nav');
 const btn_cerrar_sesion = document.getElementById('cerrar_sesion');
+const btn_agregar_usuario = document.getElementById('agregar_usuario');
 
 const cerrar_session = () => {
     fetch("app/controller/cerrar_sesion.php")
@@ -19,6 +20,11 @@ const cerrar_session = () => {
 
 mostrar_ocultar_nav.addEventListener('click', () => contenedorNav.classList.toggle('ocultar'));
 
-btn_cerrar_sesion.addEventListener('click', () => {
-    cerrar_session();
-});
+btn_cerrar_sesion.addEventListener('click', () => cerrar_session());
+
+if (btn_agregar_usuario) {
+    btn_agregar_usuario.addEventListener('click', () => {
+        window.location = 'agregar';
+    });
+}
+

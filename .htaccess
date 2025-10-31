@@ -1,5 +1,3 @@
 RewriteEngine On
-RewriteRule ^([a-zA-Z0-9/\-_]+)$ index.php?viewLogin=$1
-
-
+RewriteRule ^([a-zA-Z0-9\-_]+)$ index.php?view=$1 [L,QSA]
 
