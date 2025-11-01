@@ -16,14 +16,12 @@ class Login extends Conexion {
             $datos = $consulta->fetch(PDO::FETCH_ASSOC);
             $this->cerrar_conexion();
             if ($datos) {
-                // if (password_verify($pass,$datos['usuario_pass'])) {
-                //     $_SESSION['usuario'] = $datos;
-                //     echo json_encode([1,"Datos de acceso correctos"]);
-                // } else {
-                //     echo json_encode([0,"Error en credenciales de acceso"]);
-                // }
-                $_SESSION['usuario'] = $datos;
-                echo json_encode([1,'Datos de acceso correctos']);
+                if (password_verify($pass,$datos['pass'])) {
+                    $_SESSION['usuario'] = $datos;
+                    echo json_encode([1,"Datos de acceso correctos"]);
+                } else {
+                    echo json_encode([0,"Error en credenciales de acceso"]);
+                }
             } else {
                 echo json_encode([0,"Informacion no localizada"]);
             }

@@ -23,11 +23,17 @@ switch ($view) {
         $hoja_js = '<script src="'.JS.'inicio.js"></script>';
         $titulo = 'inicio';
         break;
-    case 'agregar':
+    case 'agregar_usuario':
         $vista = 'agregar_usuario.php';
         $hoja_css = '<link rel="stylesheet" href="'.CSS .'agregar_usuario.css">';
         $hoja_js = '<script src="'.JS.'agregar_usuario.js"></script>';
         $titulo = 'agregar usuario';
+        break;
+    case 'actualizar_informacion':
+        $vista = 'actualizar_informacion.php';
+        $hoja_css = '<link rel="stylesheet" href="'.CSS .'actualizar_informacion.css">';
+        $hoja_js = '<script src="'.JS.'actualizar_informacion.js"></script>';
+        $titulo = 'actualizar informacion';
         break;
 
     default:
