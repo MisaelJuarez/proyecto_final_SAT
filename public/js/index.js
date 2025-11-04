@@ -1,8 +1,9 @@
 const contenedorNav = document.getElementById('contenedorNav');
 const mostrar_ocultar_nav = document.getElementById('mostrar-ocultar-nav');
 const btn_cerrar_sesion = document.getElementById('cerrar_sesion');
-const btn_ir_agregar_usuario = document.getElementById('btn-ir-agregar-usuario');
+const btn_ir_agregar_colaborador = document.getElementById('btn-ir-agregar-colaborador');
 const btn_ir_actualizar_informacion = document.getElementById('btn-ir-actualizar-informacion');
+const btn_ir_administrar_colaboradores = document.getElementById('btn-ir-administrar-colaboradores');
 
 const cerrar_session = () => {
     fetch("app/controller/cerrar_sesion.php")
@@ -23,8 +24,12 @@ mostrar_ocultar_nav.addEventListener('click', () => contenedorNav.classList.togg
 
 btn_cerrar_sesion.addEventListener('click', () => cerrar_session());
 
-if (btn_ir_agregar_usuario) {
-    btn_ir_agregar_usuario.addEventListener('click', () => window.location = 'agregar_usuario');
+if (btn_ir_administrar_colaboradores) {
+    btn_ir_administrar_colaboradores.addEventListener('click', () => window.location = 'administrar_colaboradores');
+}
+
+if (btn_ir_agregar_colaborador) {
+    btn_ir_agregar_colaborador.addEventListener('click', () => window.location = 'agregar_colaborador');
 }
 
 if (btn_ir_actualizar_informacion) {

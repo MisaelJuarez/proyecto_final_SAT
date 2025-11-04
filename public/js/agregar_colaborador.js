@@ -1,8 +1,8 @@
-const btn_agregar_usuario = document.getElementById('btn-agregar-usuario');
+const btn_agregar_colaborador = document.getElementById('btn-agregar-colaborador');
 
-const agregar_usuario = () => {
-    let data = new FormData(document.getElementById('formulario-agregar-usuario'));
-    data.append('metodo','agregar_usuario');
+const agregar_colaborador = () => {
+    let data = new FormData(document.getElementById('formulario-agregar-colaborador'));
+    data.append('metodo','agregar_colaborador');
     fetch("app/controller/usuario.php",{
         method:"POST",
         body: data
@@ -17,4 +17,4 @@ const agregar_usuario = () => {
     })
 }
 
-btn_agregar_usuario.addEventListener('click', () => agregar_usuario());
+btn_agregar_colaborador.addEventListener('click', () => agregar_colaborador());

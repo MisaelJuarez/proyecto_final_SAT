@@ -23,17 +23,23 @@ switch ($view) {
         $hoja_js = '<script src="'.JS.'inicio.js"></script>';
         $titulo = 'inicio';
         break;
-    case 'agregar_usuario':
-        $vista = 'agregar_usuario.php';
-        $hoja_css = '<link rel="stylesheet" href="'.CSS .'agregar_usuario.css">';
-        $hoja_js = '<script src="'.JS.'agregar_usuario.js"></script>';
-        $titulo = 'agregar usuario';
+    case 'agregar_colaborador':
+        $vista = 'agregar_colaborador.php';
+        $hoja_css = '<link rel="stylesheet" href="'.CSS .'agregar_colaborador.css">';
+        $hoja_js = '<script src="'.JS.'agregar_colaborador.js"></script>';
+        $titulo = 'agregar colaborador';
         break;
     case 'actualizar_informacion':
         $vista = 'actualizar_informacion.php';
         $hoja_css = '<link rel="stylesheet" href="'.CSS .'actualizar_informacion.css">';
         $hoja_js = '<script src="'.JS.'actualizar_informacion.js"></script>';
         $titulo = 'actualizar informacion';
+        break;
+    case 'administrar_colaboradores':
+        $vista = 'administrar_colaboradores.php';
+        $hoja_css = '<link rel="stylesheet" href="'.CSS .'administrar_colaboradores.css">';
+        $hoja_js = '<script src="'.JS.'administrar_colaboradores.js"></script>';
+        $titulo = 'administrar colaboradores';
         break;
 
     default:

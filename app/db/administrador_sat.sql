@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 12, 2025 at 03:07 AM
+-- Generation Time: Nov 04, 2025 at 01:50 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -38,28 +38,31 @@ CREATE TABLE IF NOT EXISTS `areas` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `empleados`
+-- Table structure for table `colaboradores`
 --
 
-CREATE TABLE IF NOT EXISTS `empleados` (
+CREATE TABLE IF NOT EXISTS `colaboradores` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL,
   `apellidos` varchar(100) NOT NULL,
   `rfc` varchar(20) NOT NULL,
   `rfc_corto` varchar(20) NOT NULL,
   `usuario` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `pass` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `area` int DEFAULT NULL,
+  `administrador` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `area` (`area`)
-) ENGINE=InnoDB AUTO_INCREMENT=3;
+) ENGINE=InnoDB AUTO_INCREMENT=5;
 
 --
--- Dumping data for table `empleados`
+-- Dumping data for table `colaboradores`
 --
 
-INSERT INTO `empleados` (`id`, `nombre`, `apellidos`, `rfc`, `rfc_corto`, `usuario`, `password`, `area`) VALUES
-(2, 'Misael', 'Juarez Aguilar', '1234', '1234', 'misael', '1234', NULL);
+INSERT INTO `colaboradores` (`id`, `nombre`, `apellidos`, `rfc`, `rfc_corto`, `usuario`, `pass`, `area`, `administrador`) VALUES
+(2, 'Misael', 'Juarez Aguilar', 'JUAM010420E79', 'JUAM010420', 'misael', '$2y$10$yqxQEpYeSy890GXn4gVox.IT2.1/SjQWMA7Kuj/rXuac7/GHxm2Na', NULL, 1),
+(3, 'Luis', 'Torres Puebla', '12345', '123', 'luis', '$2y$10$L8eqKQXKyCobHqltzt34f.UzqerdJ1cOla3TdpLRHmfGVtZbKtQ5G', NULL, 2),
+(4, 'Karla', 'Guzman Gomez', '1234567', '12345', 'karla', '$2y$10$gh3hY836R8S1HtHhOIJOyer8OSsxgItTP31ZMIbyITyx1qgSf8Zw2', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -120,10 +123,10 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 --
 
 --
--- Constraints for table `empleados`
+-- Constraints for table `colaboradores`
 --
-ALTER TABLE `empleados`
-  ADD CONSTRAINT `empleados_ibfk_1` FOREIGN KEY (`area`) REFERENCES `areas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `colaboradores`
+  ADD CONSTRAINT `colaboradores_ibfk_1` FOREIGN KEY (`area`) REFERENCES `areas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `resguardos`

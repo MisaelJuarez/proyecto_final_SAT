@@ -10,7 +10,7 @@ class Login extends Conexion {
             $usuario = $_POST['usuario'];
             $pass = $_POST['pass'];
             
-            $consulta = $this->obtener_conexion()->prepare("SELECT * FROM empleados WHERE usuario = :usuario");
+            $consulta = $this->obtener_conexion()->prepare("SELECT * FROM colaboradores WHERE usuario = :usuario");
             $consulta->bindParam(':usuario',$usuario);
             $consulta->execute();
             $datos = $consulta->fetch(PDO::FETCH_ASSOC);

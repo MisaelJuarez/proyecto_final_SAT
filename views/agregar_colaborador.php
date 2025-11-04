@@ -1,6 +1,6 @@
 <div class="container">
-    <h3>Agrega un nuevo usuario</h3>
-    <form action="" class="mt-4" id="formulario-agregar-usuario">
+    <h3>Agrega un nuevo colaborador</h3>
+    <form action="" class="mt-4" id="formulario-agregar-colaborador">
         <div class="row">
             <div class="col d-flex flex-wrap justify-content-start">
                 <div class="contenedor-input ms-4 mb-4">
@@ -46,7 +46,7 @@
                 </select>  
 
                 <div class="contenedor-boton ms-4 mb-4">
-                    <button id="btn-agregar-usuario" type="button" class="btn btn-success boton">Agregar usuario</button>
+                    <button id="btn-agregar-colaborador" type="button" class="btn btn-success boton">Agregar usuario</button>
                 </div>
 
             </div>

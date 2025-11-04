@@ -4,7 +4,6 @@ const rfc = document.getElementById('rfc');
 const rfc_corto = document.getElementById('rfc_corto');
 const usuario = document.getElementById('usuario');
 const area = document.getElementById('area');
-const tipo = document.getElementById('tipo');
 const btn_actualizar_informacion = document.getElementById('btn-actualizar-informacion');
 
 const obtener_informacion_actualizar = () => {
@@ -21,7 +20,6 @@ const obtener_informacion_actualizar = () => {
         rfc.value = respuesta['rfc'];
         rfc_corto.value = respuesta['rfc_corto'];
         usuario.value = respuesta['usuario'];
-        tipo.value = respuesta['administrador'];
     });
 }
 

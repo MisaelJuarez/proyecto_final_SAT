@@ -12,6 +12,7 @@ require_once("./app/config/router.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?=CSS."bootstrap.min.css"?>">
     <link rel="stylesheet" href="<?=CSS."icons/font/bootstrap-icons.min.css"?>">
+    <link rel="stylesheet" href="<?=CSS."table.css";?>">
     <link rel="stylesheet" href="<?=CSS."index.css"?>">
     <?php if (isset($hoja_css)) echo $hoja_css; ?>
     <title><?= ($titulo !== '') ? $titulo : 'login' ?></title>
@@ -39,6 +40,8 @@ require_once("./app/config/router.php");
 
     <script src="<?=JS."bootstrap.bundle.min.js"?>"></script>
     <script src="<?=JS."alerts.js"?>"></script>
+    <script src="<?=JS."jquery.js"?>"></script>
+    <script src="<?=JS."table.js"?>"></script>
     <?php if (isset($_SESSION['usuario'])) echo '<script src="'.JS.'index.js"></script>' ?>
     <?php if (isset($hoja_js)) echo $hoja_js; ?>
 </body>

@@ -38,13 +38,7 @@
                     <option value="1">----</option>
                     <option value="2">......</option>
                 </select>  
-
-                <select class="contenedor-input ms-4 mb-4 form-select" id="tipo" name="tipo" aria-label="Default select example">
-                    <option selected>Ingrese el tipo de usuario</option>
-                    <option value="1">Administrador</option>
-                    <option value="2">Usuario</option>
-                </select>  
-
+ 
                 <div class="contenedor-boton ms-4 mb-4">
                     <button id="btn-actualizar-informacion" type="button" class="btn btn-info boton">Actualizar informacion</button>
                 </div>

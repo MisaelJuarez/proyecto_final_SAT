@@ -1,0 +1,26 @@
+.custom-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.custom-toolbar .left-section {
+    float: left;
+}
+
+.custom-toolbar .right-section {
+    float: right;
+}
+
+.dt-paging {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.dt-info {
+    margin-top: 10px;
+    float: left;
+}
