@@ -3,12 +3,10 @@
     --transition-time: 3s;
 }
 
-
 html, body {
     height: 100%;
     margin: 0;
 }
-
 
 .contenedor-nav {
     min-height: 100vh;

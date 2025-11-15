@@ -1,4 +1,24 @@
 const btn_agregar_colaborador = document.getElementById('btn-agregar-colaborador');
+const area = document.getElementById('area');
+let areas = '<option selected>Ingrese el area que pertenece</option>';
+
+const obtener_areas = () => {
+    let data = new FormData();
+    data.append('metodo','obtener_areas');
+    fetch("app/controller/usuario.php",{
+        method: "POST",
+        body: data
+    })
+    .then(respuesta => respuesta.json())
+    .then((respuesta) => {
+        respuesta.map(area => {
+            areas += `
+                <option value="${area['id_area']}">${area['nombre_area']}</option>
+            `;
+        });
+        area.innerHTML = areas;
+    });
+}
 
 const agregar_colaborador = () => {
     let data = new FormData(document.getElementById('formulario-agregar-colaborador'));
@@ -18,3 +38,5 @@ const agregar_colaborador = () => {
 }
 
 btn_agregar_colaborador.addEventListener('click', () => agregar_colaborador());
+
+document.addEventListener('DOMContentLoaded', () => obtener_areas());

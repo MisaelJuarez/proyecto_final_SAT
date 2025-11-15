@@ -34,9 +34,6 @@
                 </div>    
                 
                 <select class="contenedor-input ms-4 mb-4 form-select" id="area" name="area" aria-label="Default select example">
-                    <option selected>Ingrese el area que pertenece</option>
-                    <option value="1">----</option>
-                    <option value="2">......</option>
                 </select>  
  
                 <div class="contenedor-boton ms-4 mb-4">

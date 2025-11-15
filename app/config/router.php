@@ -41,6 +41,24 @@ switch ($view) {
         $hoja_js = '<script src="'.JS.'administrar_colaboradores.js"></script>';
         $titulo = 'administrar colaboradores';
         break;
+    case 'usuarios':
+        $vista = 'usuarios.php';
+        $hoja_css = '<link rel="stylesheet" href="'.CSS .'usuarios.css">';
+        $hoja_js = '<script src="'.JS.'usuarios.js"></script>';
+        $titulo = 'usuarios';
+        break;
+    case 'administrar_usuarios':
+        $vista = 'administrar_usuarios.php';
+        $hoja_css = '<link rel="stylesheet" href="'.CSS .'administrar_usuarios.css">';
+        $hoja_js = '<script src="'.JS.'administrar_usuarios.js"></script>';
+        $titulo = 'administrar usuarios';
+        break;
+    case 'agregar_usuario':
+        $vista = 'agregar_usuario.php';
+        $hoja_css = '<link rel="stylesheet" href="'.CSS .'agregar_usuario.css">';
+        $hoja_js = '<script src="'.JS.'agregar_usuario.js"></script>';
+        $titulo = 'agregar usuario';
+        break;
 
     default:
         $vista = 'error404';

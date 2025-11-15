@@ -1,0 +1,55 @@
+.custom-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.custom-toolbar .left-section {
+    float: left;
+}
+
+.custom-toolbar .right-section {
+    float: right;
+}
+
+.dt-paging {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.dt-info {
+    margin-top: 10px;
+    float: left;
+}
+
+.dt-container {
+    padding: 10px;
+}
+
+#tabla-de-admin-usuarios {
+    padding: 0;
+    border: 1px solid rgba(0, 0, 0, 0.223);
+    background-color: white;
+    border-bottom: 1px solid black;
+}
+
+.header-tabla {
+    background-color: rgb(34, 34, 142);
+    color: white;
+    border: 1px solid black;
+}
+
+.tituloTable {
+    padding: 5px;
+    color: white;
+    background-color: rgb(34, 34, 142);
+}
+
+.tituloInformacion {
+    padding: 5px;
+    color: white;
+    background-color: rgb(84, 84, 84);
+}

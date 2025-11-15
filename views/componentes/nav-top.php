@@ -11,10 +11,10 @@
     <button id="btn-ir-agregar-colaborador" class="botones me-4" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Agregar colaborador">
         <i class="bi bi-person-fill-add"></i>
     </button>
+    <?php endif; ?>
     <button id="btn-ir-actualizar-informacion" class="botones me-4" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Actualizar informacion">
         <i class="bi bi-person-fill-gear"></i>
     </button>
-    <?php endif; ?>
     <button id="cerrar_sesion" class="botones" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Cerrar session">
         <i class="bi bi-power"></i>
     </button>

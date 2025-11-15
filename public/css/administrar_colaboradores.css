@@ -24,3 +24,12 @@
     margin-top: 10px;
     float: left;
 }
+
+.contenedor-input {
+    width: 550px;
+}
+
+.contenedor-boton {
+    width: 400px;
+}
+

@@ -33,10 +33,7 @@
                     <input type="password" class="form-control" name="pass" placeholder="Ingrese su contraseña">
                 </div>    
                 
-                <select class="contenedor-input ms-4 mb-4 form-select" name="area" aria-label="Default select example">
-                    <option selected>Ingrese el area que pertenece</option>
-                    <option value="1">----</option>
-                    <option value="2">......</option>
+                <select class="contenedor-input ms-4 mb-4 form-select" name="area" id="area" aria-label="Default select example">
                 </select>  
 
                 <select class="contenedor-input ms-4 mb-4 form-select" name="tipo" aria-label="Default select example">
@@ -46,7 +43,7 @@
                 </select>  
 
                 <div class="contenedor-boton ms-4 mb-4">
-                    <button id="btn-agregar-colaborador" type="button" class="btn btn-success boton">Agregar usuario</button>
+                    <button id="btn-agregar-colaborador" type="button" class="btn btn-success boton">Agregar colaborador</button>
                 </div>
 
             </div>
