@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 07-11-2025 a las 03:22:57
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Host: localhost:3306
+-- Generation Time: Nov 15, 2025 at 05:59 AM
+-- Server version: 8.0.30
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,25 +18,28 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `administrador_sat`
+-- Database: `administrador_sat`
 --
+CREATE DATABASE IF NOT EXISTS `administrador_sat`;
+USE `administrador_sat`;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `areas`
+-- Table structure for table `areas`
 --
 
-CREATE TABLE `areas` (
-  `id` int(11) NOT NULL,
-  `nombre_area` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE IF NOT EXISTS `areas` (
+  `id_area` int NOT NULL AUTO_INCREMENT,
+  `nombre_area` varchar(100) NOT NULL,
+  PRIMARY KEY (`id_area`)
+) ENGINE=InnoDB AUTO_INCREMENT=5;
 
 --
--- Volcado de datos para la tabla `areas`
+-- Dumping data for table `areas`
 --
 
-INSERT INTO `areas` (`id`, `nombre_area`) VALUES
+INSERT INTO `areas` (`id_area`, `nombre_area`) VALUES
 (1, 'Auditoria Fiscal Federal'),
 (2, 'Juridica'),
 (3, 'Recaudacion'),
@@ -45,63 +48,75 @@ INSERT INTO `areas` (`id`, `nombre_area`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `colaboradores`
+-- Table structure for table `colaboradores`
 --
 
-CREATE TABLE `colaboradores` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `colaboradores` (
+  `id_colaborador` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL,
   `apellidos` varchar(100) NOT NULL,
   `rfc` varchar(20) NOT NULL,
   `rfc_corto` varchar(20) NOT NULL,
-  `correo_electronico` varchar(150) NOT NULL,
   `usuario` varchar(50) NOT NULL,
-  `pass` text NOT NULL,
-  `area` int(11) DEFAULT NULL,
-  `administrador` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `pass` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `area` int DEFAULT NULL,
+  `administrador` int DEFAULT NULL,
+  PRIMARY KEY (`id_colaborador`),
+  KEY `areas_area_colaboradores` (`area`)
+) ENGINE=InnoDB AUTO_INCREMENT=8;
 
 --
--- Volcado de datos para la tabla `colaboradores`
+-- Dumping data for table `colaboradores`
 --
 
-INSERT INTO `colaboradores` (`id`, `nombre`, `apellidos`, `rfc`, `rfc_corto`, `correo_electronico`, `usuario`, `pass`, `area`, `administrador`) VALUES
-(1, 'Misael', 'Juarez Aguilar', 'JUAM010420E79', 'JUAM010420', 'misael.juarez@sat.gob.mx', 'misael', '$2y$10$yqxQEpYeSy890GXn4gVox.IT2.1/SjQWMA7Kuj/rXuac7/GHxm2Na', NULL, 1),
-(2, 'Luis', 'Torres Puebla', 'TOPL800101ABC', 'TOPL800101', 'luis.torres@sat.gob.mx', 'luis', '$2y$10$L8eqKQXKyCobHqltzt34f.UzqerdJ1cOla3TdpLRHmfGVtZbKtQ5G', NULL, 2),
-(3, 'Karla', 'Guzman Gomez', 'GUGK850305DEF', 'GUGK850305', 'karla.guzman@sat.gob.mx', 'karla', '$2y$10$gh3hY836R8S1HtHhOIJOyer8OSsxgItTP31ZMIbyITyx1qgSf8Zw2', NULL, 1);
+INSERT INTO `colaboradores` (`id_colaborador`, `nombre`, `apellidos`, `rfc`, `rfc_corto`, `usuario`, `pass`, `area`, `administrador`) VALUES
+(2, 'Misael', 'Juarez Aguilar', 'JUAM010420E79', 'JUAM010420', 'misael', '$2y$10$CMhHd6vS/wmDHc86/bngm.aB.T4tzL/4SgmJtGJZBMAlYhv9lkImW', 2, 1),
+(3, 'Luis', 'Torres Puebla', '12345', '123', 'luis', '$2y$10$L8eqKQXKyCobHqltzt34f.UzqerdJ1cOla3TdpLRHmfGVtZbKtQ5G', 3, 1),
+(4, 'Karla', 'Guzman Gomez', '1234567', '12345', 'karla', '$2y$10$4bfAzr0mIB8VVn1P/KkI.uxfANKrbtf2XTef28aPaSAG5BdnSsyIS', 4, 1),
+(6, 'Jose Luis', 'Hernandez Garcez', '1234567', '12345', 'jose', '$2y$10$9UCWLOs/EtGDLWKCc0hqAea91DMzD/T95kMQorpmQ0OWRLbQ2eCni', 1, 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `impresoras`
+-- Table structure for table `departamentos`
 --
 
-CREATE TABLE `impresoras` (
-  `id` int(11) NOT NULL,
-  `n_serie` varchar(100) NOT NULL,
-  `ip` varchar(50) NOT NULL,
-  `nodo` varchar(100) NOT NULL,
-  `area` int(11) DEFAULT NULL,
-  `activo` int(11) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE IF NOT EXISTS `departamentos` (
+  `id_departamento` int NOT NULL AUTO_INCREMENT,
+  `nombre_departamento` varchar(100) NOT NULL,
+  `area` int NOT NULL,
+  PRIMARY KEY (`id_departamento`),
+  KEY `areas_area_departamentos` (`area`)
+) ENGINE=InnoDB AUTO_INCREMENT=5;
+
+--
+-- Dumping data for table `departamentos`
+--
+
+INSERT INTO `departamentos` (`id_departamento`, `nombre_departamento`, `area`) VALUES
+(1, 'contensioso 1', 2),
+(2, 'contensioso 2', 2),
+(3, 'contensioso 3', 2),
+(4, 'contensioso 4', 2);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ips`
+-- Table structure for table `ips`
 --
 
-CREATE TABLE `ips` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `ips` (
+  `id_ip` int NOT NULL AUTO_INCREMENT,
   `ip` varchar(50) NOT NULL,
-  `activo` int(11) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `activo` int NOT NULL,
+  PRIMARY KEY (`id_ip`)
+) ENGINE=InnoDB AUTO_INCREMENT=361;
 
 --
--- Volcado de datos para la tabla `ips`
+-- Dumping data for table `ips`
 --
 
-INSERT INTO `ips` (`id`, `ip`, `activo`) VALUES
+INSERT INTO `ips` (`id_ip`, `ip`, `activo`) VALUES
 (1, '99.85.16.119', 1),
 (2, '99.85.17.136', 1),
 (3, '99.85.16.232', 1),
@@ -466,26 +481,51 @@ INSERT INTO `ips` (`id`, `ip`, `activo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `resguardos`
+-- Table structure for table `puestos`
 --
 
-CREATE TABLE `resguardos` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `puestos` (
+  `id_puesto` int NOT NULL AUTO_INCREMENT,
+  `nombre_puesto` varchar(100) NOT NULL,
+  PRIMARY KEY (`id_puesto`)
+) ENGINE=InnoDB AUTO_INCREMENT=6;
+
+--
+-- Dumping data for table `puestos`
+--
+
+INSERT INTO `puestos` (`id_puesto`, `nombre_puesto`) VALUES
+(1, 'Subadministrador'),
+(2, 'Jefe de departamento'),
+(3, 'Operativo'),
+(4, 'Enlace'),
+(5, 'Administrador');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `resguardos`
+--
+
+CREATE TABLE IF NOT EXISTS `resguardos` (
+  `id_resguardo` int NOT NULL AUTO_INCREMENT,
   `marca` varchar(100) NOT NULL,
   `modelo` varchar(100) NOT NULL,
   `n_serie` varchar(100) NOT NULL,
   `hostname` varchar(50) NOT NULL,
-  `mac` varchar(100) NOT NULL,
-  `nodo` varchar(100) NOT NULL,
-  `activo` int(11) NOT NULL DEFAULT 1,
-  `ip` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `mac` varchar(200) DEFAULT NULL,
+  `nodo` varchar(100) DEFAULT NULL,
+  `activo` int NOT NULL,
+  `ip` int NOT NULL,
+  PRIMARY KEY (`id_resguardo`),
+  UNIQUE KEY `ip` (`ip`)
+) ENGINE=InnoDB AUTO_INCREMENT=361;
 
 --
--- Volcado de datos para la tabla `resguardos`
+-- Dumping data for table `resguardos`
 --
 
-INSERT INTO `resguardos` (`id`, `marca`, `modelo`, `n_serie`, `hostname`, `mac`, `nodo`, `activo`, `ip`) VALUES
+INSERT INTO `resguardos` (`id_resguardo`, `marca`, `modelo`, `n_serie`, `hostname`, `mac`, `nodo`, `activo`, `ip`) VALUES
 (1, 'LENOVO', 'THINKPAD L14 GEN 3 AMD', 'PW061FCA', 'B299GUCC68ATC01', 'F4-A8-0D-76-6B-F8', '', 1, 1),
 (2, 'LENOVO', 'THINKPAD L14 GEN 3 AMD', 'PW061NWY', 'B299MALO85C7C01', 'F4-A8-0D-12-34-56', '', 1, 2),
 (3, 'LENOVO', 'THINKPAD L14 GEN 3 AMD', 'PW06CHKW', 'B299ZEJJ67BRC01', 'F4-A8-0D-78-9A-BC', '', 1, 3),
@@ -850,148 +890,65 @@ INSERT INTO `resguardos` (`id`, `marca`, `modelo`, `n_serie`, `hostname`, `mac`,
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuarios`
+-- Table structure for table `usuarios`
 --
 
-CREATE TABLE `usuarios` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `usuarios` (
+  `id_usuario` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL,
   `apellidos` varchar(100) NOT NULL,
   `rfc` varchar(20) NOT NULL,
   `rfc_corto` varchar(20) NOT NULL,
-  `puesto` varchar(50) NOT NULL,
-  `n_empleado` int(11) NOT NULL,
-  `departamento` varchar(100) DEFAULT NULL,
-  `activo` int(11) NOT NULL DEFAULT 1,
-  `area` int(11) DEFAULT NULL,
-  `equipo_computo` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `n_empleado` int NOT NULL,
+  `puesto` int DEFAULT NULL,
+  `activo` int NOT NULL,
+  `departamento` int NOT NULL,
+  `area` int NOT NULL,
+  `equipo_computo` int DEFAULT NULL,
+  PRIMARY KEY (`id_usuario`),
+  KEY `areas_area_usuarios` (`area`),
+  KEY `resguardos_equipo_computo_usuarios` (`equipo_computo`),
+  KEY `departamentos_departamento_usuarios` (`departamento`),
+  KEY `puestos_puesto_usuarios` (`puesto`)
+) ENGINE=InnoDB AUTO_INCREMENT=2;
 
 --
--- Índices para tablas volcadas
+-- Dumping data for table `usuarios`
+--
+
+INSERT INTO `usuarios` (`id_usuario`, `nombre`, `apellidos`, `rfc`, `rfc_corto`, `n_empleado`, `puesto`, `activo`, `departamento`, `area`, `equipo_computo`) VALUES
+(1, 'Guillermina', 'Allende Flores', 'AEFG71A9', 'AEFG71A9', 10300, 4, 1, 1, 2, 1);
+
+--
+-- Constraints for dumped tables
 --
 
 --
--- Indices de la tabla `areas`
---
-ALTER TABLE `areas`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `colaboradores`
+-- Constraints for table `colaboradores`
 --
 ALTER TABLE `colaboradores`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `usuario` (`usuario`),
-  ADD UNIQUE KEY `rfc` (`rfc`),
-  ADD UNIQUE KEY `correo_electronico` (`correo_electronico`),
-  ADD KEY `colaboradores_ibfk_1` (`area`);
+  ADD CONSTRAINT `areas_area_colaboradores` FOREIGN KEY (`area`) REFERENCES `areas` (`id_area`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
--- Indices de la tabla `impresoras`
+-- Constraints for table `departamentos`
 --
-ALTER TABLE `impresoras`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `n_serie` (`n_serie`),
-  ADD UNIQUE KEY `ip` (`ip`),
-  ADD KEY `impresoras_ibfk_1` (`area`);
+ALTER TABLE `departamentos`
+  ADD CONSTRAINT `areas_area_departamentos` FOREIGN KEY (`area`) REFERENCES `areas` (`id_area`);
 
 --
--- Indices de la tabla `ips`
---
-ALTER TABLE `ips`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `ip` (`ip`);
-
---
--- Indices de la tabla `resguardos`
+-- Constraints for table `resguardos`
 --
 ALTER TABLE `resguardos`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `n_serie` (`n_serie`),
-  ADD UNIQUE KEY `hostname` (`hostname`),
-  ADD UNIQUE KEY `mac` (`mac`),
-  ADD UNIQUE KEY `ip` (`ip`);
+  ADD CONSTRAINT `ips_ip_resguardos` FOREIGN KEY (`ip`) REFERENCES `ips` (`id_ip`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
--- Indices de la tabla `usuarios`
+-- Constraints for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `rfc` (`rfc`),
-  ADD UNIQUE KEY `n_empleado` (`n_empleado`),
-  ADD UNIQUE KEY `equipo_computo` (`equipo_computo`),
-  ADD UNIQUE KEY `area` (`area`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `areas`
---
-ALTER TABLE `areas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT de la tabla `colaboradores`
---
-ALTER TABLE `colaboradores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de la tabla `impresoras`
---
-ALTER TABLE `impresoras`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `ips`
---
-ALTER TABLE `ips`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=361;
-
---
--- AUTO_INCREMENT de la tabla `resguardos`
---
-ALTER TABLE `resguardos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=361;
-
---
--- AUTO_INCREMENT de la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `colaboradores`
---
-ALTER TABLE `colaboradores`
-  ADD CONSTRAINT `colaboradores_ibfk_1` FOREIGN KEY (`area`) REFERENCES `areas` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `impresoras`
---
-ALTER TABLE `impresoras`
-  ADD CONSTRAINT `impresoras_ibfk_1` FOREIGN KEY (`area`) REFERENCES `areas` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `resguardos`
---
-ALTER TABLE `resguardos`
-  ADD CONSTRAINT `resguardos_ibfk_1` FOREIGN KEY (`ip`) REFERENCES `ips` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-  ADD CONSTRAINT `fk_usuarios_resguardos` FOREIGN KEY (`equipo_computo`) REFERENCES `resguardos` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`equipo_computo`) REFERENCES `resguardos` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `usuarios_ibfk_2` FOREIGN KEY (`area`) REFERENCES `areas` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `areas_area_usuarios` FOREIGN KEY (`area`) REFERENCES `areas` (`id_area`),
+  ADD CONSTRAINT `departamentos_departamento_usuarios` FOREIGN KEY (`departamento`) REFERENCES `departamentos` (`id_departamento`),
+  ADD CONSTRAINT `puestos_puesto_usuarios` FOREIGN KEY (`puesto`) REFERENCES `puestos` (`id_puesto`),
+  ADD CONSTRAINT `resguardos_equipo_computo_usuarios` FOREIGN KEY (`equipo_computo`) REFERENCES `resguardos` (`id_resguardo`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
