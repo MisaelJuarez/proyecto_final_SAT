@@ -127,14 +127,6 @@ class Usuario extends Conexion {
         echo json_encode($datos);
     }
 
-    public function obtener_areas(){
-        $consulta = $this->obtener_conexion()->prepare("SELECT * FROM areas;");
-        $consulta->execute();
-        $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
-        $this->cerrar_conexion();
-        echo json_encode($datos);
-    }
-
     public function editar_informacion_colaborador(){
         $id = $_POST['id'];
         $nombre = $_POST['nombre'];

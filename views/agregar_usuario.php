@@ -1,7 +1,7 @@
 <div class="container">
     <div class="">
         <h3>Agrega un nuevo usuario</h3>
-        <form action="" class="mt-4" id="formulario-agregar-colaborador">
+        <form action="" class="mt-4" id="formulario-agregar-usuario">
             <div class="row">
                 <div class="col d-flex flex-wrap justify-content-start">
                     <div class="contenedor-input ms-4 mb-3">
@@ -44,23 +44,51 @@
                     <div class="contenedor-input ms-4 mb-3">
                         <label for="usuario" class="form-label">Ingrese el departamento</label>
                         <select class="contenedor-input form-select" name="departamento" id="departamento" aria-label="Default select example">
+                            <option value="" selected>Seleccione el departamento</option>
                         </select>  
                     </div> 
     
                     <div class="contenedor-input ms-4 mb-3">
-                        <label for="usuario" class="form-label">Ingrese el equipo de computo</label>
-                        <select class="contenedor-input form-select" name="equipo_computo" id="equipo_computo" aria-label="Default select example">
-                        </select>  
+                        <label for="usuario" class="form-label">Seleccione el equipo de computo</label>
+                        <button type="button" id="btn-obtener-resguardos" class="form-control text-start" placeholder="Presiona para ver resguardos" data-bs-toggle="modal" data-bs-target="#buscar-resguardo">
+                            Seleccionar resguardo
+                        </button> 
                     </div> 
     
                     <div class="contenedor-input ms-4 mb-3">
                     </div>  
                     
                     <div class="contenedor-boton ms-4 mb-4">
-                        <button id="btn-agregar-colaborador" type="button" class="btn btn-success boton">Agregar usuario</button>
+                        <button id="btn-agregar-usuario" type="button" class="btn btn-success boton">Agregar usuario</button>
                     </div>
                 </div>
             </div>
         </form>
     </div>
 </div>
+
+<div class="modal fade" id="buscar-resguardo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+            <div class="modal-header h-buscar">
+                <h5 class="modal-title" id="staticBackdropLabel">Selecciona el reguardo del usaurio</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body b-buscar">
+                <table id="tablaResguardos" class="table table-secondary table-striped p-5">
+                    <thead>
+                        <tr>
+                            <th scope="col">numero de serie</th>
+                            <th scope="col">Marca</th>
+                            <th scope="col">Hostname</th>
+                            <th scope="col">Mac</th>
+                            <th scope="col">Seleccionar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+    </div>

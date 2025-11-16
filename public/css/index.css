@@ -45,7 +45,7 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 1rem;
+    margin-bottom: 1px;
     padding-bottom: 10px;
     border-bottom: 1px solid #00000081;
 }

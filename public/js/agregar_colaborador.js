@@ -4,8 +4,9 @@ let areas = '<option selected>Ingrese el area que pertenece</option>';
 
 const obtener_areas = () => {
     let data = new FormData();
-    data.append('metodo','obtener_areas');
-    fetch("app/controller/usuario.php",{
+    data.append('tabla','areas');
+    data.append('metodo','obtener_informacion_tabla');
+    fetch("app/controller/home.php",{
         method: "POST",
         body: data
     })

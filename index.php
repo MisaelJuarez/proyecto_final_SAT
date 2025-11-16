@@ -29,7 +29,7 @@ require_once("./app/config/router.php");
             <header class="barra-superior">
                 <?php require_once("./views/componentes/nav-top.php") ?>
             </header>
-            <section class="p-3">
+            <section class="p-2">
                 <?php require_once "./views/".$vista;?>
             </section>
         </main>

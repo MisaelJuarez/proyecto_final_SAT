@@ -53,3 +53,11 @@
     color: white;
     background-color: rgb(84, 84, 84);
 }
+
+.contenedor-input {
+    width: 550px;
+}
+
+.contenedor-boton {
+    width: 400px;
+}

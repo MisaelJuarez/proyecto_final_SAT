@@ -28,9 +28,7 @@ const obtener_datos_usuarios = () => {
         body: data
     })
     .then(respuesta => respuesta.json())
-    .then((respuesta) => {
-        console.log(respuesta);
-        
+    .then((respuesta) => {     
         if (tablaUsuarios) {
             tablaUsuarios.clear().rows.add(respuesta).draw(); 
         } else {
@@ -44,7 +42,11 @@ const obtener_datos_usuarios = () => {
                     { data: 'nombre_puesto', className: "border border-dark" }, 
                     { data: 'nombre_area', className: "border border-dark"}, 
                     { data: 'nombre_departamento', className: "border border-dark"}, 
-                    { data: 'n_serie', className: "border border-dark"}, 
+                    { data: 'n_serie', className: "border border-dark",
+                        render: function(data, type, row) {
+                            return (row.n_serie == null) ? '<span class="badge bg-danger">Sin equipo</span>' : row.n_serie;
+                        }
+                    }, 
                     { 
                         data: 'activo', className: "border border-dark text-center",
                         render: function(data, type, row) {
@@ -58,6 +60,7 @@ const obtener_datos_usuarios = () => {
                             return `
                                 <button class="btn btn-success info-usuario"
                                     data-id="${data}"
+                                    data-serie="${row.n_serie}"
                                 >
                                     <i class="bi bi-file-text"></i>
                                 </button>
@@ -66,7 +69,7 @@ const obtener_datos_usuarios = () => {
                     }
                 ],
                 "lengthChange": false,
-                "pageLength": 8,
+                "pageLength": 6,
                 language: { url: "./public/json/lenguaje.json" },
                 dom: '<"custom-toolbar"lf>tip', 
             });
@@ -74,7 +77,7 @@ const obtener_datos_usuarios = () => {
     });
 }
 
-const mostrar_informacion_usuario = (id) => {
+const mostrar_informacion_usuario = (id,equipo) => {
     let data = new FormData();
     data.append('id',id);
     data.append('metodo','mostrar_informacion_usuario');
@@ -83,7 +86,7 @@ const mostrar_informacion_usuario = (id) => {
         body: data
     })
     .then(respuesta => respuesta.json())
-    .then((respuesta) => {
+    .then((respuesta) => {        
         nombre_usuario.textContent = respuesta[0]['nombre'];
         apellidos_usuario.textContent = respuesta[0]['apellidos'];
         nEmpleado_usuario.textContent = respuesta[0]['n_empleado'];
@@ -93,13 +96,16 @@ const mostrar_informacion_usuario = (id) => {
         area_usuario.textContent = respuesta[0]['nombre_area'];
         departamento_usuario.textContent = respuesta[0]['nombre_departamento'];
 
-        marca_resguardo.textContent = respuesta[0]['marca'];
-        modelo_resguardo.textContent = respuesta[0]['modelo'];
-        n_serie_resguardo.textContent = respuesta[0]['n_serie'];
-        hostname_resguardo.textContent = respuesta[0]['hostname'];
-        mac_resguardo.textContent = respuesta[0]['mac'];
-        nodo_resguardo.textContent = '';
-        ip_resguardo.textContent = respuesta[0]['ip'];
+        if (equipo != null) {
+            marca_resguardo.textContent = respuesta[0]['marca'];
+            modelo_resguardo.textContent = respuesta[0]['modelo'];
+            n_serie_resguardo.textContent = respuesta[0]['n_serie'];
+            hostname_resguardo.textContent = respuesta[0]['hostname'];
+            mac_resguardo.textContent = respuesta[0]['mac'];
+            nodo_resguardo.textContent = '';
+            ip_resguardo.textContent = respuesta[0]['ip'];
+        }
+
     });
 }
 
@@ -107,8 +113,7 @@ tabla_de_info_usuarios.addEventListener('click', (e) => {
     btn_info_usuario = e.target.closest(".info-usuario"); 
 
     if (btn_info_usuario) {
-        console.log(btn_info_usuario.dataset.id);
-        mostrar_informacion_usuario(btn_info_usuario.dataset.id);
+        mostrar_informacion_usuario(btn_info_usuario.dataset.id,btn_info_usuario.dataset.serie);
         tabla_de_info_usuarios.style.display = 'none';
         informacion_usuario.style.display = 'block';
     }

@@ -38,11 +38,11 @@
             </tr>
             <tr>
                 <td class="col-3"><b>RFC</b></td>
-                <td id="rfc-corto-usuario"></td>
+                <td id="rfc-usuario"></td>
             </tr>
             <tr>
                 <td class="col-3"><b>RFC Corto</b></td>
-                <td id="rfc-usuario"></td>
+                <td id="rfc-corto-usuario"></td>
             </tr>
             <tr>
                 <td class="col-3"><b>Puesto</b></td>

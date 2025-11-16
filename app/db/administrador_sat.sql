@@ -910,14 +910,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   KEY `resguardos_equipo_computo_usuarios` (`equipo_computo`),
   KEY `departamentos_departamento_usuarios` (`departamento`),
   KEY `puestos_puesto_usuarios` (`puesto`)
-) ENGINE=InnoDB AUTO_INCREMENT=2;
-
---
--- Dumping data for table `usuarios`
---
-
-INSERT INTO `usuarios` (`id_usuario`, `nombre`, `apellidos`, `rfc`, `rfc_corto`, `n_empleado`, `puesto`, `activo`, `departamento`, `area`, `equipo_computo`) VALUES
-(1, 'Guillermina', 'Allende Flores', 'AEFG71A9', 'AEFG71A9', 10300, 4, 1, 1, 2, 1);
+) ENGINE=InnoDB;
 
 --
 -- Constraints for dumped tables
