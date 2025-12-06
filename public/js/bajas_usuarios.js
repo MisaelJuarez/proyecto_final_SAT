@@ -20,9 +20,9 @@ const mac_resguardo = document.getElementById('mac-resguardo');
 const nodo_resguardo = document.getElementById('nodo-resguardo');
 const ip_resguardo = document.getElementById('ip-resguardo');
 
-const obtener_datos_usuarios = () => {
+const obtener_datos_usuarios_bajas = () => {
     let data = new FormData();
-    data.append('metodo', 'obtener_datos_usuarios');
+    data.append('metodo', 'obtener_datos_usuarios_bajas');
     fetch("app/controller/home.php", {
         method: "POST",
         body: data
@@ -60,6 +60,20 @@ const obtener_datos_usuarios = () => {
                                 </button>
                             `;
                         }
+                    },
+                    {
+                        data: 'id_usuario',
+                        className: "text-center border border-dark",
+                        render: function(data, type, row) {
+                            return `
+                                <button class="btn btn-danger info-usuario"
+                                    data-id="${data}"
+                                    data-serie="${row.n_serie}"
+                                >
+                                    <i class="bi bi-trash-fill"></i>
+                                </button>
+                            `;
+                        }
                     }
                 ],
                 "lengthChange": false,
@@ -81,6 +95,8 @@ const mostrar_informacion_usuario = (id,equipo) => {
     })
     .then(respuesta => respuesta.json())
     .then((respuesta) => {        
+        console.log(respuesta);
+        
         nombre_usuario.textContent = respuesta[0]['nombre'];
         apellidos_usuario.textContent = respuesta[0]['apellidos'];
         nEmpleado_usuario.textContent = respuesta[0]['n_empleado'];
@@ -90,16 +106,13 @@ const mostrar_informacion_usuario = (id,equipo) => {
         area_usuario.textContent = respuesta[0]['nombre_area'];
         departamento_usuario.textContent = respuesta[0]['nombre_departamento'];
 
-        if (equipo != null) {
-            marca_resguardo.textContent = respuesta[0]['marca'];
-            modelo_resguardo.textContent = respuesta[0]['modelo'];
-            n_serie_resguardo.textContent = respuesta[0]['n_serie'];
-            hostname_resguardo.textContent = respuesta[0]['hostname'];
-            mac_resguardo.textContent = respuesta[0]['mac'];
-            nodo_resguardo.textContent = respuesta[0]['nodo'];
-            ip_resguardo.textContent = respuesta[0]['ip'];
-        }
-
+        marca_resguardo.textContent = respuesta[0]['marca'];
+        modelo_resguardo.textContent = respuesta[0]['modelo'];
+        n_serie_resguardo.textContent = respuesta[0]['n_serie'];
+        hostname_resguardo.textContent = respuesta[0]['hostname'];
+        mac_resguardo.textContent = respuesta[0]['mac'];
+        nodo_resguardo.textContent = respuesta[0]['nodo'];
+        ip_resguardo.textContent = respuesta[0]['ip_ultimo_registro'];
     });
 }
 
@@ -115,5 +128,5 @@ tabla_de_info_usuarios.addEventListener('click', (e) => {
 
 document.addEventListener('DOMContentLoaded', () => {
     informacion_usuario.style.display = 'none';
-    obtener_datos_usuarios();
+    obtener_datos_usuarios_bajas();
 });

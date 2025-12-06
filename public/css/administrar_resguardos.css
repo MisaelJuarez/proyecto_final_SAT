@@ -29,7 +29,7 @@
     padding: 10px;
 }
 
-#tabla-de-admin-usuarios {
+#tabla-de-info-resguardos {
     padding: 0;
     border: 1px solid rgba(0, 0, 0, 0.223);
     background-color: white;
@@ -37,7 +37,7 @@
 }
 
 .header-tabla {
-    background-color: rgb(34, 34, 142);
+    background-color: rgb(40, 104, 15);
     color: white;
     border: 1px solid black;
 }
@@ -45,7 +45,7 @@
 .tituloTable {
     padding: 5px;
     color: white;
-    background-color: rgb(34, 34, 142);
+    background-color: rgb(40, 104, 15);
 }
 
 .tituloInformacion {
@@ -60,17 +60,4 @@
 
 .contenedor-boton {
     width: 400px;
-}
-
-#informacion-usuario {
-    padding: 0;
-    border: 1px solid rgba(0, 0, 0, 0.223);
-    background-color: white;
-    border-bottom: 1px solid black;
-}
-
-.tituloInformacion {
-    padding: 5px;
-    color: white;
-    background-color: rgb(84, 84, 84);
 }

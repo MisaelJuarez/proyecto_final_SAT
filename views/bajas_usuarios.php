@@ -1,5 +1,5 @@
 <div id="tabla-de-info-usuarios" class="container-fluid">
-    <h3 class="mb-2 tituloTable">Usuarios</h3>
+    <h3 class="mb-2 tituloTable">Bajas de usuarios</h3>
     <table id="tablaUsuarios" class="table">
         <thead>
             <tr class="header-tabla">
@@ -12,6 +12,7 @@
                 <th scope="col" class="border border-white">Departamento</th>
                 <th scope="col" class="border border-white">N. Serie equipo</th>
                 <th scope="col" class="border border-white">Detalle</th>
+                <th scope="col" class="border border-white">Eliminar</th>
             </tr>
         </thead>
         <tbody>

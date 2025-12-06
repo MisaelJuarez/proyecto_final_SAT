@@ -1,6 +1,6 @@
-let tablaUsuarios;
-let btn_info_usuario;
-const tabla_de_info_usuarios = document.getElementById('tabla-de-info-usuarios');
+let tablaResguardos;
+
+const tabla_de_info_resguardos = document.getElementById('tabla-de-info-resguardos');
 const informacion_usuario = document.getElementById('informacion-usuario');
 
 const nombre_usuario = document.getElementById('nombre-usuario');
@@ -20,43 +20,52 @@ const mac_resguardo = document.getElementById('mac-resguardo');
 const nodo_resguardo = document.getElementById('nodo-resguardo');
 const ip_resguardo = document.getElementById('ip-resguardo');
 
-const obtener_datos_usuarios = () => {
+const obtener_datos_resguardos_bajas = () => {
     let data = new FormData();
-    data.append('metodo', 'obtener_datos_usuarios');
+    data.append('metodo', 'obtener_datos_resguardos_bajas');
     fetch("app/controller/home.php", {
         method: "POST",
         body: data
     })
     .then(respuesta => respuesta.json())
     .then((respuesta) => {     
-        if (tablaUsuarios) {
-            tablaUsuarios.clear().rows.add(respuesta).draw(); 
+        if (tablaResguardos) {
+            tablaResguardos.clear().rows.add(respuesta).draw(); 
         } else {
-            tablaUsuarios = $('#tablaUsuarios').DataTable({
+            tablaResguardos = $('#tablaResguardos').DataTable({
                 data: respuesta, 
                 columns: [
-                    { data: 'rfc_corto', className: "border border-dark" }, 
-                    { data: 'nombre', className: "border border-dark" }, 
-                    { data: 'apellidos', className: "border border-dark" }, 
-                    { data: 'n_empleado', className: "border border-dark" }, 
-                    { data: 'nombre_puesto', className: "border border-dark" }, 
-                    { data: 'nombre_area', className: "border border-dark"}, 
-                    { data: 'nombre_departamento', className: "border border-dark"}, 
-                    { data: 'n_serie', className: "border border-dark",
-                        render: function(data, type, row) {
-                            return (row.n_serie == null) ? '<span class="badge bg-danger">Sin equipo</span>' : row.n_serie;
-                        }
-                    }, 
+                    { data: 'marca', className: "border border-dark" }, 
+                    { data: 'modelo', className: "border border-dark" }, 
+                    { data: 'n_serie', className: "border border-dark" }, 
+                    { data: 'hostname', className: "border border-dark" }, 
+                    { data: 'mac', className: "border border-dark" }, 
+                    { data: 'nodo', className: "border border-dark" }, 
+                    { data: 'ip_ultimo_registro', className: "border border-dark"},   
                     {
-                        data: 'id_usuario',
+                        data: 'id_resguardo',
+                        className: "text-center border border-dark",
+                        render: function(data, type, row) {
+
+                            return (row.id_usuario == null) ? '<span class="badge bg-danger">Sin asignar</span>'
+                                : 
+                                `<button class="btn btn-success info-usuario" data-id="${row.id_usuario}"
+                                 >
+                                    <i class="bi bi-file-text"></i>
+                                </button>
+                                `
+
+                        }
+                    },
+                    {
+                        data: 'id_resguardo',
                         className: "text-center border border-dark",
                         render: function(data, type, row) {
                             return `
-                                <button class="btn btn-success info-usuario"
+                                <button class="btn btn-danger eliminar-resguardo"
                                     data-id="${data}"
-                                    data-serie="${row.n_serie}"
                                 >
-                                    <i class="bi bi-file-text"></i>
+                                    <i class="bi bi-trash-fill"></i>
                                 </button>
                             `;
                         }
@@ -71,7 +80,7 @@ const obtener_datos_usuarios = () => {
     });
 }
 
-const mostrar_informacion_usuario = (id,equipo) => {
+const mostrar_informacion_usuario = (id) => {
     let data = new FormData();
     data.append('id',id);
     data.append('metodo','mostrar_informacion_usuario');
@@ -90,30 +99,27 @@ const mostrar_informacion_usuario = (id,equipo) => {
         area_usuario.textContent = respuesta[0]['nombre_area'];
         departamento_usuario.textContent = respuesta[0]['nombre_departamento'];
 
-        if (equipo != null) {
-            marca_resguardo.textContent = respuesta[0]['marca'];
-            modelo_resguardo.textContent = respuesta[0]['modelo'];
-            n_serie_resguardo.textContent = respuesta[0]['n_serie'];
-            hostname_resguardo.textContent = respuesta[0]['hostname'];
-            mac_resguardo.textContent = respuesta[0]['mac'];
-            nodo_resguardo.textContent = respuesta[0]['nodo'];
-            ip_resguardo.textContent = respuesta[0]['ip'];
-        }
-
+        marca_resguardo.textContent = respuesta[0]['marca'];
+        modelo_resguardo.textContent = respuesta[0]['modelo'];
+        n_serie_resguardo.textContent = respuesta[0]['n_serie'];
+        hostname_resguardo.textContent = respuesta[0]['hostname'];
+        mac_resguardo.textContent = respuesta[0]['mac'];
+        nodo_resguardo.textContent = respuesta[0]['nodo'];
+        ip_resguardo.textContent = respuesta[0]['ip_ultimo_registro'];        
     });
 }
 
-tabla_de_info_usuarios.addEventListener('click', (e) => {
+tabla_de_info_resguardos.addEventListener('click', (e) => {
     btn_info_usuario = e.target.closest(".info-usuario"); 
 
     if (btn_info_usuario) {
-        mostrar_informacion_usuario(btn_info_usuario.dataset.id,btn_info_usuario.dataset.serie);
-        tabla_de_info_usuarios.style.display = 'none';
+        mostrar_informacion_usuario(btn_info_usuario.dataset.id);
+        tabla_de_info_resguardos.style.display = 'none';
         informacion_usuario.style.display = 'block';
     }
 });
 
 document.addEventListener('DOMContentLoaded', () => {
     informacion_usuario.style.display = 'none';
-    obtener_datos_usuarios();
+    obtener_datos_resguardos_bajas();
 });

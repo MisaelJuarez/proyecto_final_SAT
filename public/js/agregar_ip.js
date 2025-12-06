@@ -3,46 +3,15 @@ let id_resguardo = null;
 let btn_seleccionar_resguardo;
 let modalObtenerResguardo;
 
-let optionsAreas = '<option value="" selected>Seleccione el area</option>';
-let optionsPuestos = '<option value="" selected>Seleccione el puesto</option>';
-let optionsDepatamentos = '<option value="" selected>Seleccione el departamento</option>';
-
-const area = document.getElementById('area');
-const puesto = document.getElementById('puesto');
-const departamento = document.getElementById('departamento');
-
 const tabla_Resguardos = document.getElementById('tablaResguardos');
 const btn_obtener_resguardos = document.getElementById('btn-obtener-resguardos');
-const btn_agregar_usuario = document.getElementById('btn-agregar-usuario');
-
-const formulario_agregar_usuario = document.getElementById('formulario-agregar-usuario');
-
 const modal = document.getElementById('buscar-resguardo');
+const btn_agregar_ip = document.getElementById('btn-agregar-ip');
+const formulario_agregar_ip = document.getElementById('formulario-agregar-ip');
 
-const obtener_info_tabla = (tabla,options,id_campo,nombre_campo,etiqueta,condicion,area) => {
+const obtener_resguaros_para_asignar_ip = () => {
     let data = new FormData();
-    data.append('condicion',condicion);
-    data.append('area',area) 
-    data.append('tabla',tabla);
-    data.append('metodo','obtener_informacion_tabla');
-    fetch("app/controller/home.php",{
-        method: "POST",
-        body: data
-    })
-    .then(respuesta => respuesta.json())
-    .then((respuesta) => {
-        respuesta.map(campo => {
-            options += `
-                <option value="${campo[id_campo]}">${campo[nombre_campo]}</option>
-            `;
-        });
-        etiqueta.innerHTML = options;
-    });
-}
-
-const obtener_resguaros = () => {
-    let data = new FormData();
-    data.append('metodo', 'obtener_resguaros');
+    data.append('metodo', 'obtener_resguaros_para_asignar_ip');
     fetch("app/controller/home.php", {
         method: "POST",
         body: data
@@ -56,7 +25,6 @@ const obtener_resguaros = () => {
                 data: respuesta, 
                 columns: [
                     { data: 'n_serie' }, 
-                    { data: 'marca' }, 
                     { data: 'hostname' }, 
                     { data: 'mac' }, 
                     {
@@ -65,7 +33,6 @@ const obtener_resguaros = () => {
                             return `
                                 <button class="btn btn-info seleccionar-resguardo" 
                                     data-id="${data}"  
-                                    data-marca="${row.marca}" 
                                     data-nserie="${row.n_serie}" 
                                 >
                                     Seleccionar
@@ -87,10 +54,12 @@ const obtener_resguaros = () => {
     });
 };
 
-const agregar_nuevo_usuario = () => {
-    let data = new FormData(document.getElementById('formulario-agregar-usuario'));
+const agregar_nueva_ip = () => {
+    console.log(id_resguardo);
+    
+    let data = new FormData(document.getElementById('formulario-agregar-ip'));
     data.append('id_resguaro',id_resguardo);
-    data.append('metodo','agregar_nuevo_usuario');
+    data.append('metodo','agregar_nueva_ip');
     fetch("app/controller/home.php",{
         method:"POST",
         body: data
@@ -99,8 +68,8 @@ const agregar_nuevo_usuario = () => {
     .then(async respuesta => {
         if (respuesta[0] == 1) {
             await Swal.fire({title: `${respuesta[1]}`,icon: "success"});
-            formulario_agregar_usuario.reset();
-            btn_obtener_resguardos.textContent = 'Seleccionar resguardo';
+            formulario_agregar_ip.reset();
+            btn_obtener_resguardos.textContent = 'Equipos de computo';
             id_resguardo = null;
         }else {
             Swal.fire({title: `${respuesta[1]}`,icon: "error"});
@@ -108,31 +77,17 @@ const agregar_nuevo_usuario = () => {
     })
 }
 
-area.addEventListener('change', (e) => {
-    if (area.value != '') {
-        obtener_info_tabla('departamentos',optionsDepatamentos,'id_departamento','nombre_departamento',departamento,1,area.value);
-    } else {
-        departamento.value = '';
-        departamento.innerHTML = '<option value="" selected>Seleccione el departamento</option>'
-    }
-});
-
-btn_obtener_resguardos.addEventListener('click', () => obtener_resguaros());
-
 tabla_Resguardos.addEventListener('click', (e) => {
     btn_seleccionar_resguardo = e.target.closest(".seleccionar-resguardo"); 
     
     if (btn_seleccionar_resguardo) {
         id_resguardo = btn_seleccionar_resguardo.dataset.id;
-        btn_obtener_resguardos.textContent = `${btn_seleccionar_resguardo.dataset.marca} | ${btn_seleccionar_resguardo.dataset.nserie}`;
+        btn_obtener_resguardos.textContent = `${btn_seleccionar_resguardo.dataset.nserie}`;
         modalObtenerResguardo = bootstrap.Modal.getInstance(modal);
         if (modalObtenerResguardo) modalObtenerResguardo.hide();
     }
 });
 
-btn_agregar_usuario.addEventListener('click', () => agregar_nuevo_usuario());
+btn_agregar_ip.addEventListener('click', () => agregar_nueva_ip());
 
-document.addEventListener('DOMContentLoaded', () => {
-    obtener_info_tabla('puestos',optionsPuestos,'id_puesto','nombre_puesto',puesto,2,'');
-    obtener_info_tabla('areas',optionsAreas,'id_area','nombre_area',area,2,'');
-});
+document.addEventListener('DOMContentLoaded', () => obtener_resguaros_para_asignar_ip());

@@ -15,7 +15,7 @@
         <div class="logo-box">
           <img src="public/img/imagen2.png" alt="Logo" width="100%" height="auto">
         </div>
-        <span class="fw-semibold text-dark">Sistema Jurídica y Auditoría (SIJA)</span>
+        <!-- <span class="fw-semibold text-dark">Sistema Jurídica y Auditoría (SIJA)</span> -->
       </a>
       <div class="logo-box">
         <img src="public/img/sat.png" alt="SAT" width="100%" height="auto">
@@ -49,7 +49,7 @@
         </button>
         <div>
           <a href="#" class="login-link me-3"><i class="bi bi-question-circle me-1"></i>Recuperar acceso</a>
-          <a href="#" class="login-link"><i class="bi bi-person-plus me-1"></i>Solicitar credenciales</a>
+          <!-- <a href="#" class="login-link"><i class="bi bi-person-plus me-1"></i>Solicitar credenciales</a> -->
         </div>
       </form>
 

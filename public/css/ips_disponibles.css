@@ -29,15 +29,17 @@
     padding: 10px;
 }
 
-#tabla-de-admin-usuarios {
-    padding: 0;
+#tabla-de-info-ips {
+    padding-top: 10px;
+    padding-left: 100px;
+    padding-right: 100px;
     border: 1px solid rgba(0, 0, 0, 0.223);
     background-color: white;
     border-bottom: 1px solid black;
 }
 
 .header-tabla {
-    background-color: rgb(34, 34, 142);
+    background-color: rgb(135, 93, 16);
     color: white;
     border: 1px solid black;
 }
@@ -45,7 +47,7 @@
 .tituloTable {
     padding: 5px;
     color: white;
-    background-color: rgb(34, 34, 142);
+    background-color: rgb(135, 93, 16);
 }
 
 .tituloInformacion {
@@ -62,15 +64,6 @@
     width: 400px;
 }
 
-#informacion-usuario {
-    padding: 0;
-    border: 1px solid rgba(0, 0, 0, 0.223);
-    background-color: white;
-    border-bottom: 1px solid black;
-}
-
-.tituloInformacion {
-    padding: 5px;
-    color: white;
-    background-color: rgb(84, 84, 84);
+.ip_seleccionada {
+    font-size: 20px;
 }

@@ -1,16 +1,15 @@
-<div id="tabla-de-info-usuarios" class="container-fluid">
-    <h3 class="mb-2 tituloTable">Usuarios</h3>
-    <table id="tablaUsuarios" class="table">
+<div id="tabla-de-info-resguardos" class="container-fluid">
+    <h3 class="mb-2 tituloTable">Resguardos</h3>
+    <table id="tablaResguardos" class="table">
         <thead>
             <tr class="header-tabla">
-                <th scope="col" class="border border-white">RFC Corto</th>
-                <th scope="col" class="border border-white">Nombre</th>
-                <th scope="col" class="border border-white">Apellidos</th>
-                <th scope="col" class="border border-white">No. Empleado</th>
-                <th scope="col" class="border border-white">Puesto</th>
-                <th scope="col" class="border border-white">Area</th>
-                <th scope="col" class="border border-white">Departamento</th>
-                <th scope="col" class="border border-white">N. Serie equipo</th>
+                <th scope="col" class="border border-white">Marca</th>
+                <th scope="col" class="border border-white">Modelo</th>
+                <th scope="col" class="border border-white">Numero de serie</th>
+                <th scope="col" class="border border-white">Hostname</th>
+                <th scope="col" class="border border-white">Mac</th>
+                <th scope="col" class="border border-white">Nodo</th>
+                <th scope="col" class="border border-white">Ip</th>
                 <th scope="col" class="border border-white">Detalle</th>
             </tr>
         </thead>

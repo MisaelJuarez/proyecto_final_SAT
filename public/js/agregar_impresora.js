@@ -1,23 +1,17 @@
-let tablaResguaros;
-let id_resguardo = null;
-let btn_seleccionar_resguardo;
-let modalObtenerResguardo;
-
+let tablaIps;
+let id_ip = null;
+let btn_seleccionar_ip;
 let optionsAreas = '<option value="" selected>Seleccione el area</option>';
-let optionsPuestos = '<option value="" selected>Seleccione el puesto</option>';
 let optionsDepatamentos = '<option value="" selected>Seleccione el departamento</option>';
+let modalObtenerip;
 
+const modal = document.getElementById('buscar-ips');
+const btn_obtener_ips = document.getElementById('btn-obtener-ips');
 const area = document.getElementById('area');
-const puesto = document.getElementById('puesto');
 const departamento = document.getElementById('departamento');
-
-const tabla_Resguardos = document.getElementById('tablaResguardos');
-const btn_obtener_resguardos = document.getElementById('btn-obtener-resguardos');
-const btn_agregar_usuario = document.getElementById('btn-agregar-usuario');
-
-const formulario_agregar_usuario = document.getElementById('formulario-agregar-usuario');
-
-const modal = document.getElementById('buscar-resguardo');
+const tabla_Ips = document.getElementById('tablaIps');
+const btn_agregar_impresora = document.getElementById('btn-agregar-impresora');
+const formulario_agregar_impresora = document.getElementById('formulario-agregar-impresora');
 
 const obtener_info_tabla = (tabla,options,id_campo,nombre_campo,etiqueta,condicion,area) => {
     let data = new FormData();
@@ -40,33 +34,29 @@ const obtener_info_tabla = (tabla,options,id_campo,nombre_campo,etiqueta,condici
     });
 }
 
-const obtener_resguaros = () => {
+const obtener_ips = () => {
     let data = new FormData();
-    data.append('metodo', 'obtener_resguaros');
+    data.append('metodo', 'obtener_ips');
     fetch("app/controller/home.php", {
         method: "POST",
         body: data
     })
     .then(respuesta => respuesta.json())
     .then((respuesta) => {
-        if (tablaResguaros) {
-            tablaResguaros.clear().rows.add(respuesta).draw(); 
+        if (tablaIps) {
+            tablaIps.clear().rows.add(respuesta).draw(); 
         } else {
-            tablaResguaros = $('#tablaResguardos').DataTable({
+            tablaIps = $('#tablaIps').DataTable({
                 data: respuesta, 
                 columns: [
-                    { data: 'n_serie' }, 
-                    { data: 'marca' }, 
-                    { data: 'hostname' }, 
-                    { data: 'mac' }, 
+                    { data: 'ip' }, 
                     {
-                        data: 'id_resguardo',
+                        data: 'id_ip',
                         render: function(data, type, row) {
                             return `
-                                <button class="btn btn-info seleccionar-resguardo" 
+                                <button class="btn btn-info seleccionar-ip" 
                                     data-id="${data}"  
-                                    data-marca="${row.marca}" 
-                                    data-nserie="${row.n_serie}" 
+                                    data-ip="${row.ip}"  
                                 >
                                     Seleccionar
                                 </button>
@@ -87,10 +77,10 @@ const obtener_resguaros = () => {
     });
 };
 
-const agregar_nuevo_usuario = () => {
-    let data = new FormData(document.getElementById('formulario-agregar-usuario'));
-    data.append('id_resguaro',id_resguardo);
-    data.append('metodo','agregar_nuevo_usuario');
+const agregar_nueva_impresora = () => {
+    let data = new FormData(document.getElementById('formulario-agregar-impresora'));
+    data.append('id_ip',id_ip);
+    data.append('metodo','agregar_nueva_impresora');
     fetch("app/controller/home.php",{
         method:"POST",
         body: data
@@ -99,9 +89,9 @@ const agregar_nuevo_usuario = () => {
     .then(async respuesta => {
         if (respuesta[0] == 1) {
             await Swal.fire({title: `${respuesta[1]}`,icon: "success"});
-            formulario_agregar_usuario.reset();
-            btn_obtener_resguardos.textContent = 'Seleccionar resguardo';
-            id_resguardo = null;
+            formulario_agregar_impresora.reset();
+            btn_obtener_ips.textContent = 'Selecciona la ip';
+            id_ip = null;
         }else {
             Swal.fire({title: `${respuesta[1]}`,icon: "error"});
         }
@@ -117,22 +107,23 @@ area.addEventListener('change', (e) => {
     }
 });
 
-btn_obtener_resguardos.addEventListener('click', () => obtener_resguaros());
+tabla_Ips.addEventListener('click', (e) => {
+    btn_seleccionar_ip = e.target.closest(".seleccionar-ip"); 
 
-tabla_Resguardos.addEventListener('click', (e) => {
-    btn_seleccionar_resguardo = e.target.closest(".seleccionar-resguardo"); 
-    
-    if (btn_seleccionar_resguardo) {
-        id_resguardo = btn_seleccionar_resguardo.dataset.id;
-        btn_obtener_resguardos.textContent = `${btn_seleccionar_resguardo.dataset.marca} | ${btn_seleccionar_resguardo.dataset.nserie}`;
-        modalObtenerResguardo = bootstrap.Modal.getInstance(modal);
-        if (modalObtenerResguardo) modalObtenerResguardo.hide();
+    if (btn_seleccionar_ip) {
+        id_ip = btn_seleccionar_ip.dataset.id;
+        btn_obtener_ips.textContent = btn_seleccionar_ip.dataset.ip;
+        modalObtenerip = bootstrap.Modal.getInstance(modal);
+        if (modalObtenerip) modalObtenerip.hide();
+        console.log(id_ip);
     }
 });
 
-btn_agregar_usuario.addEventListener('click', () => agregar_nuevo_usuario());
+btn_agregar_impresora.addEventListener('click', () => {
+    agregar_nueva_impresora();
+});
 
 document.addEventListener('DOMContentLoaded', () => {
-    obtener_info_tabla('puestos',optionsPuestos,'id_puesto','nombre_puesto',puesto,2,'');
     obtener_info_tabla('areas',optionsAreas,'id_area','nombre_area',area,2,'');
+    obtener_ips();
 });

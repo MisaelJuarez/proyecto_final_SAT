@@ -29,7 +29,7 @@
     padding: 10px;
 }
 
-#tabla-de-admin-usuarios {
+#tabla-de-info-usuarios {
     padding: 0;
     border: 1px solid rgba(0, 0, 0, 0.223);
     background-color: white;
@@ -46,20 +46,6 @@
     padding: 5px;
     color: white;
     background-color: rgb(34, 34, 142);
-}
-
-.tituloInformacion {
-    padding: 5px;
-    color: white;
-    background-color: rgb(84, 84, 84);
-}
-
-.contenedor-input {
-    width: 550px;
-}
-
-.contenedor-boton {
-    width: 400px;
 }
 
 #informacion-usuario {
