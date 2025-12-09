@@ -1,18 +1,30 @@
 let tablaIps;
 let tablaResguaros;
+let tablaimpresoras;
 let id_resguardo = null;
+let id_impresora = null;
 let id_ip = null;
 let btn_ip_asignar;
 let btn_seleccionar_resguardo;
+let btn_seleccionar_impresora;
 let modalObtenerResguardo;
+let modalObtenerImpresora;
+let chekedInput = '';
+
+const asignar_resguardo_contenedor = document.getElementById('asignar-resguardo-contenedor');
+const asignar_impresoras_contenedor = document.getElementById('asignar-impresoras-contenedor');
+const radios = document.querySelectorAll('input[name="asignar"]');
 
 const modal = document.getElementById('buscar-resguardo');
+const modalImpresora = document.getElementById('buscar-impresoras');
 const tabla_resguardos = document.getElementById('tablaResguardos');
+const tabla_impresoras = document.getElementById('tablaImpresoras');
 const tabla_ips = document.getElementById('tablaIps');
 const contenedor_asignar = document.getElementById('contenedor-asignar');
 const tabla_de_info_ips = document.getElementById('tabla-de-info-ips');
 const ip_seleccionada = document.getElementById('ip-seleccionada');
 const btn_obtener_resguardos = document.getElementById('btn-obtener-resguardos');
+const btn_obtener_impresoras = document.getElementById('btn-obtener-impresoras');
 const btn_asignar_ip = document.getElementById('btn-asignar-ip');
 
 const obtener_resguaros_para_asignar_ip = () => {
@@ -59,6 +71,53 @@ const obtener_resguaros_para_asignar_ip = () => {
         }
     });
 };
+
+const obtener_impresoras_para_asignar_ip = () => {
+    let data = new FormData();
+    data.append('metodo', 'obtener_impresoras_para_asignar_ip');
+    fetch("app/controller/home.php", {
+        method: "POST",
+        body: data
+    })
+    .then(respuesta => respuesta.json())
+    .then((respuesta) => {
+        if (tablaimpresoras) {
+            tablaimpresoras.clear().rows.add(respuesta).draw(); 
+        } else {
+            tablaimpresoras = $('#tablaImpresoras').DataTable({
+                data: respuesta, 
+                columns: [
+                    { data: 'modelo' }, 
+                    { data: 'n_serie' }, 
+                    { data: 'nombre_area' }, 
+                    { data: 'nombre_departamento' }, 
+                    {
+                        data: 'id_impresora',
+                        render: function(data, type, row) {
+                            return `
+                                <button class="btn btn-info seleccionar-impresoras" 
+                                    data-id="${data}"  
+                                    data-nserie="${row.n_serie}" 
+                                >
+                                    Seleccionar
+                                </button>
+                            `;
+                        }
+                    }
+                ],
+                "lengthChange": false,
+                "pageLength": 5,
+                "info": false,
+                language: { url: "./public/json/lenguaje.json" },
+                dom: '<"custom-toolbar"lf>tip', 
+                initComplete: () => {
+                    $("div.custom-toolbar .dataTables_filter").prependTo(".custom-toolbar").addClass("left-section");
+                }
+            });
+        }
+    });
+};
+
 
 const obtener_ips_disponibles = () => {
     let data = new FormData();
@@ -126,6 +185,32 @@ const asignar_ip_al_equipo = () => {
     })
 }
 
+const asignar_ip_a_impresora = () => {
+    let data = new FormData();
+    data.append('id_ip',id_ip);
+    data.append('id_impresora',id_impresora);
+    data.append('metodo','asignar_ip_a_impresora');
+    fetch("app/controller/home.php",{
+        method:"POST",
+        body: data
+    })
+    .then(respuesta => respuesta.json())
+    .then(async respuesta => {
+        if (respuesta[0] == 1) {
+            await Swal.fire({title: `${respuesta[1]}`,icon: "success"});
+            contenedor_asignar.style.display = 'none';
+            tabla_de_info_ips.style.display = 'block';
+            id_impresora = null;
+            id_ip = null;
+            btn_obtener_impresoras.textContent = 'Impresoras';
+            obtener_ips_disponibles();
+            obtener_impresoras_para_asignar_ip();
+        }else {
+            Swal.fire({title: `${respuesta[1]}`,icon: "error"});
+        }
+    })
+}
+
 tabla_ips.addEventListener('click', (e) => {
     btn_ip_asignar = e.target.closest(".asignar-ip");
 
@@ -135,6 +220,21 @@ tabla_ips.addEventListener('click', (e) => {
         contenedor_asignar.style.display = 'block';
         ip_seleccionada.textContent = btn_ip_asignar.dataset.ip; 
     }
+});
+
+radios.forEach(radio => {
+    radio.addEventListener('change', function() {
+        btn_asignar_ip.style.display = 'block';
+        if (this.value == 'equipos') {
+            chekedInput = 'equipos';
+            asignar_impresoras_contenedor.style.display = 'none';
+            asignar_resguardo_contenedor.style.display = 'block';
+        }else if(this.value == 'impresoras'){
+            chekedInput = 'impresoras';
+            asignar_resguardo_contenedor.style.display = 'none';
+            asignar_impresoras_contenedor.style.display = 'block';
+        }
+    });
 });
 
 tabla_resguardos.addEventListener('click', (e) => {
@@ -148,14 +248,35 @@ tabla_resguardos.addEventListener('click', (e) => {
     }
 });
 
+tabla_impresoras.addEventListener('click', (e) => {
+    btn_seleccionar_impresora = e.target.closest(".seleccionar-impresoras"); 
+    
+    if (btn_seleccionar_impresora) {
+        id_impresora = btn_seleccionar_impresora.dataset.id;
+        modalObtenerImpresora = bootstrap.Modal.getInstance(modalImpresora);
+        if (modalObtenerImpresora) modalObtenerImpresora.hide();
+        btn_obtener_impresoras.textContent = `${btn_seleccionar_impresora.dataset.nserie}`;
+    }
+});
+
 btn_asignar_ip.addEventListener('click', () => {
     console.log('ID IP: ',id_ip);
     console.log('ID RESGUARDO: ',id_resguardo);
-    asignar_ip_al_equipo();
+    console.log('ID IMPRESORA: ',id_impresora);
+    console.log('CHECKED: ',chekedInput);
+    if (chekedInput == 'equipos') {
+        asignar_ip_al_equipo();
+    }else if(chekedInput == 'impresoras') {
+        asignar_ip_a_impresora()
+    }
 });
 
 document.addEventListener('DOMContentLoaded', () =>{
+    asignar_resguardo_contenedor.style.display = 'none';
+    asignar_impresoras_contenedor.style.display = 'none';
     contenedor_asignar.style.display = 'none';
+    btn_asignar_ip.style.display = 'none';
     obtener_ips_disponibles();
     obtener_resguaros_para_asignar_ip();
+    obtener_impresoras_para_asignar_ip();
 });

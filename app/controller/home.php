@@ -624,20 +624,38 @@ class Home extends Conexion {
     }
     
     public function obtener_ips_en_uso(){
-        $consulta = $this->obtener_conexion()->prepare("SELECT 
-            ips.*, 
-            resguardos.n_serie,
-            resguardos.id_resguardo
-        FROM ips
-        LEFT JOIN resguardos
-            ON resguardos.ip = ips.id_ip
-        WHERE disponible = 2;
-        ");
+        $mostrar = $_POST['mostrar'];
 
-        $consulta->execute();
-        $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
-        $this->cerrar_conexion();
-        echo json_encode($datos);
+        if ($mostrar == 'equipos') {
+            $consulta = $this->obtener_conexion()->prepare("SELECT 
+                ips.*, 
+                resguardos.n_serie,
+                resguardos.id_resguardo
+            FROM ips
+            INNER JOIN resguardos
+                ON resguardos.ip = ips.id_ip
+            WHERE disponible = 2;
+            ");
+    
+            $consulta->execute();
+            $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+            $this->cerrar_conexion();
+            echo json_encode($datos);
+        } elseif ($mostrar == 'impresoras'){
+            $consulta = $this->obtener_conexion()->prepare("SELECT 
+                ips.*, 
+                impresoras.n_serie,
+                impresoras.id_impresora
+            FROM ips
+            INNER JOIN impresoras
+                ON impresoras.ip_impresora = ips.id_ip;
+            ");
+    
+            $consulta->execute();
+            $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+            $this->cerrar_conexion();
+            echo json_encode($datos);
+        }
     }
 
     public function obtener_resguaros_para_asignar_ip(){
@@ -648,8 +666,28 @@ class Home extends Conexion {
         echo json_encode($datos);
     }
 
+    public function obtener_impresoras_para_asignar_ip() {
+        $consulta = $this->obtener_conexion()->prepare("SELECT 
+            impresoras.*, 
+            areas.nombre_area,
+            departamentos.nombre_departamento
+        FROM impresoras
+        LEFT JOIN areas
+            ON impresoras.area = areas.id_area
+        LEFT JOIN departamentos
+            ON impresoras.departamento = departamentos.id_departamento
+        WHERE impresoras.ip_impresora IS NULL;
+        ");
+
+        $consulta->execute();
+        $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        $this->cerrar_conexion();
+        echo json_encode($datos);
+    }
+
     public function agregar_nueva_ip(){
         $ip = $_POST['ip'];
+        $asignar = $_POST['asignar'];
 
         if ($_POST['id_resguaro'] == 'null') {
             $id_resguaro = null;
@@ -686,15 +724,25 @@ class Home extends Conexion {
                     $obtenerId->execute();
                     $id_ip = $obtenerId->fetch(PDO::FETCH_ASSOC);
                     $this->cerrar_conexion();
-
-                    $actualizacion = $this->obtener_conexion()->prepare("UPDATE resguardos 
-                    SET ip = :ip 
-                    WHERE id_resguardo = :id_resguardo");
-                    $actualizacion->bindParam(':ip',$id_ip['id_ip']);
-                    $actualizacion->bindParam(':id_resguardo',$id_resguaro);
-                    $actualizacion->execute();
-                    $this->cerrar_conexion();
-
+                    
+                    if ($asignar == 'equipos') {
+                        $actualizacion = $this->obtener_conexion()->prepare("UPDATE resguardos 
+                        SET ip = :ip 
+                        WHERE id_resguardo = :id_resguardo");
+                        $actualizacion->bindParam(':ip',$id_ip['id_ip']);
+                        $actualizacion->bindParam(':id_resguardo',$id_resguaro);
+                        $actualizacion->execute();
+                        $this->cerrar_conexion();
+                    }elseif ($asignar == 'impresoras'){
+                        $actualizacion = $this->obtener_conexion()->prepare("UPDATE impresoras 
+                        SET ip_impresora = :ip 
+                        WHERE id_impresora = :id");
+                        $actualizacion->bindParam(':ip',$id_ip['id_ip']);
+                        $actualizacion->bindParam(':id',$id_resguaro);
+                        $actualizacion->execute();
+                        $this->cerrar_conexion();
+                    }
+                    
                     if ($actualizacion) {
                         $cambiarDisponibleIp = $this->obtener_conexion()->prepare("UPDATE ips 
                         SET disponible = 2 
@@ -750,40 +798,109 @@ class Home extends Conexion {
         } else {
             echo json_encode([0,"Error al asignar ip"]);
         }
-        
+    }
+
+    public function asignar_ip_a_impresora() {
+        $id_ip = $_POST['id_ip'];
+        $id_impresora = $_POST['id_impresora'];
+
+        if ($id_impresora == 'null') {
+            echo json_encode([0,"No has asignado una impresora"]);
+            return;
+        }
+
+        $actualizacionImpresora = $this->obtener_conexion()->prepare("UPDATE impresoras 
+            SET ip_impresora = :ip WHERE id_impresora = :id_impresora");
+            
+        $actualizacionImpresora->bindParam(':ip',$id_ip);
+        $actualizacionImpresora->bindParam(':id_impresora',$id_impresora);
+        $actualizacionImpresora->execute();
+        $this->cerrar_conexion();
+
+        if ($actualizacionImpresora) {
+            $actualizacionIp = $this->obtener_conexion()->prepare("UPDATE ips 
+            SET disponible = 2 WHERE id_ip = :id_ip");
+            
+            $actualizacionIp->bindParam(':id_ip',$id_ip);
+            $actualizacionIp->execute();
+            $this->cerrar_conexion();
+
+            if ($actualizacionIp) {
+                echo json_encode([1,"Ip asignada correctamente"]);
+            }else {
+                echo json_encode([0,"Error al asignar ip"]);
+            }
+
+        } else {
+            echo json_encode([0,"Error al asignar ip"]);
+        }
     }
 
     public function obtener_informacion_ip() {
         $id = $_POST['id'];
+        $mostrar = $_POST['mostrar'];
 
-        $consulta = $this->obtener_conexion()->prepare("SELECT 
-            ips.ip AS ip_numero, 
-            resguardos.*
-        FROM ips
-        LEFT JOIN resguardos
-            ON resguardos.ip = ips.id_ip
-        WHERE id_ip = :id;
-        ");
-
-        $consulta->bindParam(':id',$id);
-        $consulta->execute();
-        $datos = $consulta->fetch(PDO::FETCH_ASSOC);
-        $this->cerrar_conexion();
-        echo json_encode($datos);
+        if ($mostrar == 'equipos') {
+            $consulta = $this->obtener_conexion()->prepare("SELECT 
+                ips.ip AS ip_numero, 
+                resguardos.*
+            FROM ips
+            LEFT JOIN resguardos
+                ON resguardos.ip = ips.id_ip
+            WHERE id_ip = :id;
+            ");
+    
+            $consulta->bindParam(':id',$id);
+            $consulta->execute();
+            $datos = $consulta->fetch(PDO::FETCH_ASSOC);
+            $this->cerrar_conexion();
+            echo json_encode($datos);
+        } elseif($mostrar == 'impresoras') {
+            $consulta = $this->obtener_conexion()->prepare("SELECT 
+                ips.ip AS ip_numero, 
+                impresoras.*,
+                areas.nombre_area,
+                departamentos.nombre_departamento
+            FROM ips
+            LEFT JOIN impresoras
+                ON impresoras.ip_impresora = ips.id_ip
+            LEFT JOIN areas
+                ON impresoras.area = areas.id_area
+            LEFT JOIN departamentos
+                ON impresoras.departamento = departamentos.id_departamento
+            WHERE id_ip = :id;
+            ");
+    
+            $consulta->bindParam(':id',$id);
+            $consulta->execute();
+            $datos = $consulta->fetch(PDO::FETCH_ASSOC);
+            $this->cerrar_conexion();
+            echo json_encode($datos);
+        }
     }
 
     public function retirar_ip_del_equipo() {
+        $retirar = $_POST['retirar'];
         $id_ip = $_POST['id_ip'];
-        $id_resguaro = $_POST['id_resguardo'];
+        $id = $_POST['id'];
 
-        $actualizacionResguardo = $this->obtener_conexion()->prepare("UPDATE resguardos 
-            SET ip = NULL
-            WHERE id_resguardo = :id_resguardo");
-        $actualizacionResguardo->bindParam(':id_resguardo',$id_resguaro);
-        $actualizacionResguardo->execute();
-        $this->cerrar_conexion();
-
-        if ($actualizacionResguardo) {
+        if ($retirar == 'equipos') {
+            $actualizacion = $this->obtener_conexion()->prepare("UPDATE resguardos 
+                SET ip = NULL
+                WHERE id_resguardo = :id_resguardo");
+            $actualizacion->bindParam(':id_resguardo',$id);
+            $actualizacion->execute();
+            $this->cerrar_conexion();
+        }elseif ($retirar == 'impresoras') {
+            $actualizacion = $this->obtener_conexion()->prepare("UPDATE impresoras 
+                SET ip_impresora = NULL
+                WHERE id_impresora = :id_impresora");
+            $actualizacion->bindParam(':id_impresora',$id);
+            $actualizacion->execute();
+            $this->cerrar_conexion();
+        }
+        
+        if ($actualizacion) {
             $actualizacionIp = $this->obtener_conexion()->prepare("UPDATE ips 
                 SET disponible = 1
                 WHERE id_ip = :id_ip");
