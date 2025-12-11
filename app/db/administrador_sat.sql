@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 06, 2025 at 02:49 AM
+-- Generation Time: Dec 11, 2025 at 08:44 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -61,6 +61,7 @@ CREATE TABLE IF NOT EXISTS `colaboradores` (
   `pass` text NOT NULL,
   `area` int DEFAULT NULL,
   `administrador` int DEFAULT NULL,
+  `correo` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id_colaborador`),
   KEY `areas_area_colaboradores` (`area`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8;
@@ -69,11 +70,11 @@ CREATE TABLE IF NOT EXISTS `colaboradores` (
 -- Dumping data for table `colaboradores`
 --
 
-INSERT INTO `colaboradores` (`id_colaborador`, `nombre`, `apellidos`, `rfc`, `rfc_corto`, `usuario`, `pass`, `area`, `administrador`) VALUES
-(2, 'Misael', 'Juarez Aguilar', 'JUAM010420E79', 'JUAM010420', 'misael', '$2y$10$CMhHd6vS/wmDHc86/bngm.aB.T4tzL/4SgmJtGJZBMAlYhv9lkImW', 2, 1),
-(3, 'Luis', 'Torres Puebla', '12345', '123', 'luis', '$2y$10$L8eqKQXKyCobHqltzt34f.UzqerdJ1cOla3TdpLRHmfGVtZbKtQ5G', 3, 1),
-(4, 'Karla', 'Guzman Gomez', '1234567', '12345', 'karla', '$2y$10$4bfAzr0mIB8VVn1P/KkI.uxfANKrbtf2XTef28aPaSAG5BdnSsyIS', 4, 1),
-(6, 'Jose Luis', 'Hernandez Garcez', '1234567', '12345', 'jose', '$2y$10$9UCWLOs/EtGDLWKCc0hqAea91DMzD/T95kMQorpmQ0OWRLbQ2eCni', 1, 1);
+INSERT INTO `colaboradores` (`id_colaborador`, `nombre`, `apellidos`, `rfc`, `rfc_corto`, `usuario`, `pass`, `area`, `administrador`, `correo`) VALUES
+(2, 'Misael', 'Juarez Aguilar', 'JUAM010420E79', 'JUAM010420', 'misael', '$2y$10$r2bKq4ywuEKu4U.TD.lPveYlHcipydfHeBcwrTdm22vaNVIqfgjsi', 2, 1, 'juarezaguilarmisael74@gmail.com'),
+(3, 'Luis', 'Torres Puebla', '12345', '123', 'luis', '$2y$10$L8eqKQXKyCobHqltzt34f.UzqerdJ1cOla3TdpLRHmfGVtZbKtQ5G', 3, 1, NULL),
+(4, 'Karla', 'Guzman Gomez', '1234567', '12345', 'karla', '$2y$10$4bfAzr0mIB8VVn1P/KkI.uxfANKrbtf2XTef28aPaSAG5BdnSsyIS', 4, 1, NULL),
+(6, 'Jose Luis', 'Hernandez Garcez', '1234567', '12345', 'jose', '$2y$10$9UCWLOs/EtGDLWKCc0hqAea91DMzD/T95kMQorpmQ0OWRLbQ2eCni', 1, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -152,7 +153,7 @@ CREATE TABLE IF NOT EXISTS `impresoras` (
   KEY `ips_ip_impresora_impresoras` (`ip_impresora`),
   KEY `areas_area_impresoras` (`area`),
   KEY `departamentos_departamento_impresoras` (`departamento`)
-) ENGINE=InnoDB AUTO_INCREMENT=3;
+) ENGINE=InnoDB AUTO_INCREMENT=4;
 
 --
 -- Dumping data for table `impresoras`
@@ -160,7 +161,8 @@ CREATE TABLE IF NOT EXISTS `impresoras` (
 
 INSERT INTO `impresoras` (`id_impresora`, `marca`, `modelo`, `n_serie`, `ip_impresora`, `area`, `departamento`, `nodo`) VALUES
 (1, 'Lexmark', 'MX826ade', '746595102131F', 361, 2, 1, 'D274'),
-(2, 'Lexmark', 'MX826ade', '74659500212RB', 362, 2, 2, 'D146');
+(2, 'Lexmark', 'MX826ade', '74659500212RB', 362, 2, 2, 'D146'),
+(3, 'Lexmark', 'MX826ade', '746502902191X', 367, 2, 3, 'D269');
 
 -- --------------------------------------------------------
 
@@ -173,7 +175,7 @@ CREATE TABLE IF NOT EXISTS `ips` (
   `ip` varchar(50) NOT NULL,
   `disponible` int NOT NULL,
   PRIMARY KEY (`id_ip`)
-) ENGINE=InnoDB AUTO_INCREMENT=366;
+) ENGINE=InnoDB AUTO_INCREMENT=369;
 
 --
 -- Dumping data for table `ips`
@@ -544,7 +546,10 @@ INSERT INTO `ips` (`id_ip`, `ip`, `disponible`) VALUES
 (362, '2.2.2.2', 2),
 (363, '3.3.3.3', 1),
 (364, '4.4.4.4', 1),
-(365, '5.5.5.5', 1);
+(365, '5.5.5.5', 1),
+(366, '6.6.6.6', 1),
+(367, '7.7.7.7', 2),
+(368, '8.8.8.8', 2);
 
 -- --------------------------------------------------------
 
@@ -581,7 +586,7 @@ CREATE TABLE IF NOT EXISTS `resguardos` (
   `modelo` varchar(100) NOT NULL,
   `n_serie` varchar(100) NOT NULL,
   `hostname` varchar(50) NOT NULL,
-  `mac` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `mac` varchar(200) NOT NULL,
   `nodo` varchar(100) DEFAULT NULL,
   `ip` int DEFAULT NULL,
   `baja` int NOT NULL,
@@ -955,10 +960,27 @@ INSERT INTO `resguardos` (`id_resguardo`, `marca`, `modelo`, `n_serie`, `hostnam
 (358, 'LENOVO', 'THINKPAD L14 GEN 3 AMD', 'PW061NX9', 'B299AEBM725VC01', 'F4-A8-0D-F0-67-ZC', '', 358, 2, NULL),
 (359, 'LENOVO', 'THINKPAD L14 GEN 3 AMD', 'PW063BND', 'B299LUCS61C9C01', 'F4-A8-0D-12-89-ZB', '', 359, 2, NULL),
 (360, 'LENOVO', 'THINKPAD L14 GEN 3 AMD', 'PW06BFAJ', 'B299EIOM9197C01', 'F4-A8-0D-34-AB-ZA', '', 360, 2, NULL),
-(361, 'PRUEBA', 'PRUEBA', 'PW061P2V', 'B299MOVY80CGC01', 'F4-A8-0D-85-2B-22', 'D-17', NULL, 2, NULL),
+(361, 'PRUEBA', 'PRUEBA', 'PW061P2V', 'B299MOVY80CGC01', 'F4-A8-0D-85-2B-22', 'D-17', 368, 2, NULL),
 (362, 'PRUEBA 2', 'PRUEBA 2', 'PW061P9H', 'B299RUDS72BDC01', 'F4-A8-0D-86-92-5D', 'D-20', NULL, 1, '3.3.3.3'),
 (363, 'LENOVO', 'THINKPAD L14 GEN 3 AMD', 'PW065FSY', 'B299AEFG71A9C01', 'F4-A8-0D-88-F9-44', 'D141', NULL, 2, NULL),
 (364, 'LENOVO', 'THINKPAD L14 GEN 3 AMD', 'PW06BSAQ', 'B299NAGP86B8C01', 'F4-A8-0D-8B-EC-A4', 'D-273', NULL, 2, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `restablecer_pass`
+--
+
+CREATE TABLE IF NOT EXISTS `restablecer_pass` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `correo` varchar(255) NOT NULL,
+  `token` varchar(128) NOT NULL,
+  `expira_en` datetime NOT NULL,
+  `creado_en` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `token` (`token`),
+  KEY `correo` (`correo`)
+) ENGINE=InnoDB;
 
 -- --------------------------------------------------------
 
