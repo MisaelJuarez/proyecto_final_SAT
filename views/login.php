@@ -15,6 +15,7 @@
         <div class="logo-box">
           <img src="public/img/imagen2.png" alt="Logo" width="100%" height="auto">
         </div>
+        
         <!-- <span class="fw-semibold text-dark">Sistema Jurídica y Auditoría (SIJA)</span> -->
       </a>
       <div class="logo-box">
