@@ -27,14 +27,22 @@
                     <label for="usuario" class="form-label">Ingrese su nombre de usuario</label>
                     <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Ingrese su nombre de usuario">
                 </div>
-
+                
+                <div class="contenedor-input ms-4 mb-4">
+                    <label for="correo" class="form-label">Ingrese su correo electronico</label>
+                    <input type="text" class="form-control" id="correo" name="correo" placeholder="Ingrese su correo">
+                </div>
+                
                 <div class="contenedor-input ms-4 mb-4">
                     <label for="password" class="form-label">Ingrese su contraseña</label>
                     <input type="password" class="form-control" id="pass" name="pass" placeholder="Ingrese su contraseña">
                 </div>    
                 
-                <select class="contenedor-input ms-4 mb-4 form-select" id="area" name="area" aria-label="Default select example">
-                </select>  
+                <div class="contenedor-input ms-4 mb-4">
+                    <label for="password" class="form-label">Ingrese el area que pertenece</label>
+                    <select class="contenedor-input form-select" id="area" name="area" aria-label="Default select example">
+                    </select>  
+                </div>
  
                 <div class="contenedor-boton ms-4 mb-4">
                     <button id="btn-actualizar-informacion" type="button" class="btn btn-info boton">Actualizar informacion</button>

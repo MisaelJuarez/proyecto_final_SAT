@@ -2,6 +2,8 @@ const btn_agregar_colaborador = document.getElementById('btn-agregar-colaborador
 const area = document.getElementById('area');
 let areas = '<option selected>Ingrese el area que pertenece</option>';
 
+const formulario_agregar_colaborador = document.getElementById('formulario-agregar-colaborador');
+
 const obtener_areas = () => {
     let data = new FormData();
     data.append('condicion',2);
@@ -33,6 +35,7 @@ const agregar_colaborador = () => {
     .then(async respuesta => {
         if (respuesta[0] == 1) {
             Swal.fire({title: `${respuesta[1]}`,icon: "success"});
+            formulario_agregar_colaborador.reset();
         }else {
             Swal.fire({title: `${respuesta[1]}`,icon: "error"});
         }

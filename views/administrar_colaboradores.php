@@ -5,6 +5,7 @@
             <tr>
                 <th scope="col">Nombre</th>
                 <th scope="col">Apellidos</th>
+                <th scope="col">Correo</th>
                 <th scope="col">Area</th>
                 <th scope="col">Rol</th>
                 <th scope="col">Acciones</th>
@@ -46,18 +47,28 @@
                 </div>
 
                 <div class="contenedor-input ms-4 mb-4">
+                    <label for="correo" class="form-label">Ingrese su correo electronico</label>
+                    <input type="email" class="form-control" id="correo" name="correo" placeholder="Ingrese su correo">
+                </div>    
+                
+                <div class="contenedor-input ms-4 mb-4">
                     <label for="password" class="form-label">Ingrese su contraseña</label>
                     <input type="password" class="form-control" id="pass" name="pass" placeholder="Ingrese su contraseña">
                 </div>    
-                
-                <select class="contenedor-input ms-4 mb-4 form-select" name="area" id="area" aria-label="Default select example">
-                </select>  
+                <div class="contenedor-input ms-4 mb-3">
+                    <label for="departamento" class="form-label">Ingresa el area que pertenece</label>
+                    <select class="contenedor-input form-select" name="area" id="area" aria-label="Default select example">
+                    </select>  
+                </div>
 
                 <select class="contenedor-input ms-4 mb-4 form-select" id="tipo" name="tipo" aria-label="Default select example">
                     <option selected>Ingrese el tipo de usuario</option>
                     <option value="1">Administrador</option>
                     <option value="2">Usuario</option>
                 </select>  
+                
+                <div class="contenedor-input ms-4 mb-3">
+                </div>
 
                 <div class="contenedor-boton ms-4 mb-4">
                     <button id="btn-editar-colaborador" type="button" class="btn btn-warning boton">Modificar informacion</button>

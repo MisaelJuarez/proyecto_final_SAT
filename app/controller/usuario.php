@@ -12,16 +12,62 @@ class Usuario extends Conexion {
         $pass = $_POST['pass'];
         $area = $_POST['area'];
         $tipo = $_POST['tipo'];
+        $correo = $_POST['correo'];
 
         if (empty($nombre) || empty($apellidos) || empty($rfc) || empty($rfc_corto) || empty($usuario) || 
-            empty($pass) || empty($area) || empty($tipo)) {
+            empty($pass) || empty($area) || empty($tipo) || empty($correo)) {
             echo json_encode([0,"Campos incompletos"]);
         } else if (is_numeric($nombre) || is_numeric($apellidos)) {
             echo json_encode([0,"No puedes ingresar numeros en nombre y apellidos"]);
         } else {
+
+            $consultaRfc = $this->obtener_conexion()->prepare("SELECT rfc FROM colaboradores WHERE rfc = :rfc");
+            $consultaRfc->bindParam(':rfc',$rfc);
+            $consultaRfc->execute();
+            $rfc_reperido = $consultaRfc->fetch(PDO::FETCH_ASSOC);
+            $this->cerrar_conexion();
+            
+            if ($rfc_reperido) {
+                echo json_encode([0,"El rfc ya ha sido registrado"]);
+                return;
+            }
+
+            $consultaRfcCorto = $this->obtener_conexion()->prepare("SELECT rfc_corto FROM colaboradores WHERE rfc_corto = :rfc");
+            $consultaRfcCorto->bindParam(':rfc',$rfc_corto);
+            $consultaRfcCorto->execute();
+            $rfcCorto_reperido = $consultaRfcCorto->fetch(PDO::FETCH_ASSOC);
+            $this->cerrar_conexion();
+            
+            if ($rfcCorto_reperido) {
+                echo json_encode([0,"El rfc ya ha sido registrado"]);
+                return;
+            }
+            
+            $consultaUsuario = $this->obtener_conexion()->prepare("SELECT usuario FROM colaboradores WHERE usuario = :usuario");
+            $consultaUsuario->bindParam(':usuario',$usuario);
+            $consultaUsuario->execute();
+            $rfc_reperido = $consultaUsuario->fetch(PDO::FETCH_ASSOC);
+            $this->cerrar_conexion();
+            
+            if ($rfc_reperido) {
+                echo json_encode([0,"El nombre de usuario ya ha sido registrado"]);
+                return;
+            }
+            
+            $consultaCorreo = $this->obtener_conexion()->prepare("SELECT correo FROM colaboradores WHERE correo = :correo");
+            $consultaCorreo->bindParam(':correo',$correo);
+            $consultaCorreo->execute();
+            $rfc_reperido = $consultaCorreo->fetch(PDO::FETCH_ASSOC);
+            $this->cerrar_conexion();
+            
+            if ($rfc_reperido) {
+                echo json_encode([0,"El correo ya ha sido registrado"]);
+                return;
+            }
+
             $insercion = $this->obtener_conexion()->prepare("INSERT INTO colaboradores (nombre,apellidos,rfc,rfc_corto,
-                                    usuario,pass,area,administrador) 
-            VALUES(:nombre,:apellidos,:rfc,:rfc_corto,:usuario,:pass,:area,:tipo)");
+                                    usuario,pass,area,administrador,correo) 
+            VALUES(:nombre,:apellidos,:rfc,:rfc_corto,:usuario,:pass,:area,:tipo,:correo)");
             
             $insercion->bindParam(':nombre',$nombre);
             $insercion->bindParam(':apellidos',$apellidos);
@@ -32,6 +78,7 @@ class Usuario extends Conexion {
             $insercion->bindParam(':pass',$passw);
             $insercion->bindParam(':area',$area);
             $insercion->bindParam(':tipo',$tipo);
+            $insercion->bindParam(':correo',$correo);
             $insercion->execute();
             $this->cerrar_conexion();
 
@@ -60,17 +107,68 @@ class Usuario extends Conexion {
         $usuario = $_POST['usuario'];
         $pass = $_POST['pass'];
         $area = $_POST['area'];
+        $correo = $_POST['correo'];
 
-        if (empty($nombre) || empty($apellidos) || empty($rfc) || empty($rfc_corto) || empty($usuario) || empty($area)) {
+        if (empty($nombre) || empty($apellidos) || empty($rfc) || empty($rfc_corto) || empty($usuario) || empty($area) || empty($correo)) {
             echo json_encode([0,"Campos incompletos"]);
         } else if (is_numeric($nombre) || is_numeric($apellidos)) {
             echo json_encode([0,"No puedes ingresar numeros en nombre y apellidos"]);
         } else {
-            if (empty($pass)) {
 
+            $consultaRfc = $this->obtener_conexion()->prepare("SELECT rfc FROM colaboradores WHERE rfc = :rfc AND id_colaborador != :id");
+            $consultaRfc->bindParam(':rfc',$rfc);
+            $consultaRfc->bindParam(':id',$id);
+            $consultaRfc->execute();
+            $rfc_reperido = $consultaRfc->fetch(PDO::FETCH_ASSOC);
+            $this->cerrar_conexion();
+            
+            if ($rfc_reperido) {
+                echo json_encode([0,"El rfc ya ha sido registrado"]);
+                return;
+            }
+            
+            $consultaRfcCorto = $this->obtener_conexion()->prepare("SELECT rfc_corto FROM colaboradores WHERE rfc_corto = :rfc AND id_colaborador != :id");
+            $consultaRfcCorto->bindParam(':rfc',$rfc_corto);
+            $consultaRfcCorto->bindParam(':id',$_SESSION['usuario']['id_colaborador']);
+            $consultaRfcCorto->execute();
+            $rfcCorto_reperido = $consultaRfcCorto->fetch(PDO::FETCH_ASSOC);
+            $this->cerrar_conexion();
+            
+            if ($rfcCorto_reperido) {
+                echo json_encode([0,"El rfc ya ha sido registrado"]);
+                return;
+            }
+            
+            $consultaUsuario = $this->obtener_conexion()->prepare("SELECT usuario FROM colaboradores WHERE usuario = :usuario AND id_colaborador != :id");
+            $consultaUsuario->bindParam(':usuario',$usuario);
+            $consultaUsuario->bindParam(':id',$_SESSION['usuario']['id_colaborador']);
+            $consultaUsuario->execute();
+            $rfc_reperido = $consultaUsuario->fetch(PDO::FETCH_ASSOC);
+            $this->cerrar_conexion();
+            
+            if ($rfc_reperido) {
+                echo json_encode([0,"El nombre de usuario ya ha sido registrado"]);
+                return;
+            }
+            
+            $consultaCorreo = $this->obtener_conexion()->prepare("SELECT correo FROM colaboradores WHERE correo = :correo AND id_colaborador != :id");
+            $consultaCorreo->bindParam(':correo',$correo);
+            $consultaCorreo->bindParam(':id',$_SESSION['usuario']['id_colaborador']);
+            $consultaCorreo->execute();
+            $rfc_reperido = $consultaCorreo->fetch(PDO::FETCH_ASSOC);
+            $this->cerrar_conexion();
+            
+            if ($rfc_reperido) {
+                echo json_encode([0,"El correo ya ha sido registrado"]);
+                return;
+            }
+
+
+            if (empty($pass)) {
                 $actualizacion = $this->obtener_conexion()->prepare("UPDATE colaboradores 
                 SET nombre = :nombre, apellidos = :apellidos, rfc = :rfc, rfc_corto = :rfc_corto, usuario = :usuario,
-                    area = :area WHERE id_colaborador = :usuario_id");
+                area = :area, correo = :correo
+                WHERE id_colaborador = :usuario_id");
                 
                 $actualizacion->bindParam(':nombre',$nombre);
                 $actualizacion->bindParam(':apellidos',$apellidos);
@@ -78,6 +176,7 @@ class Usuario extends Conexion {
                 $actualizacion->bindParam(':rfc_corto',$rfc_corto);
                 $actualizacion->bindParam(':usuario',$usuario);
                 $actualizacion->bindParam(':area',$area);
+                $actualizacion->bindParam(':correo',$correo);
                 $actualizacion->bindParam(':usuario_id',$_SESSION['usuario']['id_colaborador']);
                 $actualizacion->execute();
                 $this->cerrar_conexion();
@@ -87,7 +186,8 @@ class Usuario extends Conexion {
             }else {
                 $actualizacion = $this->obtener_conexion()->prepare("UPDATE colaboradores 
                 SET nombre = :nombre, apellidos = :apellidos, rfc = :rfc, rfc_corto = :rfc_corto, usuario = :usuario,
-                    pass = :pass, area = :area WHERE id_colaborador = :usuario_id");
+                pass = :pass, area = :area, correo = :correo 
+                WHERE id_colaborador = :usuario_id");
                 
                 $actualizacion->bindParam(':nombre',$nombre);
                 $actualizacion->bindParam(':apellidos',$apellidos);
@@ -97,6 +197,7 @@ class Usuario extends Conexion {
                 $passw = password_hash($pass,PASSWORD_BCRYPT);
                 $actualizacion->bindParam(':pass',$passw);
                 $actualizacion->bindParam(':area',$area);
+                $actualizacion->bindParam(':correo',$correo);
                 $actualizacion->bindParam(':usuario_id',$_SESSION['usuario']['id_colaborador']);
                 $actualizacion->execute();
                 $this->cerrar_conexion();
@@ -137,17 +238,68 @@ class Usuario extends Conexion {
         $pass = $_POST['pass'];
         $area = $_POST['area'];
         $administrador = $_POST['tipo'];
+        $correo = $_POST['correo'];
 
-        if (empty($nombre) || empty($apellidos) || empty($rfc) || empty($rfc_corto) || empty($usuario) || empty($area)) {
+        if (empty($nombre) || empty($apellidos) || empty($rfc) || empty($rfc_corto) || empty($usuario) || empty($area) || empty($correo)) {
             echo json_encode([0,"Campos incompletos"]);
         } else if (is_numeric($nombre) || is_numeric($apellidos)) {
             echo json_encode([0,"No puedes ingresar numeros en nombre y apellidos"]);
         } else {
+
+            $consultaRfc = $this->obtener_conexion()->prepare("SELECT rfc FROM colaboradores WHERE rfc = :rfc AND id_colaborador != :id");
+            $consultaRfc->bindParam(':rfc',$rfc);
+            $consultaRfc->bindParam(':id',$id);
+            $consultaRfc->execute();
+            $rfc_reperido = $consultaRfc->fetch(PDO::FETCH_ASSOC);
+            $this->cerrar_conexion();
+            
+            if ($rfc_reperido) {
+                echo json_encode([0,"El rfc ya ha sido registrado"]);
+                return;
+            }
+
+            $consultaRfcCorto = $this->obtener_conexion()->prepare("SELECT rfc_corto FROM colaboradores WHERE rfc_corto = :rfc AND id_colaborador != :id");
+            $consultaRfcCorto->bindParam(':rfc',$rfc_corto);
+            $consultaRfcCorto->bindParam(':id',$id);
+            $consultaRfcCorto->execute();
+            $rfcCorto_reperido = $consultaRfcCorto->fetch(PDO::FETCH_ASSOC);
+            $this->cerrar_conexion();
+            
+            if ($rfcCorto_reperido) {
+                echo json_encode([0,"El rfc ya ha sido registrado"]);
+                return;
+            }
+            
+            $consultaUsuario = $this->obtener_conexion()->prepare("SELECT usuario FROM colaboradores WHERE usuario = :usuario AND id_colaborador != :id");
+            $consultaUsuario->bindParam(':usuario',$usuario);
+            $consultaUsuario->bindParam(':id',$id);
+            $consultaUsuario->execute();
+            $rfc_reperido = $consultaUsuario->fetch(PDO::FETCH_ASSOC);
+            $this->cerrar_conexion();
+            
+            if ($rfc_reperido) {
+                echo json_encode([0,"El nombre de usuario ya ha sido registrado"]);
+                return;
+            }
+            
+            $consultaCorreo = $this->obtener_conexion()->prepare("SELECT correo FROM colaboradores WHERE correo = :correo AND id_colaborador != :id");
+            $consultaCorreo->bindParam(':correo',$correo);
+            $consultaCorreo->bindParam(':id',$id);
+            $consultaCorreo->execute();
+            $rfc_reperido = $consultaCorreo->fetch(PDO::FETCH_ASSOC);
+            $this->cerrar_conexion();
+            
+            if ($rfc_reperido) {
+                echo json_encode([0,"El correo ya ha sido registrado"]);
+                return;
+            }
+
             if (empty($pass)) {
 
                 $actualizacion = $this->obtener_conexion()->prepare("UPDATE colaboradores 
                 SET nombre = :nombre, apellidos = :apellidos, rfc = :rfc, rfc_corto = :rfc_corto, usuario = :usuario,
-                    area = :area, administrador = :administrador WHERE id_colaborador = :usuario_id");
+                    area = :area, administrador = :administrador, correo = :correo 
+                    WHERE id_colaborador = :usuario_id");
                 
                 $actualizacion->bindParam(':nombre',$nombre);
                 $actualizacion->bindParam(':apellidos',$apellidos);
@@ -156,6 +308,7 @@ class Usuario extends Conexion {
                 $actualizacion->bindParam(':usuario',$usuario);
                 $actualizacion->bindParam(':area',$area);
                 $actualizacion->bindParam(':administrador',$administrador);
+                $actualizacion->bindParam(':correo',$correo);
                 $actualizacion->bindParam(':usuario_id',$id);
                 $actualizacion->execute();
                 $this->cerrar_conexion();
@@ -165,7 +318,8 @@ class Usuario extends Conexion {
             }else {
                 $actualizacion = $this->obtener_conexion()->prepare("UPDATE colaboradores 
                 SET nombre = :nombre, apellidos = :apellidos, rfc = :rfc, rfc_corto = :rfc_corto, usuario = :usuario,
-                    pass = :pass, area = :area, administrador = :administrador WHERE id_colaborador = :usuario_id");
+                pass = :pass, area = :area, administrador = :administrador, correo = :correo  
+                WHERE id_colaborador = :usuario_id");
                 
                 $actualizacion->bindParam(':nombre',$nombre);
                 $actualizacion->bindParam(':apellidos',$apellidos);
@@ -176,6 +330,7 @@ class Usuario extends Conexion {
                 $actualizacion->bindParam(':pass',$passw);
                 $actualizacion->bindParam(':area',$area);
                 $actualizacion->bindParam(':administrador',$administrador);
+                $actualizacion->bindParam(':correo',$correo);
                 $actualizacion->bindParam(':usuario_id',$id);
                 $actualizacion->execute();
                 $this->cerrar_conexion();

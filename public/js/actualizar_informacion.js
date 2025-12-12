@@ -4,26 +4,30 @@ const rfc = document.getElementById('rfc');
 const rfc_corto = document.getElementById('rfc_corto');
 const usuario = document.getElementById('usuario');
 const area = document.getElementById('area');
+const correo = document.getElementById('correo');
+
 const btn_actualizar_informacion = document.getElementById('btn-actualizar-informacion');
 let areas = '<option selected>Ingrese el area que pertenece</option>';
+let optionsAreas = '<option value="" selected>Seleccione el area</option>';
 
-const obtener_areas = () => {
+const obtener_info_tabla = (tabla,options,id_campo,nombre_campo,etiqueta,condicion,area) => {
     let data = new FormData();
-    data.append('condicion',2);
-    data.append('tabla','areas');
+    data.append('condicion',condicion);
+    data.append('area',area) 
+    data.append('tabla',tabla);
     data.append('metodo','obtener_informacion_tabla');
     fetch("app/controller/home.php",{
         method: "POST",
         body: data
     })
     .then(respuesta => respuesta.json())
-    .then((respuesta) => {
-        respuesta.map(area => {
-            areas += `
-                <option value="${area['id_area']}">${area['nombre_area']}</option>
+    .then((respuesta) => {        
+        respuesta.map(campo => {
+            options += `
+                <option value="${campo[id_campo]}">${campo[nombre_campo]}</option>
             `;
         });
-        area.innerHTML = areas;
+        etiqueta.innerHTML = options;
     });
 }
 
@@ -41,7 +45,8 @@ const obtener_informacion_actualizar = () => {
         rfc.value = respuesta['rfc'];
         rfc_corto.value = respuesta['rfc_corto'];
         usuario.value = respuesta['usuario'];
-        area.value = respuesta['area'];
+        correo.value = respuesta['correo'];
+        setTimeout(() => area.value = respuesta['area'], 10);
     });
 }
 
@@ -66,6 +71,6 @@ const actualizar_informacion = () => {
 btn_actualizar_informacion.addEventListener('click', () => actualizar_informacion());
 
 document.addEventListener('DOMContentLoaded', () =>{
-    obtener_areas();
+    obtener_info_tabla('areas',optionsAreas,'id_area','nombre_area',area,2,'');
     obtener_informacion_actualizar();
 });

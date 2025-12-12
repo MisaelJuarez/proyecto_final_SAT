@@ -2,6 +2,7 @@ let tablaColaboradores;
 const btn_editar_colaborador = document.getElementById('btn-editar-colaborador');
 const contenedor_editar_colaborador = document.getElementById('contenedor-editar-colaborador');
 const informacion_de_colaboradores = document.getElementById('informacion-de-colaboradores');
+
 const nombre = document.getElementById('nombre');
 const apellidos = document.getElementById('apellidos');
 const rfc = document.getElementById('rfc');
@@ -9,6 +10,8 @@ const rfc_corto = document.getElementById('rfc_corto');
 const usuario = document.getElementById('usuario');
 const area = document.getElementById('area');
 const administrador = document.getElementById('tipo');
+const correo = document.getElementById('correo');
+
 let areas = '<option selected>Ingrese el area que pertenece</option>';
 let id_colaborador_editar;
 
@@ -49,6 +52,7 @@ const obtener_datos_colaboradores = () => {
                 columns: [
                     { data: 'nombre' }, 
                     { data: 'apellidos' }, 
+                    { data: 'correo' }, 
                     { data: 'nombre_area' }, 
                     { data: 'administrador',
                         render: function(data) {
@@ -68,6 +72,7 @@ const obtener_datos_colaboradores = () => {
                                     data-usuario="${row.usuario}"   
                                     data-area='${row.area}'   
                                     data-administrador='${row.administrador}'   
+                                    data-correo='${row.correo}'   
                                 >
                                     Editar
                                     <i class="bi bi-pencil-square"></i>
@@ -149,6 +154,7 @@ informacion_de_colaboradores.addEventListener('click', (e) => {
         usuario.value = e.target.dataset.usuario;
         area.value = e.target.dataset.area;
         administrador.value = e.target.dataset.administrador;
+        correo.value = e.target.dataset.correo;
         id_colaborador_editar = e.target.dataset.id;
     }
 
