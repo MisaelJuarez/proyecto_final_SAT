@@ -90,8 +90,6 @@ switch ($view) {
         $hoja_js = '<script src="'.JS.'bajas_resguardos.js"></script>';
         $titulo = 'bajas resguardos';
         break;
-
-
     case 'impresoras':
         $vista = 'impresoras.php';
         $hoja_css = '<link rel="stylesheet" href="'.CSS .'impresoras.css">';
@@ -128,7 +126,6 @@ switch ($view) {
         $hoja_js = '<script src="'.JS.'agregar_ip.js"></script>';
         $titulo = 'agregar ip';
         break;
-
     default:
         $vista = 'error404';
         break;

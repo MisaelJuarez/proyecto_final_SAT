@@ -21,18 +21,7 @@ const obtener_datos_impresoras = () => {
                     { data: 'nombre_area', className: "border border-dark" }, 
                     { data: 'nombre_departamento', className: "border border-dark" }, 
                     { data: 'ip', className: "border border-dark" }, 
-                    { data: 'nodo', className: "border border-dark"},   
-                    {
-                        data: 'id_impresora',
-                        className: "text-center border border-dark",
-                        render: function(data, type, row) {
-                            return `<button class="btn btn-success info-usuario" data-id="${data}"
-                                    >
-                                        <i class="bi bi-file-text"></i>
-                                    </button>
-                                    `
-                        }
-                    }
+                    { data: 'nodo', className: "border border-dark"}
                 ],
                 "lengthChange": false,
                 "pageLength": 5,

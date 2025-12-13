@@ -1,4 +1,5 @@
 let tablaResguardos;
+let btn_info_resguardo_imprimir;
 
 const tabla_de_info_resguardos = document.getElementById('tabla-de-info-resguardos');
 const informacion_usuario = document.getElementById('informacion-usuario');
@@ -56,6 +57,20 @@ const obtener_datos_resguardos = () => {
                                 `
 
                         }
+                    },
+                    {
+                        data: 'id_resguardo',
+                        className: "text-center border border-dark",
+                        render: function(data, type, row) {
+                            return `
+                                <button class="btn btn-success info-resguardo-imprimir"
+                                    data-id="${data}"
+                                    data-serie="${row.n_serie}"
+                                >
+                                    <i class="bi bi-printer-fill"></i>
+                                </button>
+                            `;
+                        }
                     }
                 ],
                 "lengthChange": false,
@@ -98,11 +113,17 @@ const mostrar_informacion_usuario = (id) => {
 
 tabla_de_info_resguardos.addEventListener('click', (e) => {
     btn_info_usuario = e.target.closest(".info-usuario"); 
+    btn_info_resguardo_imprimir = e.target.closest('.info-resguardo-imprimir');
 
     if (btn_info_usuario) {
         mostrar_informacion_usuario(btn_info_usuario.dataset.id);
         tabla_de_info_resguardos.style.display = 'none';
         informacion_usuario.style.display = 'block';
+    }
+
+    if (btn_info_resguardo_imprimir) {
+        id_imprimir_usuario = btn_info_resguardo_imprimir.dataset.id;
+        window.open(`./views/imprimir.php?registro=${btoa(id_imprimir_usuario)}&metodo=${btoa('imprimir_resguardo')}`, "_blank");
     }
 });
 

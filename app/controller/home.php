@@ -430,7 +430,7 @@ class Home extends Conexion {
     public function obtener_datos_resguardos(){
         $consulta = $this->obtener_conexion()->prepare("SELECT 
             resguardos.*, 
-            usuarios.id_usuario,
+            usuarios.*,
             ips.ip AS ip_numero
         FROM resguardos
         LEFT JOIN usuarios

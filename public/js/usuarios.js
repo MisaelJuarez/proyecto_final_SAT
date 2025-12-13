@@ -1,5 +1,8 @@
 let tablaUsuarios;
 let btn_info_usuario;
+let btn_info_usuario_imprimir;
+
+let id_imprimir_usuario;
 const tabla_de_info_usuarios = document.getElementById('tabla-de-info-usuarios');
 const informacion_usuario = document.getElementById('informacion-usuario');
 
@@ -60,6 +63,20 @@ const obtener_datos_usuarios = () => {
                                 </button>
                             `;
                         }
+                    },
+                    {
+                        data: 'id_usuario',
+                        className: "text-center border border-dark",
+                        render: function(data, type, row) {
+                            return `
+                                <button class="btn btn-success info-usuario-imprimir"
+                                    data-id="${data}"
+                                    data-serie="${row.n_serie}"
+                                >
+                                    <i class="bi bi-printer-fill"></i>
+                                </button>
+                            `;
+                        }
                     }
                 ],
                 "lengthChange": false,
@@ -105,11 +122,16 @@ const mostrar_informacion_usuario = (id,equipo) => {
 
 tabla_de_info_usuarios.addEventListener('click', (e) => {
     btn_info_usuario = e.target.closest(".info-usuario"); 
+    btn_info_usuario_imprimir = e.target.closest('.info-usuario-imprimir');
 
     if (btn_info_usuario) {
         mostrar_informacion_usuario(btn_info_usuario.dataset.id,btn_info_usuario.dataset.serie);
         tabla_de_info_usuarios.style.display = 'none';
         informacion_usuario.style.display = 'block';
+    }
+    if (btn_info_usuario_imprimir) {
+        id_imprimir_usuario = btn_info_usuario_imprimir.dataset.id;
+        window.open(`./views/imprimir.php?registro=${btoa(id_imprimir_usuario)}&metodo=${btoa('imprimir_usuario')}`, "_blank");
     }
 });
 

@@ -11,6 +11,7 @@
                 <th scope="col" class="border border-white">Nodo</th>
                 <th scope="col" class="border border-white">Ip</th>
                 <th scope="col" class="border border-white">Detalle</th>
+                <th scope="col" class="border border-white">Imprimir</th>
                 <th scope="col" class="border border-white">Eliminar</th>
             </tr>
         </thead>

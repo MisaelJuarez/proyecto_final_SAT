@@ -10,7 +10,6 @@
                 <th scope="col" class="border border-white">Departamento</th>
                 <th scope="col" class="border border-white">Ip</th>
                 <th scope="col" class="border border-white">Nodo</th>
-                <th scope="col" class="border border-white">Detalle</th>
             </tr>
         </thead>
         <tbody>
