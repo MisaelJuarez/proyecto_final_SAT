@@ -77,11 +77,70 @@ class Imprimir extends Conexion {
         $this->cerrar_conexion();
         return $datos;
     }
+
+    public function consultar_usuarios(){
+         // Recuperar los filtros desde el formulario (por ejemplo, usando POST)
+        $area = isset($_GET['area']) ? base64_decode($_GET['area']) : '';
+        $departamento = isset($_GET['departamento']) ? base64_decode($_GET['departamento']) : '';
+        $puesto = isset($_GET['puesto']) ? base64_decode($_GET['puesto']) : '';
+
+        // Crear el filtro base de la consulta
+        $sql = "SELECT usuarios.*, areas.*, departamentos.*, puestos.*,resguardos.*,ips.ip AS ip_numero
+                FROM usuarios
+                INNER JOIN areas ON usuarios.area = areas.id_area
+                INNER JOIN departamentos ON usuarios.departamento = departamentos.id_departamento
+                INNER JOIN puestos ON usuarios.puesto = puestos.id_puesto
+                INNER JOIN resguardos ON usuarios.equipo_computo = resguardos.id_resguardo
+                INNER JOIN ips ON ips.id_ip = resguardos.ip
+                WHERE 1"; // El WHERE 1 es una forma de comenzar la condición sin tener que preocuparnos por las primeras condiciones
+
+        // Agregar condiciones dependiendo de los filtros proporcionados
+        if ($area !== '') {
+            $sql .= " AND usuarios.area = :area";
+        }
+
+        if ($departamento !== '') {
+            $sql .= " AND usuarios.departamento = :departamento";
+        }
+
+        if ($puesto !== '') {
+            $sql .= " AND usuarios.puesto = :puesto";
+        }
+
+        // Preparar la consulta
+        $consulta = $this->obtener_conexion()->prepare($sql);
+
+        // Vincular los parámetros de la consulta (si existen)
+        if ($area !== '') {
+            $consulta->bindParam(':area', $area, PDO::PARAM_INT);
+        }
+
+        if ($departamento !== '') {
+            $consulta->bindParam(':departamento', $departamento, PDO::PARAM_INT);
+        }
+
+        if ($puesto !== '') {
+            $consulta->bindParam(':puesto', $puesto, PDO::PARAM_INT);
+        }
+
+        // Ejecutar la consulta
+        $consulta->execute();
+        $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        $this->cerrar_conexion();
+        return $datos;
+    }
 }
 
 $consulta = new Imprimir();
 $funcion = $metodo;
 $datos_usuario = $consulta->$funcion();
+
+if ($metodo == 'consultar_usuarios') {
+    $nombre_archivo = 'usuarios';
+}else{
+    $nombre_archivo = ($metodo == 'imprimir_usuario') ? $datos_usuario['rfc_corto'].'_'.$datos_usuario['nombre'] : $datos_usuario['n_serie'].'_'.$datos_usuario['marca'];
+}
+
 
 ?>
 
@@ -106,7 +165,8 @@ $datos_usuario = $consulta->$funcion();
             border-collapse: collapse;
         }
         th, td {
-            padding: 8px;
+            font-size: 15px;
+            padding: 7px;
             text-align: end;
             border: 1px solid #ddd;
         }
@@ -216,7 +276,7 @@ $datos_usuario = $consulta->$funcion();
                 </tr>
             </tbody>
         </table>  
-        
+
         <?php if ($datos_usuario['id_usuario'] != ''): ?>
             <h3>Datos del usuario:</h3>
             <table class="table">
@@ -258,6 +318,38 @@ $datos_usuario = $consulta->$funcion();
         <?php endif; ?>
     <?php endif; ?>
 
+    <?php if ($metodo == 'consultar_usuarios'): ?>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>No. Empleado</th>
+                    <th>RFC</th>
+                    <th>RFC Corto</th>
+                    <th>Puesto</th>
+                    <th>Area</th>
+                    <th>Departamento</th>
+                </tr>
+            </thead>
+             <tbody>
+                <?php 
+                    foreach ($datos_usuario as $usuario) {
+                    echo "<tr>";
+                        echo "<td>{$usuario['nombre']}</td>";
+                        echo "<td>{$usuario['apellidos']}</td>";
+                        echo "<td>{$usuario['n_empleado']}</td>";
+                        echo "<td>{$usuario['rfc']}</td>";
+                        echo "<td>{$usuario['rfc_corto']}</td>";
+                        echo "<td>{$usuario['nombre_puesto']}</td>";
+                        echo "<td>{$usuario['nombre_area']}</td>";
+                        echo "<td>{$usuario['nombre_departamento']}</td>";
+                    echo "</tr>";
+                    }
+                ?>
+             </tbody>
+        </table>
+    <?php endif; ?>
 </body>
 </html>
 
@@ -266,21 +358,16 @@ $datos_usuario = $consulta->$funcion();
 <?php
 require_once '../librerias/dompdf/autoload.inc.php';
 
-// reference the Dompdf namespace
 use Dompdf\Dompdf;
 
-// instantiate and use the dompdf class
 $dompdf = new Dompdf();
 $dompdf->loadHtml($html);
 
-// (Optional) Setup the paper size and orientation
 $dompdf->setPaper('A4', 'Portrait');
 
-// Render the HTML as PDF
 $dompdf->render();
 
-// Output the generated PDF to Browser
-$dompdf->stream('ejemplo.pdf',['Attachment'=>false]);
+$dompdf->stream($nombre_archivo,['Attachment'=>false]);
 
 
 ?>

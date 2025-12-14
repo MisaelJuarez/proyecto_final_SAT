@@ -1,6 +1,7 @@
 let tablaUsuarios;
 let btn_info_usuario;
 let btn_info_usuario_imprimir;
+let btn_eliminar_usuario;
 
 const tabla_de_info_usuarios = document.getElementById('tabla-de-info-usuarios');
 const informacion_usuario = document.getElementById('informacion-usuario');
@@ -82,9 +83,11 @@ const obtener_datos_usuarios_bajas = () => {
                         className: "text-center border border-dark",
                         render: function(data, type, row) {
                             return `
-                                <button class="btn btn-danger info-usuario"
+                                <button class="btn btn-danger eliminar-usuario"
                                     data-id="${data}"
-                                    data-serie="${row.n_serie}"
+                                    data-resguardo="${row.id_resguardo}"
+                                    data-nombre="${row.nombre}"
+                                    data-apellidos="${row.apellidos}"
                                 >
                                     <i class="bi bi-trash-fill"></i>
                                 </button>
@@ -132,9 +135,49 @@ const mostrar_informacion_usuario = (id,equipo) => {
     });
 }
 
+const eliminar_usuario = (id) => {
+    let data = new FormData();
+    data.append('id_usuario',id);
+    data.append('metodo','eliminar_usuario');
+    fetch("app/controller/home.php",{
+        method: "POST",
+        body: data
+    })
+    .then(respuesta => respuesta.json())
+    .then(async (respuesta) => {        
+        if (respuesta[0] == 1) {
+            await Swal.fire({title: `${respuesta[1]}`,icon: "success",draggable: true});
+            obtener_datos_usuarios_bajas();
+        }else {
+            Swal.fire({title: `${respuesta[1]}`,icon: "error",draggable: true});
+        }
+    });
+}
+
+const eliminar_usuario_resguardo = (id_usuario,id_resguardo) => {
+    let data = new FormData();
+    data.append('id_usuario',id_usuario);
+    data.append('id_resguardo',id_resguardo);
+    data.append('metodo','eliminar_usuario');
+    fetch("app/controller/home.php",{
+        method: "POST",
+        body: data
+    })
+    .then(respuesta => respuesta.json())
+    .then((respuesta) => {        
+        if (respuesta[0] == 1) {
+            Swal.fire({title: `${respuesta[1]}`,icon: "success",draggable: true});
+            obtener_datos_usuarios_bajas();
+        }else {
+            Swal.fire({title: `${respuesta[1]}`,icon: "error",draggable: true});
+        }
+    });
+}
+
 tabla_de_info_usuarios.addEventListener('click', (e) => {
     btn_info_usuario = e.target.closest(".info-usuario"); 
     btn_info_usuario_imprimir = e.target.closest('.info-usuario-imprimir');
+    btn_eliminar_usuario = e.target.closest('.eliminar-usuario');
 
     if (btn_info_usuario) {
         mostrar_informacion_usuario(btn_info_usuario.dataset.id,btn_info_usuario.dataset.serie);
@@ -145,6 +188,25 @@ tabla_de_info_usuarios.addEventListener('click', (e) => {
         id_imprimir_usuario = btn_info_usuario_imprimir.dataset.id;
         window.open(`./views/imprimir.php?registro=${btoa(id_imprimir_usuario)}&metodo=${btoa('imprimir_usuario')}`, "_blank");
     }
+
+    if (btn_eliminar_usuario) {
+        Swal.fire({
+            title: "Eliminar usuario",
+            text: `${btn_eliminar_usuario.dataset.nombre} ${btn_eliminar_usuario.dataset.apellidos}`,
+            showDenyButton: (btn_eliminar_usuario.dataset.resguardo != "null") ? true : false,
+            showCancelButton: true,
+            confirmButtonText: "Eliminar",
+            denyButtonText: `Eliminar con resguardo`,
+            cancelButtonText: 'Cancelar'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                eliminar_usuario(btn_eliminar_usuario.dataset.id);
+            } else if (result.isDenied) {
+                eliminar_usuario_resguardo(btn_eliminar_usuario.dataset.id,btn_eliminar_usuario.dataset.resguardo);
+            }
+        });
+    }
+
 });
 
 document.addEventListener('DOMContentLoaded', () => {

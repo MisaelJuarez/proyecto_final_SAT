@@ -143,16 +143,25 @@
     </div>
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingFour">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-            Areas
+        <button class="accordion-button <?=($grupo_actual == 'consultas') ? '' : 'collapsed'?>" 
+                type="button" 
+                data-bs-toggle="collapse" 
+                data-bs-target="#collapseFour" 
+                aria-expanded="<?=($grupo_actual == 'consultas') ? 'true' : 'false'?>" 
+                aria-controls="collapseFour">
+            Consultas
         </button>
         </h2>
-        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+        <div id="collapseFour" 
+             class="accordion-collapse collapse <?=($grupo_actual == 'consultas') ? 'show' : ''?>" 
+             aria-labelledby="headingFour" 
+             data-bs-parent="#accordionExample">
             <div class="accordion-body">
                 <nav class="nav flex-column">
-                    <a href="<?=url('#');?>" class="nav-link active">Visualizar areas</a>
-                    <a href="<?=url('#');?>" class="nav-link">Administrar areas</a>
-                    <a href="<?=url('#');?>" class="nav-link">Agregar una nueva area</a>
+                    <a href="<?=url('consultar_usuarios');?>" 
+                       class="nav-link <?=($grupo_actual == 'consultas') ? 'active' : ''?>">
+                       Consultar usuarios
+                    </a>
                 </nav>
             </div>
         </div>

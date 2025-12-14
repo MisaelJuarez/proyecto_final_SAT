@@ -1,5 +1,6 @@
 let tablaResguardos;
 let btn_info_resguardo_imprimir;
+let btn_exportar_excel;
 
 const tabla_de_info_resguardos = document.getElementById('tabla-de-info-resguardos');
 const informacion_usuario = document.getElementById('informacion-usuario');
@@ -114,6 +115,7 @@ const mostrar_informacion_usuario = (id) => {
 tabla_de_info_resguardos.addEventListener('click', (e) => {
     btn_info_usuario = e.target.closest(".info-usuario"); 
     btn_info_resguardo_imprimir = e.target.closest('.info-resguardo-imprimir');
+    btn_exportar_excel = e.target.closest('.exportar-excel');
 
     if (btn_info_usuario) {
         mostrar_informacion_usuario(btn_info_usuario.dataset.id);
@@ -124,6 +126,10 @@ tabla_de_info_resguardos.addEventListener('click', (e) => {
     if (btn_info_resguardo_imprimir) {
         id_imprimir_usuario = btn_info_resguardo_imprimir.dataset.id;
         window.open(`./views/imprimir.php?registro=${btoa(id_imprimir_usuario)}&metodo=${btoa('imprimir_resguardo')}`, "_blank");
+    }
+
+    if (btn_exportar_excel) {
+        window.open('./views/exportar_excel.php?metodo=exportar_resguardos');
     }
 });
 

@@ -126,6 +126,12 @@ switch ($view) {
         $hoja_js = '<script src="'.JS.'agregar_ip.js"></script>';
         $titulo = 'agregar ip';
         break;
+    case 'consultar_usuarios':
+        $vista = 'consultar_usuarios.php';
+        $hoja_css = '<link rel="stylesheet" href="'.CSS .'consultar_usuarios.css">';
+        $hoja_js = '<script src="'.JS.'consultar_usuarios.js"></script>';
+        $titulo = 'consultar usuarios';
+        break;
     default:
         $vista = 'error404';
         break;
@@ -145,6 +151,10 @@ if (in_array($view, ['impresoras', 'administrar_impresoras', 'agregar_impresora'
 
 if (in_array($view, ['ips', 'administrar_ips', 'agregar_ip','ips_disponibles','ips_en_uso'])) {
     $grupo_actual = 'ips';
+}
+
+if (in_array($view, ['consultar_usuarios'])) {
+    $grupo_actual = 'consultas';
 }
 
 

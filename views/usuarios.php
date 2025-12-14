@@ -1,5 +1,9 @@
 <div id="tabla-de-info-usuarios" class="container-fluid">
-    <h3 class="mb-2 tituloTable">Usuarios</h3>
+    <div class="mb-2 tituloTable d-flex justify-content-between">
+        <h3>Usuarios</h3> 
+        <button class="btn btn-success exportar-excel"><i class="bi bi-file-excel-fill"></i> Exportar a exel</button>
+    </div>
+
     <table id="tablaUsuarios" class="table">
         <thead>
             <tr class="header-tabla">

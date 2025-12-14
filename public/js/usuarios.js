@@ -1,6 +1,7 @@
 let tablaUsuarios;
 let btn_info_usuario;
 let btn_info_usuario_imprimir;
+let btn_exportar_excel;
 
 let id_imprimir_usuario;
 const tabla_de_info_usuarios = document.getElementById('tabla-de-info-usuarios');
@@ -123,6 +124,7 @@ const mostrar_informacion_usuario = (id,equipo) => {
 tabla_de_info_usuarios.addEventListener('click', (e) => {
     btn_info_usuario = e.target.closest(".info-usuario"); 
     btn_info_usuario_imprimir = e.target.closest('.info-usuario-imprimir');
+    btn_exportar_excel = e.target.closest('.exportar-excel');
 
     if (btn_info_usuario) {
         mostrar_informacion_usuario(btn_info_usuario.dataset.id,btn_info_usuario.dataset.serie);
@@ -133,7 +135,12 @@ tabla_de_info_usuarios.addEventListener('click', (e) => {
         id_imprimir_usuario = btn_info_usuario_imprimir.dataset.id;
         window.open(`./views/imprimir.php?registro=${btoa(id_imprimir_usuario)}&metodo=${btoa('imprimir_usuario')}`, "_blank");
     }
+    if (btn_exportar_excel) {
+        window.open('./views/exportar_excel.php?metodo=exportar_usuarios');
+    }
 });
+
+
 
 document.addEventListener('DOMContentLoaded', () => {
     informacion_usuario.style.display = 'none';

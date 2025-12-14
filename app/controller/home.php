@@ -43,6 +43,7 @@ class Home extends Conexion {
             areas.nombre_area,
             departamentos.nombre_departamento,
             resguardos.n_serie,
+            resguardos.id_resguardo,
             puestos.nombre_puesto
         FROM 
             usuarios
@@ -1205,6 +1206,107 @@ class Home extends Conexion {
                 echo json_encode([0,"No se pudo dar de baja"]);
             }
         }
+    }
+
+    public function eliminar_usuario() {
+        $id_usuario = $_POST['id_usuario'];
+        
+        $eliminar = $this->obtener_conexion()->prepare("DELETE FROM usuarios WHERE id_usuario = :id");
+        $eliminar->bindParam(':id',$id_usuario);
+        $eliminar->execute();
+        $this->cerrar_conexion();
+
+        if (isset($_POST['id_resguardo'])) {
+            $eliminar = $this->obtener_conexion()->prepare("DELETE FROM resguardos WHERE id_resguardo = :id");
+            $eliminar->bindParam(':id',$_POST['id_resguardo']);
+            $eliminar->execute();
+            $this->cerrar_conexion();
+            echo json_encode([1,'Usuario y resguardo eliminado']);
+        }else {
+            echo json_encode([1,'Usuario eliminado']);
+        }
+    }
+
+    public function eliminar_resguardo() {
+        $id_resguardo = $_POST['id_resguardo'];
+        
+        $actualizacion = $this->obtener_conexion()->prepare("UPDATE usuarios 
+        SET equipo_computo = NULL 
+        WHERE equipo_computo = :equipo_computo");
+        $actualizacion->bindParam(':equipo_computo',$id_resguardo);
+        $actualizacion->execute();
+        $this->cerrar_conexion();
+
+        if ($actualizacion) {
+            $eliminar = $this->obtener_conexion()->prepare("DELETE FROM resguardos WHERE id_resguardo = :id");
+            $eliminar->bindParam(':id',$id_resguardo);
+            $eliminar->execute();
+            $this->cerrar_conexion();
+    
+            if (isset($_POST['id_usuario'])) {
+                $eliminar = $this->obtener_conexion()->prepare("DELETE FROM usuarios WHERE id_usuario = :id");
+                $eliminar->bindParam(':id',$_POST['id_usuario']);
+                $eliminar->execute();
+                $this->cerrar_conexion();
+                echo json_encode([1,'Resguardo y usuario eliminado']);
+            }else {
+                echo json_encode([1,'Resguardo eliminado']);
+            }
+        }else {
+            echo json_encode([0,'Error al eliminar resguardo']);
+        }
+    }
+
+    public function consultar_usuarios() {
+        // Recuperar los filtros desde el formulario (por ejemplo, usando POST)
+        $area = isset($_POST['area']) ? $_POST['area'] : '';
+        $departamento = isset($_POST['departamento']) ? $_POST['departamento'] : '';
+        $puesto = isset($_POST['puesto']) ? $_POST['puesto'] : '';
+
+        // Crear el filtro base de la consulta
+        $sql = "SELECT usuarios.*, areas.*, departamentos.*, puestos.*
+                FROM usuarios
+                INNER JOIN areas ON usuarios.area = areas.id_area
+                INNER JOIN departamentos ON usuarios.departamento = departamentos.id_departamento
+                INNER JOIN puestos ON usuarios.puesto = puestos.id_puesto
+                WHERE 1"; // El WHERE 1 es una forma de comenzar la condición sin tener que preocuparnos por las primeras condiciones
+
+        // Agregar condiciones dependiendo de los filtros proporcionados
+        if ($area !== '') {
+            $sql .= " AND usuarios.area = :area";
+        }
+
+        if ($departamento !== '') {
+            $sql .= " AND usuarios.departamento = :departamento";
+        }
+
+        if ($puesto !== '') {
+            $sql .= " AND usuarios.puesto = :puesto";
+        }
+
+        // Preparar la consulta
+        $consulta = $this->obtener_conexion()->prepare($sql);
+
+        // Vincular los parámetros de la consulta (si existen)
+        if ($area !== '') {
+            $consulta->bindParam(':area', $area, PDO::PARAM_INT);
+        }
+
+        if ($departamento !== '') {
+            $consulta->bindParam(':departamento', $departamento, PDO::PARAM_INT);
+        }
+
+        if ($puesto !== '') {
+            $consulta->bindParam(':puesto', $puesto, PDO::PARAM_INT);
+        }
+
+        // Ejecutar la consulta
+        $consulta->execute();
+        $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        $this->cerrar_conexion();
+
+        // Procesar los datos obtenidos
+        echo json_encode($datos);
     }
 }
 

@@ -1,0 +1,49 @@
+h3 {
+    color: black;
+}
+
+.contenedor-input {
+    width: 300px;
+}
+
+.contenedor-boton {
+    width: 300px;
+}
+
+
+.custom-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.custom-toolbar .left-section {
+    float: left;
+}
+
+.custom-toolbar .right-section {
+    float: right;
+}
+
+.dt-paging {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.dt-info {
+    margin-top: 10px;
+    float: left;
+}
+
+.dt-container {
+    padding: 10px;
+}
+
+.header-tabla {
+    background-color: rgb(34, 34, 142);
+    color: white;
+    border: 1px solid black;
+}

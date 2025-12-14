@@ -1,5 +1,6 @@
 let tablaResguardos;
 let btn_info_resguardo_imprimir;
+let btn_eliminar_resguardo;
 
 const tabla_de_info_resguardos = document.getElementById('tabla-de-info-resguardos');
 const informacion_usuario = document.getElementById('informacion-usuario');
@@ -78,6 +79,9 @@ const obtener_datos_resguardos_bajas = () => {
                             return `
                                 <button class="btn btn-danger eliminar-resguardo"
                                     data-id="${data}"
+                                    data-usuario="${row.id_usuario}"
+                                    data-marca="${row.marca}"
+                                    data-serie="${row.n_serie}"
                                 >
                                     <i class="bi bi-trash-fill"></i>
                                 </button>
@@ -123,9 +127,49 @@ const mostrar_informacion_usuario = (id) => {
     });
 }
 
+const eliminar_resguardo = (id) => {
+    let data = new FormData();
+    data.append('id_resguardo',id);
+    data.append('metodo','eliminar_resguardo');
+    fetch("app/controller/home.php",{
+        method: "POST",
+        body: data
+    })
+    .then(respuesta => respuesta.json())
+    .then(async (respuesta) => {        
+        if (respuesta[0] == 1) {
+            await Swal.fire({title: `${respuesta[1]}`,icon: "success",draggable: true});
+            obtener_datos_resguardos_bajas();
+        }else {
+            Swal.fire({title: `${respuesta[1]}`,icon: "error",draggable: true});
+        }
+    });
+}
+
+const eliminar_resguardo_usuario = (id_resguardo,id_usuario) => {
+    let data = new FormData();
+    data.append('id_resguardo',id_resguardo);
+    data.append('id_usuario',id_usuario);
+    data.append('metodo','eliminar_resguardo');
+    fetch("app/controller/home.php",{
+        method: "POST",
+        body: data
+    })
+    .then(respuesta => respuesta.json())
+    .then((respuesta) => {        
+        if (respuesta[0] == 1) {
+            Swal.fire({title: `${respuesta[1]}`,icon: "success",draggable: true});
+            obtener_datos_resguardos_bajas();
+        }else {
+            Swal.fire({title: `${respuesta[1]}`,icon: "error",draggable: true});
+        }
+    });
+}
+
 tabla_de_info_resguardos.addEventListener('click', (e) => {
     btn_info_usuario = e.target.closest(".info-usuario"); 
     btn_info_resguardo_imprimir = e.target.closest('.info-resguardo-imprimir');
+    btn_eliminar_resguardo = e.target.closest('.eliminar-resguardo');
 
     if (btn_info_usuario) {
         mostrar_informacion_usuario(btn_info_usuario.dataset.id);
@@ -136,6 +180,24 @@ tabla_de_info_resguardos.addEventListener('click', (e) => {
     if (btn_info_resguardo_imprimir) {
         id_imprimir_usuario = btn_info_resguardo_imprimir.dataset.id;
         window.open(`./views/imprimir.php?registro=${btoa(id_imprimir_usuario)}&metodo=${btoa('imprimir_resguardo')}`, "_blank");
+    }
+
+    if (btn_eliminar_resguardo) {
+         Swal.fire({
+            title: "Eliminar resguardo",
+            text: `${btn_eliminar_resguardo.dataset.marca} - ${btn_eliminar_resguardo.dataset.serie}`,
+            showDenyButton: (btn_eliminar_resguardo.dataset.usuario != "null") ? true : false,
+            showCancelButton: true,
+            confirmButtonText: "Eliminar",
+            denyButtonText: `Eliminar con el usuario`,
+            cancelButtonText: 'Cancelar'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                eliminar_resguardo(btn_eliminar_resguardo.dataset.id);
+            } else if (result.isDenied) {
+                eliminar_resguardo_usuario(btn_eliminar_resguardo.dataset.id,btn_eliminar_resguardo.dataset.usuario);
+            }
+        });
     }
 
 });
