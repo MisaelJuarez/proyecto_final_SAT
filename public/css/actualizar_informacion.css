@@ -1,7 +1,374 @@
-.contenedor-input {
-    width: 550px;
+/* CSS EXCLUSIVO PARA FORMULARIO ACTUALIZAR INFORMACIÓN */
+/* Usa clases con sufijo -spec para evitar conflictos */
+
+/* Variables locales */
+.elegant-form-container-spec {
+    --color-vino: #722f37;
+    --color-vino-claro: #8a3a44;
+    --color-bronce: #b38e5d;
+    --color-bronce-claro: #c9a976;
+    --color-blanco: #ffffff;
+    --color-gris-claro: #f8f9fa;
+    --color-gris-medio: #e9ecef;
+    --color-gris-texto: #495057;
 }
 
-.contenedor-boton {
-    width: 400px;
+/* Contenedor principal */
+.elegant-form-container-spec {
+    background: var(--color-blanco, #ffffff);
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 6px 20px rgba(114, 47, 55, 0.1);
+    border: 1px solid rgba(114, 47, 55, 0.08);
+    position: relative;
+    overflow: hidden;
+    margin-top: 1rem;
 }
+
+.elegant-form-container-spec::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(to right, var(--color-vino, #722f37), var(--color-bronce, #b38e5d));
+}
+
+/* Encabezado */
+.form-header-spec {
+    text-align: center;
+    padding: 1rem 0 1.5rem;
+}
+
+.header-icon-spec {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 0.75rem;
+    background: linear-gradient(135deg, var(--color-vino, #722f37) 0%, var(--color-bronce, #b38e5d) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-blanco, #ffffff);
+    font-size: 1.5rem;
+    box-shadow: 0 4px 12px rgba(114, 47, 55, 0.15);
+}
+
+.form-title-spec {
+    color: var(--color-vino, #722f37);
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin: 0.5rem 0 0.25rem 0;
+    letter-spacing: -0.3px;
+}
+
+.form-title-spec::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(to right, var(--color-vino, #722f37), var(--color-bronce, #b38e5d));
+    border-radius: 2px;
+    margin: 0.5rem auto 0;
+}
+
+.form-subtitle-spec {
+    color: var(--color-gris-texto, #495057);
+    font-size: 0.9rem;
+    opacity: 0.8;
+    max-width: 500px;
+    margin: 0.75rem auto 0;
+    line-height: 1.4;
+}
+
+/* Grupos de formulario */
+.form-group-elegant-spec {
+    position: relative;
+    margin-bottom: 1.25rem;
+}
+
+.input-label-container-spec {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.input-icon-spec {
+    color: var(--color-vino, #722f37);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    min-width: 16px;
+}
+
+.form-label-elegant-spec {
+    color: var(--color-vino, #722f37);
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    margin: 0;
+    transition: all 0.3s ease;
+}
+
+/* Campos de entrada */
+.form-control-elegant-spec {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    color: var(--color-gris-texto, #495057);
+    background: var(--color-gris-claro, #f8f9fa);
+    border: 2px solid transparent;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    outline: none;
+    position: relative;
+    z-index: 1;
+    height: 42px;
+}
+
+.form-control-elegant-spec:focus {
+    background: var(--color-blanco, #ffffff);
+    border-color: var(--color-vino, #722f37);
+    box-shadow: 0 0 0 3px rgba(114, 47, 55, 0.1);
+    transform: translateY(-1px);
+}
+
+.form-control-elegant-spec::placeholder {
+    color: #adb5bd;
+    font-size: 0.85rem;
+    font-style: italic;
+}
+
+/* Select específico */
+.form-control-elegant-spec[is="select"] {
+    appearance: none;
+    cursor: pointer;
+    padding-right: 2.5rem;
+}
+
+.select-arrow-spec {
+    position: absolute;
+    right: 1rem;
+    bottom: 0.75rem;
+    color: var(--color-vino, #722f37);
+    font-size: 0.85rem;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Borde animado */
+.input-border-spec {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--color-vino, #722f37), var(--color-bronce, #b38e5d));
+    transition: width 0.3s ease;
+    border-radius: 1px;
+}
+
+.form-group-elegant-spec:focus-within .input-border-spec {
+    width: 100%;
+}
+
+.form-group-elegant-spec:focus-within .input-icon-spec,
+.form-group-elegant-spec:focus-within .form-label-elegant-spec {
+    color: var(--color-bronce, #b38e5d);
+}
+
+/* Mostrar/ocultar contraseña */
+.password-toggle-spec {
+    position: absolute;
+    right: 1rem;
+    bottom: 0.75rem;
+    cursor: pointer;
+    color: var(--color-vino, #722f37);
+    z-index: 2;
+    transition: color 0.3s ease;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.password-toggle-spec:hover {
+    color: var(--color-bronce, #b38e5d);
+}
+
+.toggle-password-spec {
+    font-size: 1rem;
+}
+
+/* Botón elegante */
+.btn-elegant-spec {
+    padding: 0.75rem 2rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    min-height: 42px;
+}
+
+.btn-update-spec {
+    background: linear-gradient(135deg, var(--color-vino, #722f37) 0%, var(--color-vino-claro, #8a3a44) 100%);
+    color: var(--color-blanco, #ffffff);
+    box-shadow: 0 4px 12px rgba(114, 47, 55, 0.25);
+}
+
+.btn-update-spec:hover {
+    background: linear-gradient(135deg, var(--color-vino-claro, #8a3a44) 0%, #9a4a53 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(114, 47, 55, 0.35);
+}
+
+.btn-update-spec:active {
+    transform: translateY(0);
+}
+
+.btn-update-spec::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    transition: left 0.5s ease;
+}
+
+.btn-update-spec:hover::before {
+    left: 100%;
+}
+
+/* Pie del formulario */
+.form-footer-spec {
+    border-color: rgba(114, 47, 55, 0.1) !important;
+    margin-top: 1.5rem !important;
+    padding-top: 1rem !important;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .elegant-form-container-spec {
+        padding: 1.25rem;
+    }
+    
+    .form-title-spec {
+        font-size: 1.3rem;
+    }
+    
+    .header-icon-spec {
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+    }
+    
+    .form-group-elegant-spec {
+        margin-bottom: 1rem;
+    }
+    
+    .form-control-elegant-spec {
+        padding: 0.65rem 0.875rem;
+        height: 40px;
+        font-size: 0.85rem;
+    }
+    
+    .btn-elegant-spec {
+        padding: 0.65rem 1.75rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .elegant-form-container-spec {
+        padding: 1rem;
+        border-radius: 12px;
+    }
+    
+    .form-title-spec {
+        font-size: 1.2rem;
+    }
+    
+    .form-subtitle-spec {
+        font-size: 0.85rem;
+    }
+    
+    .header-icon-spec {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .form-label-elegant-spec {
+        font-size: 0.8rem;
+    }
+    
+    .form-control-elegant-spec {
+        padding: 0.6rem 0.75rem;
+        height: 38px;
+        font-size: 0.85rem;
+    }
+    
+    .btn-elegant-spec {
+        padding: 0.6rem 1.5rem;
+        font-size: 0.85rem;
+        min-height: 40px;
+        width: 100%;
+    }
+    
+    .select-arrow-spec,
+    .password-toggle-spec {
+        right: 0.75rem;
+        bottom: 0.6rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .form-title-spec {
+        font-size: 1.1rem;
+    }
+    
+    .form-subtitle-spec {
+        font-size: 0.8rem;
+        line-height: 1.3;
+    }
+    
+    .header-icon-spec {
+        width: 35px;
+        height: 35px;
+        font-size: 1.1rem;
+    }
+    
+    .input-label-container-spec {
+        gap: 6px;
+    }
+    
+    .input-icon-spec {
+        font-size: 0.9rem;
+    }
+    
+    .form-control-elegant-spec {
+        padding: 0.55rem 0.65rem;
+        height: 36px;
+        font-size: 0.8rem;
+    }
+    
+    .row.g-3 {
+        gap: 0.75rem !important;
+    }
+}
+

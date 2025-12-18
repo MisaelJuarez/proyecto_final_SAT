@@ -1,49 +1,440 @@
+/* consultar_usuarios.css - Diseño bronce y vino */
+
+:root {
+    --color-bronce: #CD7F32;
+    --color-bronce-claro: #E8B98C;
+    --color-bronce-suave: #F5E8D9;
+    --color-vino: #722F37;
+    --color-vino-oscuro: #5A1F28;
+    --color-vino-claro: #A85C65;
+    --color-fondo: #F9F5F0;
+    --color-excel: #217346;
+    --color-pdf: #D32F2F;
+    --color-info: #17a2b8;
+}
+
+body {
+    background-color: var(--color-fondo);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 15px 0;
+}
+
+/* CONTENEDOR PRINCIPAL */
+.container {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 3px 8px rgba(114, 47, 55, 0.1);
+    margin-bottom: 20px;
+    border: 1px solid var(--color-bronce-suave);
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* TÍTULO CENTRADO */
 h3 {
-    color: black;
+    color: var(--color-vino);
+    border-bottom: 2px solid var(--color-bronce);
+    padding-bottom: 12px;
+    margin-bottom: 25px;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+h3 i {
+    color: var(--color-bronce);
+    font-size: 1.3em;
+}
+
+/* FORMULARIO DE BÚSQUEDA */
+#form-consultar-usuarios {
+    background-color: var(--color-bronce-suave);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid var(--color-bronce-claro);
+    margin-bottom: 20px;
 }
 
 .contenedor-input {
-    width: 300px;
+    width: 100%;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
+.form-label {
+    font-weight: 600;
+    color: var(--color-vino);
+    margin-bottom: 8px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.form-label i {
+    color: var(--color-bronce);
+    margin-right: 6px;
+    font-size: 1em;
+}
+
+.form-select {
+    border: 1px solid var(--color-bronce-claro);
+    border-radius: 5px;
+    padding: 8px 12px;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    text-align: center;
+    width: 100%;
+    background-color: white;
+}
+
+.form-select:focus {
+    border-color: var(--color-vino);
+    box-shadow: 0 0 0 0.2rem rgba(114, 47, 55, 0.2);
+    outline: none;
+}
+
+.form-select option {
+    text-align: center;
+}
+
+/* BOTÓN BUSCAR */
 .contenedor-boton {
-    width: 300px;
+    width: 100%;
+    max-width: 200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
+#buscar-usuario {
+    background-color: var(--color-vino);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    width: 100%;
+}
 
+#buscar-usuario:hover {
+    background-color: var(--color-vino-oscuro);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(114, 47, 55, 0.3);
+}
+
+#buscar-usuario i {
+    font-size: 1em;
+}
+
+/* BOTONES DE EXPORTACIÓN */
+#btns_exportar {
+    margin-bottom: 20px;
+}
+
+.btn-excel {
+    background-color: var(--color-excel);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 0.9rem;
+}
+
+.btn-excel:hover {
+    background-color: #1a5c38;
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(33, 115, 70, 0.3);
+}
+
+.btn-pdf {
+    background-color: var(--color-pdf);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 0.9rem;
+}
+
+.btn-pdf:hover {
+    background-color: #b71c1c;
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(211, 47, 47, 0.3);
+}
+
+/* TABLA DE RESULTADOS */
+.table-responsive {
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--color-vino-claro);
+}
+
+.table-sm {
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+.header-tabla {
+    background: linear-gradient(to right, var(--color-vino), var(--color-vino-oscuro));
+    color: white;
+}
+
+.header-tabla th {
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    padding: 10px 6px !important;
+    font-weight: 600;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.header-tabla th i {
+    color: var(--color-bronce-claro);
+    margin-right: 4px;
+    font-size: 0.9em;
+}
+
+#tablaUsuarios tbody tr {
+    transition: all 0.2s ease;
+    border-bottom: 1px solid var(--color-bronce-suave);
+}
+
+#tablaUsuarios tbody tr:nth-child(even) {
+    background-color: rgba(165, 92, 101, 0.05);
+}
+
+#tablaUsuarios tbody tr:hover {
+    background-color: var(--color-bronce-suave);
+    cursor: pointer;
+}
+
+#tablaUsuarios tbody td {
+    padding: 10px 6px !important;
+    border-bottom: 1px solid var(--color-bronce-suave);
+    font-size: 0.85rem;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* MENSAJE DE RESULTADOS VACÍOS */
+#tablaUsuarios tbody tr.no-results td {
+    text-align: center;
+    padding: 30px !important;
+    color: var(--color-bronce);
+    font-style: italic;
+}
+
+/* DataTables personalizados */
 .custom-toolbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    padding: 12px;
+    background-color: var(--color-bronce-suave);
+    border-radius: 6px;
+    border: 1px solid var(--color-bronce-claro);
+    font-size: 0.85rem;
 }
 
-.custom-toolbar .left-section {
-    float: left;
-}
-
+.custom-toolbar .left-section,
 .custom-toolbar .right-section {
-    float: right;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .dt-paging {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 12px;
+    font-size: 0.85rem;
 }
 
 .dt-info {
     margin-top: 10px;
-    float: left;
+    text-align: center;
+    color: var(--color-vino);
+    font-weight: 500;
+    font-size: 0.85rem;
+    width: 100%;
 }
 
 .dt-container {
     padding: 10px;
 }
 
-.header-tabla {
-    background-color: rgb(34, 34, 142);
-    color: white;
-    border: 1px solid black;
+/* RESPONSIVE */
+@media (max-width: 1200px) {
+    .container {
+        max-width: 95%;
+        padding: 18px;
+    }
+    
+    .contenedor-input {
+        max-width: 280px;
+    }
+}
+
+@media (max-width: 992px) {
+    #form-consultar-usuarios .col-md-4 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    h3 {
+        font-size: 1.3rem;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+    
+    #form-consultar-usuarios {
+        padding: 15px;
+    }
+    
+    #form-consultar-usuarios .col-md-4 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    
+    .contenedor-input {
+        max-width: 100%;
+    }
+    
+    .contenedor-boton {
+        max-width: 100%;
+    }
+    
+    .header-tabla th {
+        font-size: 0.8rem;
+        padding: 8px 4px !important;
+    }
+    
+    .form-label {
+        font-size: 0.85rem;
+    }
+    
+    .form-select {
+        padding: 7px 10px;
+        font-size: 0.85rem;
+    }
+    
+    #buscar-usuario {
+        padding: 9px 16px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding: 12px;
+    }
+    
+    h3 {
+        font-size: 1.2rem;
+    }
+    
+    #btns_exportar {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+    
+    .btn-excel, .btn-pdf {
+        width: 100%;
+        max-width: 200px;
+    }
+    
+    .me-2 {
+        margin-right: 0 !important;
+    }
+    
+    .table-responsive {
+        font-size: 0.8rem;
+    }
+}
+
+/* ANIMACIONES */
+.form-select, #buscar-usuario, .btn-excel, .btn-pdf, #tablaUsuarios tbody tr {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ESTILO PARA SELECT CON OPCIONES */
+.form-select option:first-child {
+    color: var(--color-bronce-claro);
+    font-style: italic;
+}
+
+/* EFECTO DE CARGA */
+#buscar-usuario.loading {
+    position: relative;
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+#buscar-usuario.loading::after {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border: 2px solid white;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ESTILO PARA SIN RESULTADOS */
+.sin-resultados {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--color-bronce);
+    font-style: italic;
+    background-color: var(--color-bronce-suave);
+    border-radius: 6px;
+    margin-top: 20px;
+    display: none;
+}
+
+.sin-resultados i {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: var(--color-vino-claro);
+}
+
+/* ESTILO PARA FILTRADO ACTIVO */
+.filter-active {
+    background-color: var(--color-bronce-suave) !important;
+    border-left: 3px solid var(--color-vino) !important;
 }

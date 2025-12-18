@@ -1,35 +1,499 @@
+/* styles.css - Diseño bronce y vino con iconos */
+:root {
+    --color-bronce: #CD7F32;
+    --color-bronce-claro: #E8B98C;
+    --color-bronce-suave: #F5E8D9;
+    --color-vino: #722F37;
+    --color-vino-oscuro: #5A1F28;
+    --color-vino-claro: #A85C65;
+    --color-fondo: #F9F5F0;
+}
+
+body {
+    background-color: var(--color-fondo);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}
+
+.container {
+    background-color: white;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(114, 47, 55, 0.1);
+    margin-bottom: 30px;
+    border: 1px solid var(--color-bronce-suave);
+}
+
+h3 {
+    color: var(--color-vino);
+    border-bottom: 2px solid var(--color-bronce);
+    padding-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+h3 i {
+    color: var(--color-bronce);
+}
+
+/* Estilos para la tabla */
+#tablaColaboradores {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--color-vino-claro);
+}
+
+#tablaColaboradores thead {
+    background: linear-gradient(to right, var(--color-vino), var(--color-vino-oscuro));
+    color: white;
+}
+
+#tablaColaboradores thead th {
+    border: none;
+    padding: 15px 10px;
+    font-weight: 600;
+}
+
+#tablaColaboradores tbody tr {
+    transition: all 0.3s ease;
+}
+
+#tablaColaboradores tbody tr:hover {
+    background-color: var(--color-bronce-suave);
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(205, 127, 50, 0.2);
+}
+
+#tablaColaboradores tbody td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Estilos para los botones de acción en la tabla */
+.acciones-columna {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.btn-accion {
+    border: none;
+    border-radius: 5px;
+    padding: 6px 12px;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+}
+
+.btn-editar {
+    background-color: var(--color-bronce);
+    color: white;
+}
+
+.btn-editar:hover {
+    background-color: var(--color-vino-claro);
+    color: white;
+    transform: scale(1.1);
+}
+
+.btn-eliminar {
+    background-color: var(--color-vino);
+    color: white;
+}
+
+.btn-eliminar:hover {
+    background-color: var(--color-vino-oscuro);
+    color: white;
+    transform: scale(1.1);
+}
+
+/* Estilos para el formulario */
+.form-label {
+    font-weight: 600;
+    color: var(--color-vino);
+    margin-bottom: 5px;
+}
+
+.form-control, .form-select {
+    border: 1px solid var(--color-bronce-claro);
+    border-radius: 5px;
+    padding: 10px 15px;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--color-vino);
+    box-shadow: 0 0 0 0.25rem rgba(114, 47, 55, 0.25);
+}
+
+.contenedor-input {
+    width: 100%;
+    max-width: 550px;
+}
+
+.contenedor-boton {
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Botón principal del formulario */
+#btn-editar-colaborador {
+    background: linear-gradient(to right, var(--color-bronce), var(--color-vino-claro));
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 24px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+}
+
+#btn-editar-colaborador:hover {
+    background: linear-gradient(to right, var(--color-vino-claro), var(--color-vino));
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(114, 47, 55, 0.3);
+}
+
+/* Estilos para DataTables personalizados */
 .custom-toolbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    background-color: var(--color-bronce-suave);
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid var(--color-bronce-claro);
 }
 
-.custom-toolbar .left-section {
-    float: left;
-}
-
-.custom-toolbar .right-section {
-    float: right;
+.custom-toolbar .left-section, .custom-toolbar .right-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .dt-paging {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 .dt-info {
-    margin-top: 10px;
-    float: left;
+    margin-top: 15px;
+    color: var(--color-vino);
+    font-weight: 500;
 }
 
-.contenedor-input {
-    width: 550px;
+/* Estilo para el header de la tabla con iconos */
+.table-header-icon {
+    margin-right: 8px;
+    font-size: 0.9em;
 }
 
-.contenedor-boton {
-    width: 400px;
+/* Estilo para los botones de paginación de DataTables */
+.page-link {
+    color: var(--color-vino);
+    border: 1px solid var(--color-bronce-claro);
 }
 
+.page-link:hover {
+    color: white;
+    background-color: var(--color-bronce);
+    border-color: var(--color-bronce);
+}
+
+.page-item.active .page-link {
+    background-color: var(--color-vino);
+    border-color: var(--color-vino);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .custom-toolbar {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .contenedor-input {
+        max-width: 100%;
+    }
+    
+    .row > .col {
+        padding: 0;
+    }
+    
+    .acciones-columna {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+    
+    .btn-accion {
+        width: 100%;
+        max-width: 40px;
+    }
+}
+    /* Estilos para colores bronce y vino */
+    :root {
+        --color-bronce: #CD7F32;
+        --color-bronce-claro: #E8B98C;
+        --color-bronce-suave: #F5E8D9;
+        --color-vino: #722F37;
+        --color-vino-oscuro: #5A1F28;
+        --color-vino-claro: #A85C65;
+        --color-fondo: #F9F5F0;
+    }
+    
+    .container {
+        background-color: white;
+        border-radius: 10px;
+        padding: 25px;
+        box-shadow: 0 4px 12px rgba(114, 47, 55, 0.1);
+        margin-bottom: 30px;
+        border: 1px solid var(--color-bronce-suave);
+    }
+    
+    h3 {
+        color: var(--color-vino);
+        border-bottom: 2px solid var(--color-bronce);
+        padding-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Estilos para la tabla con color vino */
+    #tablaColaboradores {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid var(--color-vino-claro);
+    }
+    
+    #tablaColaboradores thead {
+        background: linear-gradient(to right, var(--color-vino), var(--color-vino-oscuro));
+        color: white;
+    }
+    
+    #tablaColaboradores thead th {
+        border: none;
+        padding: 15px 10px;
+        font-weight: 600;
+        text-align: center;
+        vertical-align: middle;
+    }
+    
+    #tablaColaboradores thead th i {
+        margin-right: 8px;
+        font-size: 1.1em;
+    }
+    
+    #tablaColaboradores tbody tr {
+        transition: all 0.3s ease;
+        text-align: center;
+    }
+    
+    #tablaColaboradores tbody tr:nth-child(even) {
+        background-color: rgba(165, 92, 101, 0.1);
+    }
+    
+    #tablaColaboradores tbody tr:nth-child(odd) {
+        background-color: rgba(245, 232, 217, 0.3);
+    }
+    
+    #tablaColaboradores tbody tr:hover {
+        background-color: var(--color-bronce-suave) !important;
+        transform: translateY(-2px);
+        box-shadow: 0 3px 8px rgba(205, 127, 50, 0.2);
+    }
+    
+    #tablaColaboradores tbody td {
+        padding: 12px 10px;
+        border-bottom: 1px solid rgba(114, 47, 55, 0.1);
+        vertical-align: middle;
+    }
+    
+    /* Estilos para los botones de acción en la tabla */
+    #tablaColaboradores tbody td:last-child {
+        text-align: center;
+    }
+    
+    .btn-accion {
+        border: none;
+        border-radius: 5px;
+        padding: 8px 12px;
+        margin: 0 4px;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        font-size: 14px;
+        min-width: 80px;
+    }
+    
+    .btn-editar {
+        background-color: var(--color-bronce);
+        color: white;
+    }
+    
+    .btn-editar:hover {
+        background-color: var(--color-vino-claro);
+        color: white;
+        transform: scale(1.05);
+        box-shadow: 0 3px 6px rgba(205, 127, 50, 0.3);
+    }
+    
+    .btn-eliminar {
+        background-color: var(--color-vino);
+        color: white;
+    }
+    
+    .btn-eliminar:hover {
+        background-color: var(--color-vino-oscuro);
+        color: white;
+        transform: scale(1.05);
+        box-shadow: 0 3px 6px rgba(114, 47, 55, 0.3);
+    }
+    
+    /* Estilos para el formulario */
+    .form-label {
+        font-weight: 600;
+        color: var(--color-vino);
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .form-label i {
+        color: var(--color-bronce);
+        margin-right: 8px;
+        font-size: 1.1em;
+    }
+    
+    .form-control, .form-select {
+        border: 1px solid var(--color-bronce-claro);
+        border-radius: 5px;
+        padding: 10px 15px;
+        transition: all 0.3s ease;
+    }
+    
+    .form-control:focus, .form-select:focus {
+        border-color: var(--color-vino);
+        box-shadow: 0 0 0 0.25rem rgba(114, 47, 55, 0.25);
+    }
+    
+    .form-select option {
+        display: flex;
+        align-items: center;
+        padding: 8px;
+    }
+    
+    .form-select option i {
+        margin-right: 8px;
+    }
+    
+    .contenedor-input {
+        width: 550px;
+    }
+    
+    .contenedor-boton {
+        width: 400px;
+    }
+    
+    /* Botón principal */
+    #btn-editar-colaborador {
+        background: linear-gradient(to right, var(--color-bronce), var(--color-vino-claro));
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 12px 24px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+    
+    #btn-editar-colaborador:hover {
+        background: linear-gradient(to right, var(--color-vino-claro), var(--color-vino));
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(114, 47, 55, 0.3);
+    }
+    
+    #btn-editar-colaborador i {
+        font-size: 1.2em;
+    }
+    
+    /* Estilos para DataTables personalizados */
+    .custom-toolbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    
+    .custom-toolbar .left-section {
+        float: left;
+    }
+    
+    .custom-toolbar .right-section {
+        float: right;
+    }
+    
+    .dt-paging {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-top: 10px;
+    }
+    
+    .dt-info {
+        margin-top: 10px;
+        float: left;
+        color: var(--color-vino);
+        font-weight: 500;
+    }
+    
+    /* Iconos en los títulos */
+    h3 i {
+        color: var(--color-bronce);
+        font-size: 1.3em;
+    }
+    
+    /* Responsive para iconos */
+    @media (max-width: 768px) {
+        h3 {
+            font-size: 1.5rem;
+        }
+        
+        #tablaColaboradores thead th i {
+            margin-right: 4px;
+            font-size: 1em;
+        }
+        
+        .btn-accion {
+            min-width: 70px;
+            padding: 6px 8px;
+            font-size: 12px;
+        }
+        
+        .form-label i {
+            margin-right: 6px;
+            font-size: 1em;
+        }
+    }

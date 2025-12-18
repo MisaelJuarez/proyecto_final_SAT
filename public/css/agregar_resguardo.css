@@ -1,21 +1,400 @@
-.bg-secondary {
-    height: 40px;
+/* agregar_resguardo.css - Diseño vino y bronce, centrado, Arial */
+
+:root {
+    --color-bronce: #CD7F32;
+    --color-bronce-claro: #E8B98C;
+    --color-bronce-suave: #F5E8D9;
+    --color-vino: #722F37;
+    --color-vino-oscuro: #5A1F28;
+    --color-vino-claro: #A85C65;
+    --color-fondo: #F9F5F0;
+    --color-success: #28a745;
 }
 
-div.dt-container .dt-search input {
-    margin-bottom: 20px;
-    width: 50%;
-    height: 40px;
-}   
+body {
+    background-color: var(--color-fondo);
+    font-family: 'Arial', sans-serif;
+    padding: 15px 0;
+}
 
-div.dt-search > label {
-    font-size: 20px;
+/* CONTENEDOR PRINCIPAL CENTRADO */
+.container {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 3px 8px rgba(114, 47, 55, 0.1);
+    margin-bottom: 20px;
+    border: 1px solid var(--color-bronce-suave);
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* TÍTULO CENTRADO */
+h3 {
+    color: var(--color-vino);
+    border-bottom: 2px solid var(--color-bronce);
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+    text-align: center;
+    font-size: 1.6rem;
+    font-family: 'Arial', sans-serif;
+    font-weight: 600;
+}
+
+h3 i {
+    color: var(--color-bronce);
+    font-size: 1.4em;
+}
+
+/* FORMULARIO CENTRADO */
+#formulario-agregar-reguardo .row {
+    display: flex;
+    justify-content: center;
 }
 
 .contenedor-input {
-    width: 550px;
+    width: 100%;
+    max-width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-label {
+    font-weight: 600;
+    color: var(--color-vino);
+    margin-bottom: 8px;
+    text-align: center;
+    font-size: 0.9rem;
+    font-family: 'Arial', sans-serif;
+}
+
+.form-label i {
+    color: var(--color-bronce);
+    margin-right: 6px;
+    font-size: 1em;
+}
+
+.form-control {
+    border: 1px solid var(--color-bronce-claro);
+    border-radius: 5px;
+    padding: 10px 15px;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    text-align: center;
+    width: 100%;
+    font-family: 'Arial', sans-serif;
+}
+
+.form-control:focus {
+    border-color: var(--color-vino);
+    box-shadow: 0 0 0 0.2rem rgba(114, 47, 55, 0.2);
+    outline: none;
+}
+
+.form-control::placeholder {
+    color: var(--color-bronce-claro);
+    opacity: 0.7;
+    text-align: center;
+    font-size: 0.85rem;
+}
+
+/* BOTÓN DE IP - ESTILO SIMILAR */
+#btn-obtener-ips {
+    border: 1px solid var(--color-bronce-claro);
+    color: var(--color-vino);
+    background-color: white;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    padding: 10px 15px;
+}
+
+#btn-obtener-ips:hover {
+    background-color: var(--color-bronce-suave);
+    border-color: var(--color-vino);
+}
+
+#btn-obtener-ips i {
+    color: var(--color-bronce);
+    font-size: 0.95em;
+}
+
+/* BOTÓN AGREGAR RESGUARDO CENTRADO */
+.contenedor-boton {
+    width: 100%;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#btn-agregar-resguardo {
+    background-color: var(--color-success);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 1.05rem;
+    width: 100%;
+    font-family: 'Arial', sans-serif;
+}
+
+#btn-agregar-resguardo:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+}
+
+#btn-agregar-resguardo i {
+    font-size: 1.2em;
+}
+
+/* MODAL DE IPS CENTRADO */
+#buscar-ips .modal-header {
+    background: linear-gradient(to right, var(--color-vino), var(--color-vino-oscuro));
+    color: white;
+    border-bottom: 2px solid var(--color-bronce);
+    text-align: center;
+    padding: 15px 20px;
+}
+
+#buscar-ips .modal-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    font-size: 1.2rem;
+    font-family: 'Arial', sans-serif;
+}
+
+#buscar-ips .modal-title i {
+    color: var(--color-bronce-claro);
+}
+
+#tablaIps {
+    border: 1px solid var(--color-bronce-suave);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-top: 15px;
+}
+
+#tablaIps thead {
+    background-color: var(--color-bronce-suave);
+}
+
+#tablaIps th {
+    padding: 10px 15px;
+    font-weight: 600;
+    color: var(--color-vino);
+    border-bottom: 2px solid var(--color-bronce);
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+}
+
+#tablaIps th i {
+    color: var(--color-bronce);
+    margin-right: 6px;
+}
+
+#tablaIps tbody tr {
+    transition: all 0.3s ease;
+}
+
+#tablaIps tbody tr:hover {
+    background-color: var(--color-bronce-suave);
+}
+
+#tablaIps tbody td {
+    padding: 12px 15px;
+    text-align: center;
+    vertical-align: middle;
+    font-family: 'Arial', sans-serif;
+}
+
+/* BOTÓN SELECCIONAR IP CENTRADO */
+.btn-seleccionar {
+    background-color: var(--color-vino);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-family: 'Arial', sans-serif;
+}
+
+.btn-seleccionar:hover {
+    background-color: var(--color-vino-oscuro);
+    transform: translateY(-2px);
+}
+
+/* ESTILOS ESPECÍFICOS DEL CSS ORIGINAL */
+.bg-secondary {
+    height: 40px;
+    background-color: var(--color-bronce-suave) !important;
+}
+
+div.dt-container .dt-search input {
+    border: 1px solid var(--color-bronce-claro);
+    border-radius: 5px;
+    padding: 8px 12px;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto 15px auto;
+    display: block;
+    font-family: 'Arial', sans-serif;
+}
+
+div.dt-container .dt-search input:focus {
+    border-color: var(--color-vino);
+    box-shadow: 0 0 0 0.2rem rgba(114, 47, 55, 0.2);
+    outline: none;
+}
+
+div.dt-search > label {
+    font-size: 0.95rem;
+    color: var(--color-vino);
+    font-weight: 600;
+    text-align: center;
+    display: block;
+    margin-bottom: 8px;
+    font-family: 'Arial', sans-serif;
+}
+
+.contenedor-input {
+    width: 100%;
+    max-width: 550px;
 }
 
 .contenedor-boton {
-    width: 400px;
+    width: 100%;
+    max-width: 400px;
+}
+
+/* RESPONSIVE - TODO CENTRADO */
+@media (max-width: 1200px) {
+    .container {
+        max-width: 95%;
+        padding: 18px;
+    }
+    
+    .contenedor-input {
+        max-width: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    h3 {
+        font-size: 1.4rem;
+        padding-bottom: 12px;
+        margin-bottom: 20px;
+    }
+    
+    .col-md-6 {
+        width: 100%;
+    }
+    
+    .contenedor-input {
+        max-width: 100%;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    
+    .contenedor-boton {
+        max-width: 100%;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    
+    .form-label {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+    
+    .form-label i {
+        margin-right: 0;
+    }
+    
+    .form-control {
+        padding: 9px 12px;
+        font-size: 0.9rem;
+    }
+    
+    #btn-agregar-resguardo {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+    
+    .modal-header .modal-title {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding: 12px;
+    }
+    
+    h3 {
+        font-size: 1.2rem;
+    }
+    
+    #btn-agregar-resguardo {
+        padding: 9px 16px;
+        font-size: 0.95rem;
+    }
+    
+    .modal-header .modal-title {
+        font-size: 1rem;
+    }
+}
+
+/* ANIMACIONES SUAVES CON ARIAL */
+.form-control, #btn-obtener-ips, #btn-agregar-resguardo, .btn-seleccionar {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* EFECTO DE CARGA PARA BOTÓN */
+#btn-agregar-resguardo.loading {
+    position: relative;
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+#btn-agregar-resguardo.loading::after {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border: 2px solid white;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* FUENTE ARIAL PARA TODO EL TEXTO */
+body, h1, h2, h3, h4, h5, h6, p, span, div, td, th, label, input, button, select, textarea {
+    font-family: 'Arial', sans-serif !important;
 }

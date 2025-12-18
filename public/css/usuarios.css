@@ -1,62 +1,386 @@
+/* info_usuarios.css - Diseño IDÉNTICO a administrar_usuarios */
+
+:root {
+    --color-bronce: #CD7F32;
+    --color-bronce-claro: #E8B98C;
+    --color-bronce-suave: #F5E8D9;
+    --color-vino: #722F37;
+    --color-vino-oscuro: #5A1F28;
+    --color-vino-claro: #A85C65;
+    --color-fondo: #F9F5F0;
+    --color-gris: #6c757d;
+    --color-gris-oscuro: #495057;
+    --color-excel: #217346;
+}
+
+body {
+    background-color: var(--color-fondo);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 15px 0;
+}
+
+/* CONTENEDORES PRINCIPALES - IGUAL QUE ADMINISTRAR_USUARIOS */
+.container {
+    background-color: white;
+    border-radius: 8px;
+    padding: 18px;
+    box-shadow: 0 3px 8px rgba(114, 47, 55, 0.1);
+    margin-bottom: 20px;
+    border: 1px solid var(--color-bronce-suave);
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* TÍTULOS CENTRADOS - IGUAL QUE ADMINISTRAR_USUARIOS */
+h3 {
+    color: var(--color-vino);
+    border-bottom: 2px solid var(--color-bronce);
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+h3 i {
+    color: var(--color-bronce);
+    font-size: 1.3em;
+}
+
+/* BOTÓN EXPORTAR EXCEL - ESTILO SIMILAR A BOTONES DE ADMINISTRAR */
+.btn-excel {
+    background-color: var(--color-excel);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 0.9rem;
+}
+
+.btn-excel:hover {
+    background-color: #1a5c38;
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(33, 115, 70, 0.3);
+}
+
+/* TABLA PRINCIPAL - EXACTAMENTE IGUAL QUE ADMINISTRAR_USUARIOS */
+.table-responsive {
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--color-vino-claro);
+}
+
+.table-sm {
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+.header-tabla {
+    background: linear-gradient(to right, var(--color-vino), var(--color-vino-oscuro));
+    color: white;
+}
+
+.header-tabla th {
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    padding: 10px 6px !important;
+    font-weight: 600;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.header-tabla th i {
+    color: var(--color-bronce-claro);
+    margin-right: 4px;
+    font-size: 0.9em;
+}
+
+#tablaUsuarios tbody tr {
+    transition: all 0.2s ease;
+    border-bottom: 1px solid var(--color-bronce-suave);
+}
+
+#tablaUsuarios tbody tr:nth-child(even) {
+    background-color: rgba(165, 92, 101, 0.05);
+}
+
+#tablaUsuarios tbody tr:hover {
+    background-color: var(--color-bronce-suave);
+}
+
+#tablaUsuarios tbody td {
+    padding: 10px 6px !important;
+    border-bottom: 1px solid var(--color-bronce-suave);
+    font-size: 0.85rem;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* BOTONES DE ACCIÓN - MISMOS ESTILOS QUE ADMINISTRAR_USUARIOS */
+.btn-accion-tabla {
+    border: none;
+    border-radius: 3px;
+    padding: 5px 10px;
+    margin: 0 2px;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    font-size: 0.8rem;
+    min-width: 70px;
+}
+
+.btn-detalle {
+    background-color: var(--color-bronce);
+    color: white;
+}
+
+.btn-detalle:hover {
+    background-color: var(--color-vino-claro);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(205, 127, 50, 0.2);
+}
+
+.btn-imprimir {
+    background-color: var(--color-vino);
+    color: white;
+}
+
+.btn-imprimir:hover {
+    background-color: var(--color-vino-oscuro);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(114, 47, 55, 0.2);
+}
+
+/* INFORMACIÓN DEL USUARIO - ESTILO COMO LA SECCIÓN DE BAJA EN ADMINISTRAR */
+#informacion-usuario {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* TABLAS DE INFORMACIÓN - ESTILO SIMILAR A LA TABLA DE DATOS EN ADMINISTRAR */
+#informacion-usuario .table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--color-bronce-claro);
+    margin-bottom: 25px;
+}
+
+#informacion-usuario .table td {
+    padding: 12px 15px;
+    vertical-align: middle;
+}
+
+.bg-bronce-suave {
+    background-color: var(--color-bronce-suave) !important;
+    color: var(--color-vino);
+    font-weight: 600;
+    border-right: 2px solid var(--color-bronce) !important;
+}
+
+.bg-bronce-suave i {
+    color: var(--color-bronce);
+    margin-right: 8px;
+}
+
+#informacion-usuario .table tbody tr {
+    border-bottom: 1px solid var(--color-bronce-suave);
+}
+
+#informacion-usuario .table tbody tr:last-child {
+    border-bottom: none;
+}
+
+/* ESTILOS PARA DATOS VACÍOS - IGUAL QUE ADMINISTRAR */
+#nombre-usuario:empty::before,
+#apellidos-usuario:empty::before,
+#nEmpleado-usuario:empty::before,
+#rfc-usuario:empty::before,
+#rfc-corto-usuario:empty::before,
+#puesto-empleado:empty::before,
+#area-usuario:empty::before,
+#departamento-usuario:empty::before,
+#marca-resguardo:empty::before,
+#modelo-resguardo:empty::before,
+#n-serie-resguardo:empty::before,
+#hostname-resguardo:empty::before,
+#mac-resguardo:empty::before,
+#nodo-resguardo:empty::before,
+#ip-resguardo:empty::before {
+    content: "No disponible";
+    color: var(--color-bronce-claro);
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+/* DataTables personalizados - EXACTAMENTE IGUAL */
 .custom-toolbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    padding: 10px 12px;
+    background-color: var(--color-bronce-suave);
+    border-radius: 6px;
+    border: 1px solid var(--color-bronce-claro);
+    font-size: 0.85rem;
 }
 
-.custom-toolbar .left-section {
-    float: left;
-}
-
+.custom-toolbar .left-section,
 .custom-toolbar .right-section {
-    float: right;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .dt-paging {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 12px;
+    font-size: 0.85rem;
 }
 
 .dt-info {
     margin-top: 10px;
-    float: left;
+    text-align: center;
+    color: var(--color-vino);
+    font-weight: 500;
+    font-size: 0.85rem;
+    width: 100%;
 }
 
 .dt-container {
     padding: 10px;
 }
 
-#tabla-de-info-usuarios {
-    padding: 0;
-    border: 1px solid rgba(0, 0, 0, 0.223);
-    background-color: white;
-    border-bottom: 1px solid black;
+/* RESPONSIVE - EXACTAMENTE IGUAL QUE ADMINISTRAR_USUARIOS */
+@media (max-width: 1200px) {
+    .container {
+        max-width: 95%;
+        padding: 15px;
+    }
 }
 
-.header-tabla {
-    background-color: rgb(34, 34, 142);
-    color: white;
-    border: 1px solid black;
+@media (max-width: 768px) {
+    .container {
+        padding: 12px;
+    }
+    
+    h3 {
+        font-size: 1.2rem;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+    }
+    
+    .btn-excel {
+        font-size: 0.85rem;
+        padding: 6px 12px;
+    }
+    
+    .header-tabla th {
+        font-size: 0.75rem;
+        padding: 8px 4px !important;
+    }
+    
+    #tablaUsuarios tbody td {
+        font-size: 0.8rem;
+        padding: 8px 4px !important;
+    }
+    
+    .btn-accion-tabla {
+        min-width: 60px;
+        padding: 4px 8px;
+        font-size: 0.75rem;
+    }
+    
+    #informacion-usuario .table td {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+    }
+    
+    .bg-bronce-suave {
+        font-size: 0.85rem;
+    }
 }
 
-.tituloTable {
-    padding: 5px;
-    color: white;
-    background-color: rgb(34, 34, 142);
+@media (max-width: 576px) {
+    .container {
+        padding: 10px;
+    }
+    
+    h3 {
+        font-size: 1.1rem;
+    }
+    
+    #informacion-usuario .table td {
+        padding: 8px 10px;
+        font-size: 0.85rem;
+    }
+    
+    .bg-bronce-suave {
+        font-size: 0.8rem;
+    }
+    
+    .table-responsive {
+        font-size: 0.8rem;
+    }
 }
 
-#informacion-usuario {
-    padding: 0;
-    border: 1px solid rgba(0, 0, 0, 0.223);
-    background-color: white;
-    border-bottom: 1px solid black;
+/* ANIMACIONES SUAVES - IGUAL */
+#tablaUsuarios tbody tr,
+.btn-accion-tabla,
+.btn-excel {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.tituloInformacion {
-    padding: 5px;
-    color: white;
-    background-color: rgb(84, 84, 84);
+/* EFECTO DE CARGA - IGUAL */
+.btn-excel.loading {
+    position: relative;
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.btn-excel.loading::after {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border: 2px solid white;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ESTILO PARA SIN DATOS - IGUAL */
+.sin-datos {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--color-bronce);
+    font-style: italic;
+    background-color: var(--color-bronce-suave);
+    border-radius: 6px;
+    margin-top: 20px;
+}
+
+.sin-datos i {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: var(--color-vino-claro);
 }

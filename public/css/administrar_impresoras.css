@@ -1,63 +1,553 @@
+/* administrar_impresoras.css - Diseño vino y bronce, centrado, Arial */
+
+:root {
+    --color-bronce: #CD7F32;
+    --color-bronce-claro: #E8B98C;
+    --color-bronce-suave: #F5E8D9;
+    --color-vino: #722F37;
+    --color-vino-oscuro: #5A1F28;
+    --color-vino-claro: #A85C65;
+    --color-fondo: #F9F5F0;
+}
+
+body {
+    background-color: var(--color-fondo);
+    font-family: 'Arial', sans-serif;
+    padding: 15px 0;
+}
+
+/* CONTENEDORES PRINCIPALES CENTRADOS */
+.container {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 3px 8px rgba(114, 47, 55, 0.1);
+    margin-bottom: 20px;
+    border: 1px solid var(--color-bronce-suave);
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* TÍTULOS CENTRADOS */
+h3 {
+    color: var(--color-vino);
+    border-bottom: 2px solid var(--color-bronce);
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+    text-align: center;
+    font-size: 1.6rem;
+    font-family: 'Arial', sans-serif;
+    font-weight: 600;
+}
+
+h3 i {
+    color: var(--color-bronce);
+    font-size: 1.4em;
+}
+
+/* TABLA PRINCIPAL CENTRADA */
+#tabla-de-info-impresoras {
+    overflow: hidden;
+}
+
+.table-responsive {
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--color-vino-claro);
+}
+
+.table-sm {
+    font-size: 0.85rem;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+.header-tabla {
+    background: linear-gradient(to right, var(--color-vino), var(--color-vino-oscuro));
+    color: white;
+}
+
+.header-tabla th {
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    padding: 12px 8px !important;
+    font-weight: 600;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    text-align: center;
+    vertical-align: middle;
+    font-family: 'Arial', sans-serif;
+}
+
+.header-tabla th i {
+    color: var(--color-bronce-claro);
+    margin-right: 6px;
+    font-size: 1em;
+}
+
+#tablaImpresoras tbody tr {
+    transition: all 0.2s ease;
+    border-bottom: 1px solid var(--color-bronce-suave);
+}
+
+#tablaImpresoras tbody tr:nth-child(even) {
+    background-color: rgba(165, 92, 101, 0.05);
+}
+
+#tablaImpresoras tbody tr:hover {
+    background-color: var(--color-bronce-suave);
+}
+
+#tablaImpresoras tbody td {
+    padding: 12px 8px !important;
+    border-bottom: 1px solid var(--color-bronce-suave);
+    font-size: 0.9rem;
+    text-align: center;
+    vertical-align: middle;
+    font-family: 'Arial', sans-serif;
+}
+
+/* BOTONES DE ACCIÓN CENTRADOS */
+.btn-accion-tabla {
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    margin: 0 3px;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-size: 0.85rem;
+    min-width: 80px;
+    font-family: 'Arial', sans-serif;
+}
+
+.btn-actualizar {
+    background-color: var(--color-bronce);
+    color: white;
+}
+
+.btn-actualizar:hover {
+    background-color: var(--color-vino-claro);
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(205, 127, 50, 0.2);
+}
+
+.btn-baja {
+    background-color: var(--color-vino);
+    color: white;
+}
+
+.btn-baja:hover {
+    background-color: var(--color-vino-oscuro);
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(114, 47, 55, 0.2);
+}
+
+/* FORMULARIO MODIFICAR CENTRADO */
+#contenedor_modificar_impresoras .row {
+    display: flex;
+    justify-content: center;
+}
+
+.contenedor-input {
+    width: 100%;
+    max-width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-label {
+    font-weight: 600;
+    color: var(--color-vino);
+    margin-bottom: 8px;
+    text-align: center;
+    font-size: 0.9rem;
+    font-family: 'Arial', sans-serif;
+}
+
+.form-label i {
+    color: var(--color-bronce);
+    margin-right: 6px;
+    font-size: 1em;
+}
+
+.form-control, .form-select {
+    border: 1px solid var(--color-bronce-claro);
+    border-radius: 5px;
+    padding: 10px 15px;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    text-align: center;
+    width: 100%;
+    font-family: 'Arial', sans-serif;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--color-vino);
+    box-shadow: 0 0 0 0.2rem rgba(114, 47, 55, 0.2);
+    outline: none;
+}
+
+.form-control::placeholder {
+    color: var(--color-bronce-claro);
+    opacity: 0.7;
+    text-align: center;
+    font-size: 0.85rem;
+}
+
+.form-select {
+    text-align-last: center;
+    padding-right: 2rem;
+}
+
+.form-select option {
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+/* BOTÓN DE IP - ESTILO SIMILAR */
+#btn-obtener-ips {
+    border: 1px solid var(--color-bronce-claro);
+    color: var(--color-vino);
+    background-color: white;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    padding: 10px 15px;
+}
+
+#btn-obtener-ips:hover {
+    background-color: var(--color-bronce-suave);
+    border-color: var(--color-vino);
+}
+
+#btn-obtener-ips i {
+    color: var(--color-bronce);
+    font-size: 0.95em;
+}
+
+/* BOTÓN MODIFICAR CENTRADO */
+.contenedor-boton {
+    width: 100%;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#btn-modificar-impresora {
+    background-color: var(--color-vino);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 1.05rem;
+    width: 100%;
+    font-family: 'Arial', sans-serif;
+}
+
+#btn-modificar-impresora:hover {
+    background-color: var(--color-vino-oscuro);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(114, 47, 55, 0.3);
+}
+
+#btn-modificar-impresora i {
+    font-size: 1.2em;
+}
+
+/* MODAL DE IPS CENTRADO */
+#buscar-ips .modal-header {
+    background: linear-gradient(to right, var(--color-vino), var(--color-vino-oscuro));
+    color: white;
+    border-bottom: 2px solid var(--color-bronce);
+    text-align: center;
+    padding: 15px 20px;
+}
+
+#buscar-ips .modal-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    font-size: 1.2rem;
+    font-family: 'Arial', sans-serif;
+}
+
+#buscar-ips .modal-title i {
+    color: var(--color-bronce-claro);
+}
+
+#btn-sin-ip {
+    background-color: var(--color-bronce);
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: white;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    font-family: 'Arial', sans-serif;
+}
+
+#btn-sin-ip:hover {
+    background-color: var(--color-vino-claro);
+    transform: translateY(-2px);
+}
+
+#tablaIps {
+    border: 1px solid var(--color-bronce-suave);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-top: 15px;
+}
+
+#tablaIps thead {
+    background-color: var(--color-bronce-suave);
+}
+
+#tablaIps th {
+    padding: 10px 15px;
+    font-weight: 600;
+    color: var(--color-vino);
+    border-bottom: 2px solid var(--color-bronce);
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+}
+
+#tablaIps th i {
+    color: var(--color-bronce);
+    margin-right: 6px;
+}
+
+#tablaIps tbody tr {
+    transition: all 0.3s ease;
+}
+
+#tablaIps tbody tr:hover {
+    background-color: var(--color-bronce-suave);
+}
+
+#tablaIps tbody td {
+    padding: 12px 15px;
+    text-align: center;
+    vertical-align: middle;
+    font-family: 'Arial', sans-serif;
+}
+
+/* BOTÓN SELECCIONAR IP CENTRADO */
+.btn-seleccionar {
+    background-color: var(--color-vino);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-family: 'Arial', sans-serif;
+}
+
+.btn-seleccionar:hover {
+    background-color: var(--color-vino-oscuro);
+    transform: translateY(-2px);
+}
+
+/* DataTables personalizados CENTRADOS */
 .custom-toolbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
-}
-
-.custom-toolbar .left-section {
-    float: left;
-}
-
-.custom-toolbar .right-section {
-    float: right;
+    margin-bottom: 15px;
+    padding: 12px;
+    background-color: var(--color-bronce-suave);
+    border-radius: 6px;
+    border: 1px solid var(--color-bronce-claro);
+    font-size: 0.85rem;
+    font-family: 'Arial', sans-serif;
 }
 
 .dt-paging {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 15px;
+    font-size: 0.85rem;
+    font-family: 'Arial', sans-serif;
 }
 
 .dt-info {
     margin-top: 10px;
-    float: left;
+    text-align: center;
+    color: var(--color-vino);
+    font-weight: 500;
+    font-size: 0.85rem;
+    width: 100%;
+    font-family: 'Arial', sans-serif;
 }
 
 .dt-container {
     padding: 10px;
 }
 
-#tabla-de-info-impresoras {
-    padding: 0;
-    border: 1px solid rgba(0, 0, 0, 0.223);
-    background-color: white;
-    border-bottom: 1px solid black;
+/* RESPONSIVE - TODO CENTRADO */
+@media (max-width: 1200px) {
+    .container {
+        max-width: 95%;
+        padding: 18px;
+    }
+    
+    .contenedor-input {
+        max-width: 300px;
+    }
 }
 
-.header-tabla {
-    background-color: rgb(132, 132, 16);
-    color: white;
-    border: 1px solid black;
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    h3 {
+        font-size: 1.4rem;
+        padding-bottom: 12px;
+        margin-bottom: 20px;
+    }
+    
+    .header-tabla th {
+        font-size: 0.85rem;
+        padding: 10px 6px !important;
+    }
+    
+    #tablaImpresoras tbody td {
+        font-size: 0.85rem;
+        padding: 10px 6px !important;
+    }
+    
+    .btn-accion-tabla {
+        min-width: 70px;
+        padding: 5px 10px;
+        font-size: 0.8rem;
+    }
+    
+    .col-md-6 {
+        width: 100%;
+    }
+    
+    .contenedor-input {
+        max-width: 100%;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    
+    .contenedor-boton {
+        max-width: 100%;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    
+    .form-label {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+    
+    .form-label i {
+        margin-right: 0;
+    }
+    
+    .form-control, .form-select {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+    }
+    
+    #btn-modificar-impresora {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
 }
 
-.tituloTable {
-    padding: 5px;
-    color: white;
-    background-color: rgb(132, 132, 16);
+@media (max-width: 576px) {
+    .container {
+        padding: 12px;
+    }
+    
+    h3 {
+        font-size: 1.2rem;
+    }
+    
+    #btn-modificar-impresora {
+        padding: 9px 16px;
+        font-size: 0.95rem;
+    }
+    
+    .modal-header .modal-title {
+        font-size: 1rem;
+    }
 }
 
-.tituloInformacion {
-    padding: 5px;
-    color: white;
-    background-color: rgb(84, 84, 84);
+/* ANIMACIONES SUAVES CON ARIAL */
+#tablaImpresoras tbody tr,
+.btn-accion-tabla,
+#btn-obtener-ips,
+#btn-modificar-impresora,
+.btn-seleccionar {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.contenedor-input {
-    width: 550px;
+/* EFECTO DE CARGA PARA BOTÓN */
+#btn-modificar-impresora.loading {
+    position: relative;
+    pointer-events: none;
+    opacity: 0.8;
 }
 
-.contenedor-boton {
-    width: 400px;
+#btn-modificar-impresora.loading::after {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border: 2px solid white;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* FUENTE ARIAL PARA TODO EL TEXTO */
+body, h1, h2, h3, h4, h5, h6, p, span, div, td, th, label, input, button, select, textarea {
+    font-family: 'Arial', sans-serif !important;
+}
+
+/* ESTILOS ESPECÍFICOS PARA IMPRESORAS */
+.impresora-operativa {
+    background-color: rgba(40, 167, 69, 0.05) !important;
+}
+
+.impresora-operativa:hover {
+    background-color: rgba(40, 167, 69, 0.1) !important;
+}
+
+.impresora-mantenimiento {
+    background-color: rgba(255, 193, 7, 0.05) !important;
+}
+
+.impresora-mantenimiento:hover {
+    background-color: rgba(255, 193, 7, 0.1) !important;
 }

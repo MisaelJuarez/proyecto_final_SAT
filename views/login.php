@@ -6,66 +6,135 @@
   <link rel="stylesheet" href="<?=CSS."bootstrap.min.css"?>">
   <link rel="stylesheet" href="<?=CSS."icons/font/bootstrap-icons.min.css"?>">
   <link rel="stylesheet" href="<?=CSS.'login.css'?>" />
-  <title>Login</title>
+  <title>SADCTI - Inicio de Sesión</title>
 </head>
 <body>
-  <nav class="navbar navbar-light bg-light shadow-sm py-1">
-    <div class="container d-flex justify-content-between align-items-center">
-      <a class="navbar-brand d-flex align-items-center gap-2" href="#">
-        <div class="logo-box">
-          <img src="public/img/imagen2.png" alt="Logo" width="100%" height="auto">
+  <header class="header">
+    <div class="header-container">
+      <div class="logo-container">
+        <img src="public/img/imagen2.png" alt="Logo Institución" class="institution-logo">
+        <div class="institution-name">
+          Subadministración Desconcentrada de Comunicaciones y Tecnologías<br>de la Información Distrito Federal "4 Sur"
         </div>
-        
-        <!-- <span class="fw-semibold text-dark">Sistema Jurídica y Auditoría (SIJA)</span> -->
-      </a>
+      </div>
       <div class="logo-box">
-        <img src="public/img/sat.png" alt="SAT" width="100%" height="auto">
+        <img src="public/img/sat.png" alt="SAT" class="institution-logo">
       </div>
     </div>
-  </nav>
+  </header>
 
-  <div class="login-container">
-    <div class="login-background"></div>
+  <main class="main-container">
+    <section class="info-panel">
+      <h1 class="system-name">SADCTI</h1>
+      <p class="system-tagline">Subadministración Desconcentrada de Comunicaciones y Tecnologías de la Información</p>
+      <p class="system-description">
+        Su espacio único para la interacción con el gobierno. 
+        SADCTI es un programa que te permite hacer busquedas y buena administración en resguados y datos personales en la empresa. 
+      </p>
+      
+      <div class="divider"></div>
+      
+      <h3 style="color: var(--color-vino); margin-bottom: 20px; font-size: 1.3rem;">
+        <i class="bi bi-stars bronze-accent"></i> Características del Sistema
+      </h3>
+      <ul class="features-list">
+        <li><i class="bi bi-shield-check"></i> Seguridad de nivel empresarial</li>
+        <li><i class="bi bi-folder-check"></i> Gestión centralizada de información personal</li>
+        <li><i class="bi bi-clock-history"></i> Historial completo de equipos y resguardos seguros</li>
+        <li><i class="bi bi-bell"></i> Notificaciones en tiempo real</li>
+        <li><i class="bi bi-cloud-arrow-up"></i> Almacenamiento en la nube seguro</li>
+      </ul>
+    </section>
 
-    <div class="login-card mx-auto text-center">
-      <div class="sat-logo mb-3">
-        <div class="sat-inner">
-          <img src="public/img/sat2.png" alt="Logo SAT 2">
-        </div>
+    <section class="login-panel">
+      <div class="login-header">
+        <h2 class="login-title">Iniciar Sesión</h2>
+        <p class="login-subtitle">Acceda a su cuenta SADCTI</p>
       </div>
-      <h1 class="login-title mb-2">Sistema de Información Jurídica y Auditoría</h1>
-      <p class="login-subtitle mb-4">Servicio de Administración Tributaria</p>
 
       <form id="formulario_login">
-        <div class="floating-label mb-4">
-          <input type="text" class="form-control" id="usuario" name="usuario" placeholder="" required>
-          <label for="usuario"><i class="bi bi-person-circle me-2"></i>Usuario autorizado</label>
+        <div class="form-group">
+          <label for="usuario" class="form-label">
+            <i class="bi bi-envelope"></i> correo electronico o usuario
+          </label>
+          <input 
+            type="text" 
+            class="form-control" 
+            id="usuario" 
+            name="usuario" 
+            placeholder="ejemplo@dominio.com"
+            required>
         </div>
-        <div class="floating-label mb-4">
-          <input type="password" class="form-control" id="pass" name="pass" placeholder=" " required>
-          <label for="pass"><i class="bi bi-shield-lock me-2"></i>Contraseña de acceso</label>
+
+        <div class="form-group">
+          <label for="pass" class="form-label">
+            <i class="bi bi-key"></i> Contraseña (password)
+          </label>
+          <div class="password-container">
+            <input 
+              type="password" 
+              class="form-control" 
+              id="pass" 
+              name="pass" 
+              placeholder="Ingrese su contraseña"
+              required>
+            <button type="button" class="password-toggle" id="togglePassword">
+              <i class="bi bi-eye"></i>
+            </button>
+          </div>
         </div>
-        <button type="button" id="btn-ingresar" class="btn btn-primary w-100 mb-3">
-          <i class="bi bi-box-arrow-in-right me-2"></i>Acceder al Sistema
+
+        <button type="button" id="btn-ingresar" class="btn btn-primary">
+          <i class="bi bi-box-arrow-in-right"></i> Ingresar al Sistema
         </button>
-        <div>
-          <a href="#" class="login-link me-3"><i class="bi bi-question-circle me-1"></i>Recuperar acceso</a>
-          <!-- <a href="#" class="login-link"><i class="bi bi-person-plus me-1"></i>Solicitar credenciales</a> -->
-        </div>
       </form>
 
-      <p class="footer-text mt-4">
-        <i class="bi bi-shield-lock me-1"></i>
-        Sistema protegido bajo las normativas de seguridad del SAT
-      </p>
+      <div class="help-section">
+        <h3 class="help-title">¿Tiene alguna pregunta? Podemos ayudarle desde aquí</h3>
+        <div class="help-links">
+          <a href="./views/recovery.php" class="help-link">
+            <i class="bi bi-key"></i> ¿Olvidó su contraseña?
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+      <div class="copyright">
+        <i class="bi bi-shield-lock"></i> Sistema protegido por el Servicio de Administración Tributaria - SADCTI © 2025
+      </div>
     </div>
-  </div>
+  </footer>
 
   <script src="<?=JS."bootstrap.bundle.min.js"?>"></script>
   <script src="<?=JS."alerts.js"?>"></script>
   <script src="<?=JS.'login.js'?>"></script>
+  
+  <script>
+    document.getElementById('togglePassword').addEventListener('click', function() {
+      const passwordInput = document.getElementById('pass');
+      const icon = this.querySelector('i');
+      
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        icon.classList.remove('bi-eye');
+        icon.classList.add('bi-eye-slash');
+      } else {
+        passwordInput.type = 'password';
+        icon.classList.remove('bi-eye-slash');
+        icon.classList.add('bi-eye');
+      }
+    });
+    
+    document.getElementById('btn-ingresar').addEventListener('click', function() {
+      const btn = this;
+      const originalText = btn.innerHTML;
+      
+      btn.innerHTML = '<span class="loading"></span> Ingresando...';
+      btn.disabled = true;
+      
+    });
+  </script>
 </body>
 </html>
-
-
-

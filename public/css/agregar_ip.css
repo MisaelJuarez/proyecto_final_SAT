@@ -1,21 +1,376 @@
-.bg-secondary {
-    height: 40px;
+/* Variables de color */
+:root {
+    --color-vino: #722f37;
+    --color-vino-claro: #8a3b45;
+    --color-bronce: #b08d57;
+    --color-bronce-claro: #d4b483;
+    --color-bronce-suave: #f1e6d6;
+    --color-fondo: #faf7f2;
+    --color-texto: #333333;
 }
 
+/* Estilos generales compactos */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #f9f5f0 0%, #f0e9df 100%);
+    margin: 0;
+    padding: 20px;
+    color: var(--color-texto);
+    min-height: 100vh;
+    font-size: 0.9rem;
+}
+
+/* Contenedor principal compacto */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Contenedor centrado compacto */
+.centered-container.compact {
+    width: 100%;
+    max-width: 700px;
+    margin: 10px auto;
+}
+
+/* Tarjeta compacta */
+.card {
+    border: 1px solid var(--color-bronce);
+    border-radius: 12px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 5px 15px rgba(114, 47, 55, 0.1);
+}
+
+.card-header {
+    background: linear-gradient(135deg, var(--color-vino) 0%, var(--color-vino-claro) 100%);
+    color: white;
+    border-bottom: 2px solid var(--color-bronce);
+    padding: 12px 20px;
+}
+
+.tituloAgregar {
+    font-family: 'Arial', sans-serif;
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* Campos de formulario compactos */
+.form-control {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.9rem;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 8px 12px;
+}
+
+.form-control:focus {
+    border-color: var(--color-bronce);
+    box-shadow: 0 0 0 3px rgba(176, 141, 87, 0.2);
+}
+
+.input-group-sm .input-group-text {
+    background: linear-gradient(135deg, var(--color-bronce) 0%, var(--color-bronce-claro) 100%);
+    border: 1px solid var(--color-bronce);
+    color: white;
+    font-size: 0.85rem;
+    padding: 0 15px;
+}
+
+/* Opciones de selección compactas */
+.card-option .card {
+    border: 1px solid var(--color-bronce-suave);
+    border-radius: 10px;
+    transition: all 0.2s ease;
+    min-width: 120px;
+    padding: 10px 8px;
+}
+
+.card-option .card:hover {
+    border-color: var(--color-bronce);
+    transform: translateY(-2px);
+}
+
+.card-option .form-check-input:checked + .card {
+    border-color: var(--color-vino);
+    background: rgba(114, 47, 55, 0.05);
+    transform: scale(1.03);
+}
+
+.card-option .fa-lg {
+    font-size: 1.2rem;
+}
+
+/* Botones compactos */
+.btn {
+    font-family: 'Arial', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    padding: 8px 16px;
+    transition: all 0.2s ease;
+}
+
+.btn-vino {
+    background: linear-gradient(135deg, var(--color-vino) 0%, var(--color-vino-claro) 100%);
+    color: white;
+    border: 1px solid var(--color-bronce);
+    font-size: 0.95rem;
+}
+
+.btn-vino:hover {
+    background: linear-gradient(135deg, var(--color-vino-claro) 0%, var(--color-vino) 100%);
+    transform: translateY(-2px);
+}
+
+.btn-bronce-outline {
+    border: 1px solid var(--color-bronce);
+    color: var(--color-vino);
+    background: white;
+    font-size: 0.85rem;
+}
+
+.btn-bronce-outline:hover {
+    background: linear-gradient(135deg, var(--color-bronce) 0%, var(--color-bronce-claro) 100%);
+    color: white;
+    border-color: var(--color-bronce);
+}
+
+.btn-sm {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+}
+
+/* Modales compactos */
+.modal-content {
+    border: 2px solid var(--color-bronce);
+    border-radius: 12px;
+    overflow: hidden;
+    font-size: 0.9rem;
+}
+
+.modal-header {
+    background: linear-gradient(135deg, var(--color-vino) 0%, var(--color-vino-claro) 100%);
+    color: white;
+    border-bottom: 2px solid var(--color-bronce);
+    padding: 12px 15px;
+}
+
+.modal-title {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.btn-close-sm {
+    padding: 5px;
+    background-size: 0.8rem;
+}
+
+/* Tablas compactas */
+.compact-table {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.85rem;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.compact-table.table-sm th,
+.compact-table.table-sm td {
+    padding: 6px 8px;
+}
+
+.compact-table thead th {
+    background: linear-gradient(135deg, rgba(114, 47, 55, 0.08) 0%, rgba(138, 59, 69, 0.08) 100%);
+    color: var(--color-vino);
+    font-weight: 600;
+    border-bottom: 1px solid var(--color-bronce);
+    white-space: nowrap;
+}
+
+.compact-table tbody tr:hover {
+    background-color: rgba(176, 141, 87, 0.08);
+}
+
+/* Información del dispositivo seleccionado */
+#info-dispositivo {
+    background: var(--color-bronce-suave);
+    padding: 10px;
+    border-radius: 8px;
+    border-left: 3px solid #28a745;
+    font-size: 0.85rem;
+}
+
+/* Iconos pequeños */
+.fas {
+    font-size: 0.9rem;
+}
+
+.text-bronce {
+    color: var(--color-bronce) !important;
+}
+
+.small {
+    font-size: 0.85rem;
+}
+
+/* DataTables compacto */
 div.dt-container .dt-search input {
-    margin-bottom: 20px;
-    width: 50%;
-    height: 40px;
-}   
+    border: 1px solid var(--color-bronce);
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    width: 250px;
+    max-width: 100%;
+}
 
 div.dt-search > label {
-    font-size: 20px;
+    font-size: 0.9rem;
+    margin-right: 8px;
 }
 
-.contenedor-input {
-    width: 550px;
+/* Responsividad para compacto */
+@media (max-width: 768px) {
+    body {
+        padding: 15px 10px;
+        font-size: 0.85rem;
+    }
+    
+    .main-container {
+        padding: 10px;
+    }
+    
+    .centered-container.compact {
+        max-width: 95%;
+    }
+    
+    .card-body {
+        padding: 20px !important;
+    }
+    
+    .card-header {
+        padding: 10px 15px;
+    }
+    
+    .tituloAgregar {
+        font-size: 1.1rem;
+    }
+    
+    .d-flex.justify-content-center.gap-3 {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px !important;
+    }
+    
+    .card-option .card {
+        min-width: 150px;
+        width: 100%;
+        max-width: 200px;
+    }
+    
+    div.dt-container .dt-search input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
 }
 
-.contenedor-boton {
-    width: 400px;
+@media (max-width: 576px) {
+    body {
+        padding: 10px 5px;
+    }
+    
+    .card-header {
+        padding: 8px 12px;
+    }
+    
+    .card-body {
+        padding: 15px !important;
+    }
+    
+    .tituloAgregar {
+        font-size: 1rem;
+    }
+    
+    .modal-header {
+        padding: 10px 12px;
+    }
+    
+    .modal-title {
+        font-size: 0.9rem;
+    }
+    
+    .compact-table {
+        font-size: 0.8rem;
+    }
+    
+    .compact-table.table-sm th,
+    .compact-table.table-sm td {
+        padding: 4px 6px;
+    }
+    
+    .btn {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
+}
+
+/* Utilidades compactas */
+.p-2 { padding: 0.5rem !important; }
+.p-3 { padding: 1rem !important; }
+.p-4 { padding: 1.5rem !important; }
+.mb-2 { margin-bottom: 0.5rem !important; }
+.mb-3 { margin-bottom: 1rem !important; }
+.mb-4 { margin-bottom: 1.5rem !important; }
+.mt-2 { margin-top: 0.5rem !important; }
+.mt-3 { margin-top: 1rem !important; }
+.mt-4 { margin-top: 1.5rem !important; }
+
+/* Animación mínima */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.centered-container {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Estados */
+.d-none {
+    display: none !important;
+}
+
+/* Texto de ayuda */
+.text-muted {
+    color: #6c757d !important;
+    font-size: 0.8rem;
+}
+
+/* Personalización de paginación DataTables */
+.dataTables_paginate .paginate_button {
+    padding: 4px 8px !important;
+    font-size: 0.8rem !important;
+    margin: 0 1px !important;
+    border-radius: 4px !important;
+}
+
+/* Ajustes para input IP */
+#ip {
+    letter-spacing: 0.5px;
+    font-weight: 500;
+}
+
+/* Hover mínimo para mantener limpieza */
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(114, 47, 55, 0.15);
 }

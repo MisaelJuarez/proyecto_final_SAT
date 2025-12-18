@@ -1,51 +1,92 @@
 <div class="container">
-    <h3>Consultar usuarios</h3>
-    <form action="" id="form-consultar-usuarios" class="d-flex">
+    <h3 class="text-center mb-4">
+        <i class="bi bi-search me-2"></i> Consultar usuarios
+    </h3>
+    
+    <!-- Formulario de búsqueda -->
+    <form action="" id="form-consultar-usuarios" class="row justify-content-center mb-4">
+        <div class="col-md-4 col-lg-3 mb-3">
+            <div class="contenedor-input">
+                <label for="area" class="form-label text-center d-block">
+                    <i class="bi bi-diagram-3 me-1"></i> Buscar por área
+                </label>
+                <select class="form-select text-center" name="area" id="area" aria-label="Default select example">
+                    <option value="" selected class="text-center">Seleccione el área</option>
+                </select> 
+            </div>
+        </div>
 
-        <div class="contenedor-input ms-4 mb-3">
-            <label for="area" class="form-label">Buscar por area</label>
-            <select class="contenedor-input form-select" name="area" id="area" aria-label="Default select example">
-                <option value="" selected>Seleccione el area</option>
-            </select> 
-        </div> 
+        <div class="col-md-4 col-lg-3 mb-3">
+            <div class="contenedor-input">
+                <label for="departamento" class="form-label text-center d-block">
+                    <i class="bi bi-building me-1"></i> Buscar por departamento
+                </label>
+                <select class="form-select text-center" name="departamento" id="departamento" aria-label="Default select example">
+                    <option value="" selected class="text-center">Seleccione el departamento</option>
+                </select>  
+            </div>
+        </div>
 
-        <div class="contenedor-input ms-4 mb-3">
-            <label for="departamento" class="form-label">Buscar por departamento</label>
-            <select class="contenedor-input form-select" name="departamento" id="departamento" aria-label="Default select example">
-                <option value="" selected>Seleccione el departamento</option>
-            </select>  
-        </div> 
+        <div class="col-md-4 col-lg-3 mb-3">
+            <div class="contenedor-input">
+                <label for="puesto" class="form-label text-center d-block">
+                    <i class="bi bi-briefcase me-1"></i> Buscar por puesto
+                </label>
+                <select class="form-select text-center" name="puesto" id="puesto" aria-label="Default select example">
+                    <option value="" selected class="text-center">Seleccione el puesto</option>
+                </select> 
+            </div>
+        </div>
 
-        <div class="contenedor-input ms-4 mb-3">
-            <label for="puesto" class="form-label">Buscar por puesto</label>
-            <select class="contenedor-input form-select" name="puesto" id="puesto" aria-label="Default select example">
-                <option value="" selected>Seleccione el puesto</option>
-            </select> 
-        </div> 
-
-        <div class="contenedor-boton mt-3 ms-4 d-flex align-items-center">
-            <button id="buscar-usuario" class="btn btn-info" type="button">Buscar</button>
+        <div class="col-12 col-md-4 col-lg-3 mb-3 d-flex align-items-center justify-content-center">
+            <div class="contenedor-boton">
+                <button id="buscar-usuario" class="btn btn-buscar w-100" type="button">
+                    <i class="bi bi-search me-2"></i> Buscar
+                </button>
+            </div>
         </div>
     </form>
 
-    <div class="ms-4" id="btns_exportar">
-        <button id="exportar_excel" class="btn btn-success me-2" type="button">Excel</button>
-        <button id="exportar_pdf" class="btn btn-danger" type="button">PDF</button>
+    <!-- Botones de exportación -->
+    <div class="text-center mb-4" id="btns_exportar">
+        <button id="exportar_excel" class="btn btn-excel me-2" type="button">
+            <i class="bi bi-file-earmark-excel me-1"></i> Excel
+        </button>
+        <button id="exportar_pdf" class="btn btn-pdf" type="button">
+            <i class="bi bi-file-earmark-pdf me-1"></i> PDF
+        </button>
     </div>
 
-    <table id="tablaUsuarios" class="table">
-        <thead>
-            <tr class="header-tabla">
-                <th scope="col" class="border border-white">RFC Corto</th>
-                <th scope="col" class="border border-white">Nombre</th>
-                <th scope="col" class="border border-white">Apellidos</th>
-                <th scope="col" class="border border-white">No. Empleado</th>
-                <th scope="col" class="border border-white">Puesto</th>
-                <th scope="col" class="border border-white">Area</th>
-                <th scope="col" class="border border-white">Departamento</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+    <!-- Tabla de resultados -->
+    <div class="table-responsive">
+        <table id="tablaUsuarios" class="table table-sm table-hover">
+            <thead>
+                <tr class="header-tabla">
+                    <th scope="col" class="text-center py-2">
+                        <i class="bi bi-file-earmark-text me-1"></i> RFC Corto
+                    </th>
+                    <th scope="col" class="text-center py-2">
+                        <i class="bi bi-person me-1"></i> Nombre
+                    </th>
+                    <th scope="col" class="text-center py-2">
+                        <i class="bi bi-card-text me-1"></i> Apellidos
+                    </th>
+                    <th scope="col" class="text-center py-2">
+                        <i class="bi bi-person-badge me-1"></i> No. Emp
+                    </th>
+                    <th scope="col" class="text-center py-2">
+                        <i class="bi bi-briefcase me-1"></i> Puesto
+                    </th>
+                    <th scope="col" class="text-center py-2">
+                        <i class="bi bi-diagram-3 me-1"></i> Area
+                    </th>
+                    <th scope="col" class="text-center py-2">
+                        <i class="bi bi-building me-1"></i> Depto
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
 </div>

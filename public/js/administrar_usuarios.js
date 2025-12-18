@@ -96,8 +96,9 @@ const obtener_resguaros = () => {
                                     data-id="${data}"  
                                     data-marca="${row.marca}" 
                                     data-nserie="${row.n_serie}" 
+                                    style="background-color: #722f37; border-color: #b08d57; color: white;"
                                 >
-                                    Seleccionar
+                                    <i class="fas fa-check me-1"></i>Seleccionar
                                 </button>
                             `;
                         }
@@ -140,7 +141,7 @@ const obtener_datos_usuarios_administrar = () => {
                     { data: 'nombre_departamento', className: "border border-dark"}, 
                     { data: 'n_serie', className: "border border-dark",
                         render: function(data, type, row) {
-                            return (row.n_serie == null) ? '<span class="badge bg-danger">Sin equipo</span>' : row.n_serie;
+                            return (row.n_serie == null) ? '<span class="badge" style="background-color: #9d4a54; color: white;">Sin equipo</span>' : row.n_serie;
                         }
                     },  
                     {
@@ -148,10 +149,11 @@ const obtener_datos_usuarios_administrar = () => {
                         className: "text-center border border-dark",
                         render: function(data, type, row) {
                             return `
-                                <button class="btn btn-warning modificar-usuario"
+                                <button class="btn modificar-usuario"
                                     data-id="${data}"
+                                    style="background-color: #b08d57; border-color: #8a3b45; color: white;"
                                 >
-                                    <i class="bi bi-pencil-square"></i>
+                                    <i class="fas fa-edit me-1"></i>Editar
                                 </button>
                             `;
                         }
@@ -162,10 +164,11 @@ const obtener_datos_usuarios_administrar = () => {
                         render: function(data, type, row) {
                             return (row.n_serie != null) ?
                             `
-                                <button class="btn btn-danger baja-usuario"
+                                <button class="btn baja-usuario"
                                     data-id="${data}"
+                                    style="background-color: #8a3b45; border-color: #722f37; color: white;"
                                 >
-                                    <i class="bi bi-trash-fill"></i>
+                                    <i class="fas fa-trash me-1"></i>Eliminar
                                 </button>
                             `
                             : ''
@@ -201,8 +204,10 @@ const obtener_datos_usuarios_modificar = (id) => {
         area.value =  respuesta[0]['area'];
         if (respuesta[0]['n_serie'] == null) {
             btn_obtener_resguardos.textContent = `Seleccionar resguardo`;
+            btn_obtener_resguardos.innerHTML = `<i class="fas fa-search me-1"></i>Seleccionar resguardo`;
         }else {
             btn_obtener_resguardos.textContent = `${respuesta[0]['marca']} | ${respuesta[0]['n_serie']}`;
+            btn_obtener_resguardos.innerHTML = `<i class="fas fa-laptop me-1"></i>${respuesta[0]['marca']} | ${respuesta[0]['n_serie']}`;
         }
         id_resguardo = respuesta[0]['id_resguardo'];
         setTimeout(() => area.dispatchEvent(new Event('change')), 10);
@@ -247,12 +252,36 @@ const modificar_informacion_usuario = () => {
     .then(respuesta => respuesta.json())
     .then(async respuesta => {
         if (respuesta[0] == 1) {
-            await Swal.fire({icon: "success",title:`${respuesta[1]}`});
+            await Swal.fire({
+                icon: "success",
+                title: respuesta[1],
+                background: '#ffffff',
+                color: '#3c3a36',
+                iconColor: '#b08d57',
+                confirmButtonColor: '#722f37',
+                confirmButtonText: 'Aceptar',
+                customClass: {
+                    popup: 'border-radius-16',
+                    confirmButton: 'btn-vino'
+                }
+            });
             contenedor_modificar_usuario.style.display = "none";
             tabla_de_admin_usuarios.style.display = "block";
             obtener_datos_usuarios_administrar();
         } else {
-            Swal.fire({icon: "error",title:`${respuesta[1]}`});
+            Swal.fire({
+                icon: "error",
+                title: respuesta[1],
+                background: '#ffffff',
+                color: '#3c3a36',
+                iconColor: '#8a3b45',
+                confirmButtonColor: '#b08d57',
+                confirmButtonText: 'Reintentar',
+                customClass: {
+                    popup: 'border-radius-16',
+                    confirmButton: 'btn-bronce'
+                }
+            });
         }
     });
 }
@@ -271,13 +300,65 @@ const dar_baja_usuario = () => {
     .then(respuesta => respuesta.json())
     .then(async respuesta => {
         if (respuesta[0] == 1) {
-            await Swal.fire({icon: "success",title:`${respuesta[1]}`});
+            await Swal.fire({
+                icon: "success",
+                title: respuesta[1],
+                html: `
+                    <div style="text-align: center; padding: 10px;">
+                        <div style="color: #722f37; font-size: 1.3rem; margin-bottom: 15px; font-weight: bold;">
+                            <i class="fas fa-user-check" style="color: #b08d57; margin-right: 10px;"></i>
+                            ${respuesta[1]}
+                        </div>
+                        <div style="color: #5a5349; font-size: 0.9rem; background: #f8f5f2; padding: 10px; border-radius: 8px; border-left: 4px solid #b08d57;">
+                            El usuario ha sido dado de baja correctamente.
+                        </div>
+                    </div>
+                `,
+                background: '#ffffff',
+                color: '#3c3a36',
+                iconColor: '#b08d57',
+                confirmButtonColor: '#722f37',
+                confirmButtonText: 'Aceptar',
+                showConfirmButton: true,
+                customClass: {
+                    popup: 'border-radius-16',
+                    confirmButton: 'btn-vino'
+                }
+            });
             contenedor_modificar_usuario.style.display = "none";
             contenedor_baja_usuario.style.display = 'none';
             tabla_de_admin_usuarios.style.display = "block";
             obtener_datos_usuarios_administrar();
         } else {
-            Swal.fire({icon: "error",title:`${respuesta[1]}`});
+            Swal.fire({
+                icon: "error",
+                title: respuesta[1],
+                html: `
+                    <div style="text-align: center; padding: 10px;">
+                        <div style="color: #722f37; font-size: 1.2rem; margin-bottom: 10px; font-weight: bold;">
+                            <i class="fas fa-user-slash" style="color: #8a3b45; margin-right: 10px;"></i>
+                            ${respuesta[1]}
+                        </div>
+                        <div style="color: #7a756e; font-size: 0.85rem; background: #f8f5f2; padding: 10px; border-radius: 8px; margin-top: 15px; border-left: 4px solid #8a3b45;">
+                            No se pudo completar la operación.
+                        </div>
+                    </div>
+                `,
+                background: '#ffffff',
+                color: '#3c3a36',
+                iconColor: '#8a3b45',
+                confirmButtonColor: '#b08d57',
+                confirmButtonText: 'Reintentar',
+                showCancelButton: true,
+                cancelButtonText: 'Cancelar',
+                cancelButtonColor: '#a39e97',
+                focusConfirm: true,
+                customClass: {
+                    popup: 'border-radius-16',
+                    confirmButton: 'btn-bronce',
+                    cancelButton: 'btn-outline-secondary'
+                }
+            });
         }
     });
 }
@@ -295,7 +376,7 @@ btn_obtener_resguardos.addEventListener('click', () => obtener_resguaros());
 
 btn_sin_resguardo.addEventListener('click', () => {
     id_resguardo = null;
-    btn_obtener_resguardos.textContent = 'Seleccionar resguardo';
+    btn_obtener_resguardos.innerHTML = '<i class="fas fa-search me-1"></i>Seleccionar resguardo';
     modalObtenerResguardo = bootstrap.Modal.getInstance(modal);
     if (modalObtenerResguardo) modalObtenerResguardo.hide();
 });
@@ -305,7 +386,7 @@ tabla_Resguardos.addEventListener('click', (e) => {
 
     if (btn_seleccionar_resguardo) {
         id_resguardo = btn_seleccionar_resguardo.dataset.id;
-        btn_obtener_resguardos.textContent = `${btn_seleccionar_resguardo.dataset.marca} | ${btn_seleccionar_resguardo.dataset.nserie}`;
+        btn_obtener_resguardos.innerHTML = `<i class="fas fa-laptop me-1"></i>${btn_seleccionar_resguardo.dataset.marca} | ${btn_seleccionar_resguardo.dataset.nserie}`;
         modalObtenerResguardo = bootstrap.Modal.getInstance(modal);
         if (modalObtenerResguardo) modalObtenerResguardo.hide();
     }
@@ -325,7 +406,7 @@ tabla_de_admin_usuarios.addEventListener('click', (e) => {
 
     if (btn_baja_usuario) {
         tabla_de_admin_usuarios.style.display = 'none';
-        contenedor_baja_usuario.style.display = 'none'
+        contenedor_baja_usuario.style.display = 'none';
         contenedor_baja_usuario.style.display = 'block';
         id_usuario_baja = btn_baja_usuario.dataset.id
         mostrar_informacion_usuario(btn_baja_usuario.dataset.id)
@@ -334,13 +415,94 @@ tabla_de_admin_usuarios.addEventListener('click', (e) => {
 });
 
 btn_modificar_usuario.addEventListener('click', () => {
-    modificar_informacion_usuario();
+    const nombreValue = nombre.value.trim();
+    const apellidosValue = apellidos.value.trim();
+    const rfcValue = rfc.value.trim();
+    
+    if (!nombreValue || !apellidosValue || !rfcValue) {
+        Swal.fire({
+            icon: "warning",
+            title: "Campos incompletos",
+            html: `
+                <div style="text-align: center; padding: 10px;">
+                    <div style="color: #722f37; font-size: 1.2rem; margin-bottom: 10px; font-weight: bold;">
+                        <i class="fas fa-exclamation-triangle" style="color: #b08d57; margin-right: 10px;"></i>
+                        Complete los campos requeridos
+                    </div>
+                    <div style="color: #7a756e; font-size: 0.85rem; background: #f8f5f2; padding: 10px; border-radius: 8px; margin-top: 15px; border-left: 4px solid #b08d57;">
+                        Nombre, apellidos y RFC son obligatorios.
+                    </div>
+                </div>
+            `,
+            background: '#ffffff',
+            color: '#3c3a36',
+            iconColor: '#b08d57',
+            confirmButtonColor: '#722f37',
+            confirmButtonText: 'Entendido',
+            customClass: {
+                popup: 'border-radius-16',
+                confirmButton: 'btn-vino'
+            }
+        });
+        return;
+    }
+    
+    const btnOriginalText = btn_modificar_usuario.innerHTML;
+    btn_modificar_usuario.innerHTML = '<span class="loading"></span> Actualizando...';
+    btn_modificar_usuario.disabled = true;
+    
+    setTimeout(() => {
+        modificar_informacion_usuario();
+        btn_modificar_usuario.innerHTML = btnOriginalText;
+        btn_modificar_usuario.disabled = false;
+    }, 300);
 });
 
 btn_dar_baja_usuario.addEventListener('click', () => {
-    console.log('RESGUARDO: ',id_resguardo_baja);
-    console.log('USUARIO: : ',id_usuario_baja);
-    dar_baja_usuario();
+    Swal.fire({
+        title: 'Confirmar baja',
+        html: `
+            <div style="text-align: center; padding: 10px;">
+                <div style="color: #722f37; font-size: 1.3rem; margin-bottom: 15px; font-weight: bold;">
+                    <i class="fas fa-user-times" style="color: #8a3b45; margin-right: 10px; font-size: 2rem;"></i>
+                    ¿Dar de baja al usuario?
+                </div>
+                <div style="color: #5a5349; font-size: 0.9rem; background: #f8f5f2; padding: 15px; border-radius: 8px; border: 1px solid #f0e9df;">
+                    <strong>Esta acción no se puede deshacer.</strong><br>
+                    El equipo asignado quedará disponible.
+                </div>
+            </div>
+        `,
+        background: '#ffffff',
+        color: '#3c3a36',
+        icon: 'warning',
+        iconColor: '#8a3b45',
+        showCancelButton: true,
+        confirmButtonColor: '#8a3b45',
+        cancelButtonColor: '#b08d57',
+        confirmButtonText: 'Sí, dar de baja',
+        cancelButtonText: 'Cancelar',
+        reverseButtons: true,
+        focusConfirm: false,
+        focusCancel: true,
+        customClass: {
+            popup: 'border-radius-16',
+            confirmButton: 'btn-danger-custom',
+            cancelButton: 'btn-bronce'
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const btnOriginalText = btn_dar_baja_usuario.innerHTML;
+            btn_dar_baja_usuario.innerHTML = '<span class="loading"></span> Procesando...';
+            btn_dar_baja_usuario.disabled = true;
+            
+            setTimeout(() => {
+                dar_baja_usuario();
+                btn_dar_baja_usuario.innerHTML = btnOriginalText;
+                btn_dar_baja_usuario.disabled = false;
+            }, 300);
+        }
+    });
 });
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -349,4 +511,94 @@ document.addEventListener('DOMContentLoaded', () => {
     obtener_info_tabla('puestos',optionsPuestos,'id_puesto','nombre_puesto',puesto,2,'');
     obtener_info_tabla('areas',optionsAreas,'id_area','nombre_area',area,2,'');
     obtener_datos_usuarios_administrar();
+    
+    // Estilo para el loading spinner
+    const style = document.createElement('style');
+    style.textContent = `
+        .loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #722f37;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .border-radius-16 {
+            border-radius: 16px !important;
+            border: 2px solid #b08d57;
+        }
+        
+        .btn-vino {
+            background: linear-gradient(135deg, #722f37 0%, #8a3b45 100%);
+            color: white;
+            border: 1px solid #b08d57;
+            border-radius: 8px;
+            padding: 10px 24px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-vino:hover {
+            background: linear-gradient(135deg, #8a3b45 0%, #722f37 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(114, 47, 55, 0.2);
+        }
+        
+        .btn-bronce {
+            background: linear-gradient(135deg, #b08d57 0%, #d4b483 100%);
+            color: white;
+            border: 1px solid #8a3b45;
+            border-radius: 8px;
+            padding: 10px 24px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-bronce:hover {
+            background: linear-gradient(135deg, #d4b483 0%, #b08d57 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(176, 141, 87, 0.2);
+        }
+        
+        .btn-danger-custom {
+            background: linear-gradient(135deg, #8a3b45 0%, #9d4a54 100%);
+            color: white;
+            border: 1px solid #722f37;
+            border-radius: 8px;
+            padding: 10px 24px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-danger-custom:hover {
+            background: linear-gradient(135deg, #9d4a54 0%, #8a3b45 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(157, 74, 84, 0.2);
+        }
+        
+        .btn-outline-secondary {
+            background: transparent;
+            color: #6c757d;
+            border: 1px solid #6c757d;
+            border-radius: 8px;
+            padding: 10px 24px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-secondary:hover {
+            background: #6c757d;
+            color: white;
+        }
+    `;
+    document.head.appendChild(style);
 });

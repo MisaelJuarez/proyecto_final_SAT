@@ -1,55 +1,351 @@
+/* Variables de color */
+:root {
+    --color-vino: #722f37;
+    --color-vino-claro: #8a3b45;
+    --color-bronce: #b08d57;
+    --color-bronce-claro: #d4b483;
+    --color-bronce-suave: #f1e6d6;
+    --color-fondo: #faf7f2;
+    --color-texto: #333333;
+}
+
+/* Estilos generales compactos */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #f9f5f0 0%, #f0e9df 100%);
+    margin: 0;
+    padding: 20px;
+    color: var(--color-texto);
+    min-height: 100vh;
+}
+
+/* Contenedor principal compacto */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 15px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Contenedores centrados y compactos */
+.centered-container {
+    width: 100%;
+    max-width: 900px; /* Más compacto */
+    margin: 15px auto;
+}
+
+/* Tarjetas compactas */
+.card {
+    border: 1px solid var(--color-bronce);
+    border-radius: 12px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 5px 15px rgba(114, 47, 55, 0.1);
+    margin-bottom: 15px;
+}
+
+.card-header {
+    background: linear-gradient(135deg, var(--color-vino) 0%, var(--color-vino-claro) 100%);
+    color: white;
+    border-bottom: 2px solid var(--color-bronce);
+    padding: 12px 20px;
+}
+
+/* Títulos más pequeños */
+.tituloTable, .tituloInformacion {
+    font-family: 'Arial', sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* Form check compacto */
+.form-check {
+    margin: 0;
+}
+
+.form-check-input {
+    width: 16px;
+    height: 16px;
+    margin-top: 0;
+    border: 2px solid var(--color-bronce);
+}
+
+.form-check-input:checked {
+    background-color: var(--color-vino);
+    border-color: var(--color-vino);
+}
+
+.form-check-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.9rem;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 2px 0;
+}
+
+/* TABLA PRINCIPAL COMPACTA */
+.compact-table {
+    width: 100%;
+    max-width: 800px; /* Tabla más pequeña */
+    margin: 0 auto;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.85rem; /* Texto más pequeño */
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.compact-table thead th {
+    padding: 10px 12px !important; /* Padding reducido */
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-align: center !important; /* Texto centrado */
+    vertical-align: middle !important; /* Alineación vertical centrada */
+}
+
+.compact-table tbody td {
+    padding: 8px 10px !important; /* Padding reducido */
+    text-align: center !important; /* Todo el contenido centrado */
+    vertical-align: middle !important; /* Alineación vertical centrada */
+    border-top: 1px solid var(--color-bronce-suave);
+}
+
+.compact-table tbody {
+    text-align: center !important; /* Garantiza que todo esté centrado */
+}
+
+/* Header de tabla compacta */
+.header-tabla {
+    background: linear-gradient(135deg, var(--color-vino) 0%, var(--color-vino-claro) 100%);
+    color: white;
+    border: none;
+}
+
+.header-tabla th {
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    white-space: nowrap; /* Evita saltos de línea */
+}
+
+/* Tabla de detalles compacta */
+.compact-details {
+    max-width: 600px; /* Más compacta */
+    margin: 0 auto;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.85rem;
+    border: 1px solid var(--color-bronce-suave);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.compact-details tbody tr {
+    border-bottom: 1px solid var(--color-bronce-suave);
+}
+
+.compact-details td {
+    padding: 8px 12px !important;
+    text-align: center !important; /* Todo centrado */
+    vertical-align: middle !important;
+}
+
+.compact-details .fw-bold {
+    font-size: 0.9rem;
+}
+
+/* Botones pequeños en tabla */
+.btn-table {
+    padding: 4px 10px !important;
+    font-size: 0.8rem !important;
+    border-radius: 6px;
+    border: 1px solid var(--color-bronce);
+    background: white;
+    color: var(--color-vino);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    min-width: 70px;
+    margin: 0 auto; /* Centrado */
+}
+
+.btn-table:hover {
+    background: linear-gradient(135deg, var(--color-vino) 0%, var(--color-vino-claro) 100%);
+    color: white;
+    border-color: var(--color-vino);
+}
+
+/* Iconos pequeños */
+.fas {
+    font-size: 0.9rem;
+}
+
+.text-bronce {
+    color: var(--color-bronce) !important;
+}
+
+/* Hover para filas */
+.table-hover tbody tr:hover {
+    background-color: rgba(176, 141, 87, 0.1);
+}
+
+/* Custom toolbar compacto */
 .custom-toolbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
-}
-
-.custom-toolbar .left-section {
-    float: left;
-}
-
-.custom-toolbar .right-section {
-    float: right;
-}
-
-.dt-paging {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    margin-top: 10px;
+    margin-bottom: 15px;
+    padding: 10px 15px;
+    background: var(--color-bronce-suave);
+    border-radius: 8px;
+    border: 1px solid var(--color-bronce);
+    font-size: 0.9rem;
 }
 
 .dt-info {
-    margin-top: 10px;
-    float: left;
+    color: var(--color-vino);
+    font-weight: 500;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    font-size: 0.85rem;
+    margin: 10px 0;
 }
 
-.dt-container {
-    padding: 10px;
+/* Responsividad para versión compacta */
+@media (max-width: 768px) {
+    body {
+        padding: 15px 10px;
+    }
+    
+    .main-container {
+        padding: 10px;
+    }
+    
+    .centered-container {
+        max-width: 95%;
+    }
+    
+    .compact-table {
+        font-size: 0.8rem;
+    }
+    
+    .compact-table thead th {
+        padding: 8px 10px !important;
+        font-size: 0.85rem;
+    }
+    
+    .compact-table tbody td {
+        padding: 6px 8px !important;
+    }
+    
+    .compact-details {
+        font-size: 0.8rem;
+    }
+    
+    .compact-details td {
+        padding: 6px 10px !important;
+    }
+    
+    .card-header {
+        padding: 10px 15px;
+    }
+    
+    .tituloTable, .tituloInformacion {
+        font-size: 1rem;
+    }
+    
+    .form-check-label {
+        font-size: 0.85rem;
+    }
+    
+    .btn-table {
+        padding: 3px 8px !important;
+        font-size: 0.75rem !important;
+        min-width: 60px;
+    }
 }
 
-#tabla-de-info-ips {
-    padding: 0;
-    border: 1px solid rgba(0, 0, 0, 0.223);
-    background-color: white;
-    border-bottom: 1px solid black;
+@media (max-width: 576px) {
+    .compact-table {
+        font-size: 0.75rem;
+    }
+    
+    .compact-table th, 
+    .compact-table td {
+        padding: 5px 6px !important;
+    }
+    
+    .compact-details {
+        font-size: 0.75rem;
+    }
+    
+    .fas {
+        font-size: 0.8rem;
+    }
+    
+    .form-check-label span {
+        display: none; /* Oculta texto en móviles muy pequeños */
+    }
+    
+    .form-check-label .fas {
+        margin-right: 0;
+    }
 }
 
-.header-tabla {
-    background-color: rgb(135, 93, 16);
-    color: white;
-    border: 1px solid black;
+/* Asegurar que todo esté centrado */
+.text-center {
+    text-align: center !important;
 }
 
-.tituloTable {
-    padding: 5px;
-    color: white;
-    background-color: rgb(135, 93, 16);
+.mx-auto {
+    margin-left: auto !important;
+    margin-right: auto !important;
 }
 
-.tituloInformacion {
-    padding: 5px;
-    color: white;
-    background-color: rgb(84, 84, 84);
+/* Alineación vertical centrada */
+.align-middle {
+    vertical-align: middle !important;
+}
+
+/* Estilos para DataTables paginación compacta */
+.dataTables_paginate .paginate_button {
+    padding: 4px 8px !important;
+    font-size: 0.85rem !important;
+    margin: 0 2px !important;
+}
+
+/* Fila destacada para IP */
+.table-primary {
+    background-color: rgba(176, 141, 87, 0.15) !important;
+}
+
+/* Ajustes para contenido vacío */
+#tablaIps tbody tr td[colspan="4"] {
+    text-align: center !important;
+    padding: 30px !important;
+    color: #666;
+    font-style: italic;
+}
+
+/* Animación sutil */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.centered-container {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Efecto hover mínimo para mantener limpieza */
+.card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(114, 47, 55, 0.12);
 }

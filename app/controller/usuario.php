@@ -2,6 +2,14 @@
 session_start();
 require_once '../config/conexion.php';
 
+use PHPMailer\PHPMailer\PHPMailer; // -- copiar
+use PHPMailer\PHPMailer\Exception; // -- copiar
+use PHPMailer\PHPMailer\SMTP; // -- copiar
+
+require 'PHPMailer/Exception.php'; // -- copiar
+require 'PHPMailer/PHPMailer.php'; // -- copiar
+require 'PHPMailer/SMTP.php'; // -- copiar
+
 class Usuario extends Conexion {
     public function agregar_colaborador() {
         $nombre = $_POST['nombre'];

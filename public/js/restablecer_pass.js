@@ -11,7 +11,7 @@ const cambiar_pass = () => {
     .then(async respuesta => {
         if (respuesta[0] == 1) {
             await Swal.fire({title: `${respuesta[1]}`,icon: "success"});
-            window.location = '../../index.php';
+            window.location = '../../administrador_usuarios/login.php';
         }else {
             await Swal.fire({title: `${respuesta[1]}`,icon: "success"});
         }
